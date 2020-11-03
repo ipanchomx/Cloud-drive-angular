@@ -1,0 +1,55 @@
+h1, h2, .name-error {
+    width: 70%;
+    margin: 0 auto;
+    padding-top: 2%;
+}
+
+.error {
+    color: red;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+
+.profileInfoContainer {
+    width: 70%;
+    margin: 0 auto;
+    height: 200px;
+    padding: 30px 25px;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #e6e6e6;
+
+    .dummyImage {
+        border-radius: 100%;
+        height: 140px;
+        width: 140px;
+        background-color: gray;
+    }
+
+    .profile-name {
+        font-size: 24px;
+        font-weight: 500;
+        padding: 10px 5px;
+        border: 1px solid #e6e6e6;
+        border-radius: 5px;
+    }
+
+    .member-since {
+        color: #676767;
+        font-size: 14px;
+    }
+
+    .userInfo {
+        flex-grow: 1;
+        padding-left: 5%;
+    }
+}
+
+.app-theme-toggle, .change-password-container {
+    width: 70%;
+    margin: 0 auto;
+}
+
