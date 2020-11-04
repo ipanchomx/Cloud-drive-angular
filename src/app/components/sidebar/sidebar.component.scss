@@ -1,0 +1,20 @@
+#sidebar {
+    float: left;
+    width: 15%;
+    height: 100vh;
+    background: #37474F;
+    border-radius: 2px;
+}
+
+.item-list {
+    padding: 16px 24px;
+    border-bottom: 1px solid #455A64;
+}
+
+#sidebar a {
+    margin: 0%;
+    padding: 0%;
+    color: #fff;
+    display: block;
+    text-decoration: none !important;
+}
