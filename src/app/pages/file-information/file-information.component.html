@@ -1,0 +1,70 @@
+<mat-drawer-container class="file-info-container">
+    <mat-drawer-content class="file-information-main">
+        <div class="file-action-container">
+            <button mat-raised-button color="primary" (click)="downloadFile()">Download</button>
+            <button mat-raised-button color="primary" type="file" (click)="fileInput.click()">Update</button>
+            <input hidden (change)="uploadFile()" #fileInput type="file" id="file">
+            <button mat-raised-button color="primary" (click)="shareFile()">Share</button>
+            <mat-form-field appearance="fill">
+                <mat-label>Versions</mat-label>
+                <mat-select value="4">
+                    <mat-option value="4">04/10/2020</mat-option>
+                    <mat-option value="3">03/10/2020</mat-option>
+                    <mat-option value="2">02/10/2020</mat-option>
+                    <mat-option value="1">01/10/2020</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <h1>File: {{file.filename}}</h1>
+        <h2>Path</h2>
+        <p>{{file.path}}</p>
+
+        <h2>Status</h2>
+        <p>{{file.status}}</p>
+
+        <h2>Date of Creation</h2>
+        <p>{{file.date}}</p>
+
+        <h2>Owner</h2>
+        <p>{{file.owner}}</p>
+
+    </mat-drawer-content>
+    <mat-drawer mode="side" position="end" class="file-comments-bar" opened>
+        <div class="file-comments-content">
+            <h1>Verification</h1>
+
+            <mat-form-field class="select-verification">
+                <mat-label>Verification Status</mat-label>
+                <mat-select value="4">
+                    <mat-option value="4">Does not apply</mat-option>
+                    <mat-option value="3">Pending Verification</mat-option>
+                    <mat-option value="2">Verified</mat-option>
+                    <mat-option value="1">Not verified</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <h1>Comments</h1>
+
+            <div class="comments-container">
+
+                <div class="create-comment-div">
+                    <mat-form-field class="comment-input">
+                        <textarea matInput placeholder="Leave a comment here"></textarea>
+                    </mat-form-field>
+                    <button mat-mini-fab color="primary" aria-label="Example icon button with a home icon">
+                        <mat-icon>send</mat-icon>
+                    </button>
+                </div>
+
+                <div *ngFor="let comment of file.comments" class="messageBox">
+                    <mat-card class="messageBox-card">
+                        <p class="comment-author">{{comment.author}}</p>
+                        <p>{{comment.comment}}</p>
+                    </mat-card>
+                    <p class="comment-date">{{comment.date}}</p>
+                </div>
+            </div>
+
+        </div>
+    </mat-drawer>
+</mat-drawer-container>

@@ -1,0 +1,103 @@
+.file-comments-bar {
+    width: 35%;
+    padding: 50px 0;
+    height: 100vh;
+
+    .file-comments-content {
+        width: 100%;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        h1 {
+            font-size: 2rem;
+            width: 90%;
+            margin: 10px auto;
+            word-wrap: break-word;
+            font-weight: 300;
+        }
+
+        .select-verification {
+            width: 90%;
+        }
+
+        .comments-container {
+            flex: 1;
+            width: 90%;
+            margin-bottom: 20px;
+
+            .create-comment-div {
+                display: flex;
+                width: 100%;
+                margin: 0;
+
+                .comment-input {
+                    margin: 0;
+                    flex: 1;
+                }
+            }
+
+            .messageBox {
+                width: 100%;
+                height: fit-content;
+                margin: 0;
+
+                .messageBox-card {
+                    width: 100%;
+                    height: fit-content;
+                    .comment-author {
+                        font-size: 0.7rem;
+                        font-weight: bold;
+                    }
+    
+                }
+                        .comment-date {
+                            margin-top: 5px;
+                            text-align: right;
+                            font-size: 0.8rem;
+                        }
+            }
+        }
+    }
+}
+
+.file-information-main {
+    width: 65%;
+    padding: 50px;
+    height: calc(100vh - 50px);
+    h1,
+    h2,
+    p {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    h1 {
+        font-size: 4rem;
+        margin-top: 50px;
+    }
+
+    h2 {
+        margin-top: 60px;
+        margin-bottom: 30px;
+        font-weight: 300;
+        font-size: 2.5rem;
+    }
+
+    p {
+        font-size: 1.5rem;
+    }
+}
+
+.file-action-container {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-evenly;
+    * {
+        min-width: 20%;
+    }
+}

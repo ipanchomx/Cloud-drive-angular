@@ -14,12 +14,17 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { FileInformationComponent } from './pages/file-information/file-information.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
     AppComponent,
     SettingsComponent,
-    TestmaterialComponent
+    TestmaterialComponent,
+    FileInformationComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +37,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatIconModule,
     MatButtonModule,
     MatSlideToggleModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatSelectModule,
+    MatInputModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
