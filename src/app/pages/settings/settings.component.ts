@@ -12,6 +12,7 @@ export class SettingsComponent implements OnInit {
   editableName: boolean = false;
   nameError: boolean = false;
   name: string = "Mauricio Duran";
+  darkMode:boolean = false;
 
   constructor(private formBuilder: FormBuilder) { }
 

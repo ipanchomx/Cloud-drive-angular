@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SettingsComponent } from './pages/settings/settings.component';
-
+import { TestmaterialComponent } from './pages/testmaterial/testmaterial.component';
 
 const routes: Routes = [
-  { path: "", component: SettingsComponent},
+  { path: "", component: TestmaterialComponent},
   { path: "settings", component: SettingsComponent}
 ];
 
