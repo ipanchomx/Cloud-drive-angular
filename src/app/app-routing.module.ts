@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { SettingsComponent } from './pages/settings/settings.component';
+import { TestmaterialComponent } from './pages/testmaterial/testmaterial.component';
 
 import { FileListComponent } from './components/file-list/file-list.component'
 import { SidebarComponent } from './components/sidebar/sidebar.component'
@@ -11,7 +13,9 @@ const routes: Routes = [
   { path: "file-list", component : FileListComponent},
   { path: "sidebar", component : SidebarComponent},
   { path: "file-element", component : FileElementComponent},
-  { path: "dir-element", component : DirElementComponent}
+  { path: "dir-element", component : DirElementComponent},
+  { path: "test", component: TestmaterialComponent},
+  { path: "settings", component: SettingsComponent}
 ];
 
 @NgModule({
