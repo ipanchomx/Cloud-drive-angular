@@ -5,6 +5,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { PendingFilesSharedComponent } from './pages/pending-files-shared/pending-files-shared.component'
 import { FileManagerComponent } from './pages/file-manager/file-manager.component';
 import { HomeComponent } from './pages/home/home.component';
+import { SignUpComponent } from './pages/home/sign-up.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: "file-info", component: FileInformationComponent },
   { path: "pending-files-shared", component: PendingFilesSharedComponent },
   { path: "file-manager", component: FileManagerComponent },
-  { path: 'home', component: HomeComponent }
+  { path: 'home', component: HomeComponent },
+  { path: 'sign-up', component: SignUpComponent }
 ];
 
 @NgModule({
