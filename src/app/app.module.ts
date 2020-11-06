@@ -28,6 +28,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
+import { SignUpComponent } from './pages/sign-up/sign-up.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { MatListModule } from '@angular/material/list';
     PendingFilesSharedComponent,
     FileInformationComponent,
     GridListComponent,
-    FileManagerComponent
+    FileManagerComponent,
+    SignUpComponent
   ],
   imports : [
     AppRoutingModule,
