@@ -1,41 +1,47 @@
-<h1>Settings</h1>
+<div class="settings-container">
+    <h1>Settings</h1>
 
-<h2>My Profile</h2>
-<div class="profileInfoContainer">
-    <div class="dummyImage"></div>
-    <div class="userInfo">
-        <input type="text" [(ngModel)]="name" [disabled]="!editableName" value="Mauricio Duran"  class="profile-name">
-        <p>is716122@iteso.mx</p>
-        <p class="member-since">Member since 10/13/2020</p>
+    <h2>My Profile</h2>
+    <div class="profileInfoContainer">
+        <div class="dummyImage"></div>
+        <div class="userInfo">
+            <input type="text" [(ngModel)]="name" [disabled]="!editableName" value="Mauricio Duran"
+                class="profile-name">
+            <p>is716122@iteso.mx</p>
+            <p class="member-since">Member since 10/13/2020</p>
+        </div>
+        <button (click)="toggleEditableName()">{{editableName? "Save": "Edit name"}}</button>
     </div>
-    <button (click)="toggleEditableName()">{{editableName? "Save": "Edit name"}}</button>
-</div>
-<p *ngIf="nameError" class="error name-error">Error. Cannot leave name field empty</p>
+    <p *ngIf="nameError" class="error name-error">Error. Cannot leave name field empty</p>
 
-<h2>Themes</h2>
-<div class="app-theme-toggle">
-    <mat-slide-toggle [(ngModel)]="darkMode">Dark Mode</mat-slide-toggle>
-</div>
+    <h2>Themes</h2>
+    <div class="app-theme-toggle">
+        <mat-slide-toggle [(ngModel)]="darkMode">Dark Mode</mat-slide-toggle>
+    </div>
 
-<h2>Change Password</h2>
+    <h2>Change Password</h2>
 
-<div class="change-password-container">
-    <form  [formGroup]="passwordForm" (submit)="changePassword($event)">
-        <div class="group">
-            <label [ngClass]="{shrink: passwordForm.value.current}" class="form-input-label">Current password</label>
-            <input type="password" class="form-input" name="currentPassword" formControlName="current">
-        </div>
+    <div class="change-password-container">
+        <form [formGroup]="passwordForm" (submit)="changePassword($event)">
+            <div class="group">
+                <label [ngClass]="{shrink: passwordForm.value.current}" class="form-input-label">Current
+                    password</label>
+                <input type="password" class="form-input" name="currentPassword" formControlName="current">
+            </div>
 
-        <div class="group">
-            <label [ngClass]="{shrink: passwordForm.value.new}" class="form-input-label">New password</label>
-            <input type="password" class="form-input" name="newPassword" formControlName="new">
-        </div>
+            <div class="group">
+                <label [ngClass]="{shrink: passwordForm.value.new}" class="form-input-label">New password</label>
+                <input type="password" class="form-input" name="newPassword" formControlName="new">
+            </div>
 
-        <div class="group">
-            <label [ngClass]="{shrink: passwordForm.value.confirm}" class="form-input-label">Password confirmation</label>
-            <input type="password" class="form-input" name="confirmNewPassword" formControlName="confirm">
-        </div>
-        <button>Change password</button>
-    </form>
+            <div class="group">
+                <label [ngClass]="{shrink: passwordForm.value.confirm}" class="form-input-label">Password
+                    confirmation</label>
+                <input type="password" class="form-input" name="confirmNewPassword" formControlName="confirm">
+            </div>
+            <button>Change password</button>
+        </form>
+
+    </div>
 
 </div>

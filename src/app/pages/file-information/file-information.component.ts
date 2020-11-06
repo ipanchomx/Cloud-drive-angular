@@ -32,7 +32,8 @@ export class FileInformationComponent implements OnInit {
     alert('file is downloading');
   }
 
-  uploadFile() {
+  uploadFile(event) {
+    console.log(event);
     alert('file is uploading');
   }
 

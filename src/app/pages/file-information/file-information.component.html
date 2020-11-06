@@ -2,8 +2,8 @@
     <mat-drawer-content class="file-information-main">
         <div class="file-action-container">
             <button mat-raised-button color="primary" (click)="downloadFile()">Download</button>
-            <button mat-raised-button color="primary" type="file" (click)="fileInput.click()">Update</button>
-            <input hidden (change)="uploadFile()" #fileInput type="file" id="file">
+            <button mat-raised-button type="file" (click)="fileInput.click()">Update</button>
+            <input hidden (change)="uploadFile($event)" #fileInput type="file" id="file">
             <button mat-raised-button color="primary" (click)="shareFile()">Share</button>
             <mat-form-field appearance="fill">
                 <mat-label>Versions</mat-label>
