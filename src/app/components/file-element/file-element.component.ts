@@ -2,11 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
-  selector: 'app-testmaterial',
-  templateUrl: './testmaterial.component.html',
-  styleUrls: ['./testmaterial.component.scss']
+  selector: 'app-file-element',
+  templateUrl: './file-element.component.html',
+  styleUrls: ['./file-element.component.scss']
 })
-export class TestmaterialComponent implements OnInit {
+export class FileElementComponent implements OnInit {
 
   items = [
     {id: 1, name: 'Item 1'},

@@ -1,0 +1,78 @@
+.file-manager-container {
+  width: 100%;
+  height: calc(100vh - 50px);
+}
+
+.example-form-field {
+  width: 200px;
+}
+
+.input-path-section {
+  width: 100%;
+  height: 250px;
+  // background-color: #37474F;
+  // border-radius: 10px;
+  // border: 1px solid black;
+  text-align: center;
+  display: block;
+}
+
+.input-path-section .input-info label {
+  display: block;
+  width: 100%;
+  height: 40px;
+  padding: 10px 0px;
+  font-size: 18px;
+  text-align: left;
+  margin-left: 10%;
+}
+
+.input-path-section .input-info input {
+  width: 80%;
+  height: 50px;
+  margin: 10px 0px;
+  padding: 20px;
+  border-radius: 5px;
+  border: 1px solid #E6E6E6;
+  font-size: 18px;
+}
+
+.input-path-section .input-button button {
+  width: 80%;
+  margin-top: 5px;
+  background-color: darkcyan;
+  color: white;
+}
+
+.input-path-section .input-button button:hover {
+  background-color: lighten(darkcyan, 5%);
+  color: aliceblue;
+}
+
+.sidebar-drawer {
+  width: 20%;
+}
+
+.file-manager-main-container {
+    width: 80%;
+    overflow-x: hidden;
+    border: none;
+}
+
+.path-actions {
+    display: flex;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 15px;
+    justify-content: space-between;
+
+    button {
+        width: 48%;
+    }
+
+}
+
+h1 {
+  font-size: 30px;
+  margin: 25px;
+}

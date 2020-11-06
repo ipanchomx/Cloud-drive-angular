@@ -1,0 +1,135 @@
+<!-- <div class="grid">
+  <mat-list>
+    <div *ngIf="folders.length > 0">
+      <h3 matSubheader>Folders</h3>
+    </div>
+    <mat-list-item *ngFor="let folder of folders" (contextmenu)="onContextMenu($event, item)"
+      class=" xs-100 md-50 lg-33">
+      <mat-icon matListIcon>folder</mat-icon>
+      <h4 matLine>{{folder.name}}</h4>
+      <p matLine class="demo-2"> {{folder.updated}} </p>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <h3 matSubheader>Archivos</h3>
+    <mat-list-item *ngFor="let file of files" (contextmenu)="onContextMenu($event, item)" class="xs-100 md-50 lg-33">
+      <mat-icon matListIcon>insert_drive_file</mat-icon>
+      <h4 matLine>{{file.name}}</h4>
+      <p matLine class="demo-2"> {{file.updated}} </p>
+    </mat-list-item>
+  </mat-list>
+</div>
+
+<div style="visibility: hidden; position: fixed" [style.left]="contextMenuPosition.x"
+  [style.top]="contextMenuPosition.y" [matMenuTriggerFor]="contextMenu">
+</div>
+
+<mat-menu #contextMenu="matMenu">
+  <ng-template matMenuContent let-item="item">
+    <button mat-menu-item (click)="onContextMenuAction1(item)">Download</button>
+    <button mat-menu-item (click)="onContextMenuAction2(item)">More information</button>
+    <button mat-menu-item (click)="onContextMenuAction2(item)">Share</button>
+  </ng-template>
+</mat-menu> -->
+
+<!-- 
+<div class="grid">
+  <mat-list>
+    <div *ngIf="folders.length > 0">
+      <h3 matSubheader>Folders</h3>
+    </div>
+
+    <div class="item-section">
+      <div *ngFor="let folder of folders" class=" xs-100 md-50 lg-33 item-grid">
+        <mat-list-item (contextmenu)="onContextMenu($event, item)">
+          <mat-icon matListIcon>folder</mat-icon>
+          <h4 matLine>{{folder.name}}</h4>
+          <p matLine class="demo-2"> {{folder.updated | date}} </p>
+        </mat-list-item>
+      </div>
+
+    </div>
+
+    <mat-divider></mat-divider>
+
+
+    <div *ngIf="folders.length > 0">
+      <h3 matSubheader>Archivos</h3>
+    </div>
+
+    <div class="item-section">
+      <div *ngFor="let file of files" class=" xs-100 md-50 lg-33 item-grid">
+        <mat-list-item (contextmenu)="onContextMenu($event, item)">
+          <mat-icon matListIcon>insert_drive_file</mat-icon>
+          <h4 matLine>{{file.name}}</h4>
+          <p matLine class="demo-2"> {{file.updated | date}} </p>
+        </mat-list-item>
+      </div>
+    </div>
+
+
+  </mat-list>
+</div>
+
+<div style="visibility: hidden; position: fixed" [style.left]="contextMenuPosition.x"
+  [style.top]="contextMenuPosition.y" [matMenuTriggerFor]="contextMenu">
+</div>
+
+<mat-menu #contextMenu="matMenu">
+  <ng-template matMenuContent let-item="item">
+    <button mat-menu-item (click)="onContextMenuAction1(item)">Download</button>
+    <button mat-menu-item (click)="onContextMenuAction2(item)">More information</button>
+    <button mat-menu-item (click)="onContextMenuAction2(item)">Share</button>
+  </ng-template>
+</mat-menu> -->
+
+
+
+<div class="grid">
+  <mat-list>
+
+    <div *ngFor="let folder of folders" class="border xs-100 md-50 lg-33 item-grid">
+      <mat-list-item (contextmenu)="onContextMenu($event, folder)" class="border container-info" (click)="clickOnFolder(folder)">
+        <mat-icon matListIcon class="border">folder</mat-icon>
+        <div class="info-section">
+          <h4 matLine class="border">{{folder.name}}</h4>
+          <p matLine class="demo-2 border"> {{folder.updated | date}} </p> 
+        </div>
+
+      </mat-list-item>
+    </div>
+
+    <div *ngFor="let file of files" class="border xs-100 md-50 lg-33 item-grid">
+      <mat-list-item (contextmenu)="onContextMenu($event, file)" class="border container-info" (click)="clickOnFile(file)">
+        <mat-icon matListIcon class="border">insert_drive_file</mat-icon>
+        <div class="info-section">
+          <h4 matLine class="border">{{file.name}}</h4>
+          <p matLine class="demo-2 border"> {{file.updated | date}} </p> 
+        </div>
+
+      </mat-list-item>
+    </div>
+
+<!-- 
+    <div *ngFor="let file of files" class="border xs-100 md-50 lg-33 item-grid">
+      <mat-list-item (contextmenu)="onContextMenu($event, item)">
+        <mat-icon matListIcon>insert_drive_file</mat-icon>
+        <h4 matLine>{{file.name}}</h4>
+        <p matLine class="demo-2"> {{file.updated | date}} </p>
+      </mat-list-item>
+    </div> -->
+
+
+  </mat-list>
+</div>
+
+<div style="visibility: hidden; position: fixed" [style.left]="contextMenuPosition.x"
+  [style.top]="contextMenuPosition.y" [matMenuTriggerFor]="contextMenu">
+</div>
+
+<mat-menu #contextMenu="matMenu">
+  <ng-template matMenuContent let-item="item">
+    <button mat-menu-item (click)="onContextMenuAction1(item)">Download</button>
+    <button mat-menu-item (click)="onContextMenuAction2(item)">More information</button>
+    <button mat-menu-item (click)="onContextMenuAction(item)">Share</button>
+  </ng-template>
+</mat-menu>

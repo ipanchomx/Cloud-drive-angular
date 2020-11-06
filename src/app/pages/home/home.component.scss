@@ -1,0 +1,60 @@
+@import 'https://fonts.googleapis.com/css?family=Ubuntu:300, 400, 500, 700';
+@import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
+
+.homePage{
+    background-color: #120655;
+    background: linear-gradient( 145deg,#b805ff9f 0%, #1d05a7 100%);
+    font-family: 'Ubuntu', sans-serif;
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    height: calc( 100vh - 50px );
+    overflow: hidden;
+}
+
+.header {
+    
+    //background: linear-gradient( 145deg, #ff05ff9f 0%, #2f0bf7 100%);   
+    background-image: url('../../../assets/img/bk.png');
+    background-repeat: no-repeat;
+    //background-attachment: fixed;
+    background-size: cover;
+    padding: 15vh 0vw 20vh;
+    height: 70%;
+    box-sizing: border-box;
+    .header-content {
+        width: 45%;
+        h1{
+            font-family: 'Cairo', sans-serif;
+            font-size: 6vw;
+            padding-bottom: 3vh;
+        }
+        h3{
+            font-size: 1.5vw;
+        }
+        color: #FFF;
+        text-shadow: 1px 1px 1px #333;
+        text-align: center;
+    
+    }
+
+    .astro{
+        img{
+            float: right;
+            float: top;
+            width: 30%;
+        }
+    }
+
+}
+
+.gradient {
+    background: linear-gradient(to bottom, #ffffff 0%, #d8d8db 100%);
+    padding: 10vh 13vw 0ch;
+    border-radius:  50% 50% 0 0 /10%;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 30px;
+    font-weight: 50;
+    box-sizing: border-box;
+    height: 35%;
+  }
