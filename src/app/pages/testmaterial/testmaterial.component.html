@@ -1,0 +1,26 @@
+<button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+    <mat-icon>more_vert</mat-icon>
+</button>
+
+
+<mat-slide-toggle [(ngModel)]="isChecked">Slide Toggle Checked: {{isChecked}}</mat-slide-toggle>
+
+<h1 *ngFor="let item of items" (contextmenu)="onContextMenu($event, item)">{{item.name}}</h1>
+
+<div style="visibility: hidden; position: fixed" [style.left]="contextMenuPosition.x"
+    [style.top]="contextMenuPosition.y" [matMenuTriggerFor]="contextMenu">
+</div>
+
+<mat-menu #contextMenu="matMenu">
+    <ng-template matMenuContent let-item="item">
+        <button mat-menu-item (click)="onContextMenuAction1(item)">Download</button>
+        <button mat-menu-item (click)="onContextMenuAction2(item)">More information</button>
+        <button mat-menu-item (click)="onContextMenuAction2(item)">Share</button>
+    </ng-template>
+</mat-menu>
+
+
+<mat-drawer-container class="example-container">
+    <mat-drawer mode="side" position="end" class="sidebar" opened>Drawer content</mat-drawer>
+    <mat-drawer-content>Main content</mat-drawer-content>
+  </mat-drawer-container>
