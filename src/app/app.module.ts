@@ -9,7 +9,6 @@ import { DirElementComponent } from './components/dir-element/dir-element.compon
 import { HomeComponent } from './pages/home/home.component';
 import { NavBarComponent } from './globals/layouts/nav-bar/nav-bar.component';
 import { SettingsComponent } from './pages/settings/settings.component';
-import { TestmaterialComponent } from './pages/testmaterial/testmaterial.component';
 import { GridListComponent } from './components/grid-list/grid-list.component';
 import { PendingFilesSharedComponent } from './pages/pending-files-shared/pending-files-shared.component';
 
@@ -34,7 +33,6 @@ import { FileManagerComponent } from './pages/file-manager/file-manager.componen
     HomeComponent,
     NavBarComponent,
     SettingsComponent,
-    TestmaterialComponent,
     GridListComponent,
     PendingFilesSharedComponent,
     FileManagerComponent
