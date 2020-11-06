@@ -4,7 +4,8 @@
 
   .logo {
     height: 100%;
-    display: inline;
+    display: flex;
+    align-items: center;
 
     img {
       height: 100%;
@@ -19,7 +20,8 @@
       align-items: center;
       display: inline;
       align-items: center;
-      float: left;
+      margin: 0;
+      padding: 0;
       padding-left: 7px;
     }
   }
@@ -39,9 +41,17 @@
     color: rgb(15, 184, 240);
   }
 
-  height: 35px;
+  .nav-links {
+    display: flex;
+    width: 20%;
+    justify-content: space-evenly;
+  }
+
+  height: 50px;
   font-weight: 500;
   background: linear-gradient(to bottom, #ffffff 0%, #dddee1 100%);
-  float: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
 }
