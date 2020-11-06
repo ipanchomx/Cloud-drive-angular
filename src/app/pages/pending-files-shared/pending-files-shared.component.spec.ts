@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FileListComponent } from './file-list.component';
+import { PendingFilesSharedComponent } from './pending-files-shared.component';
 
-describe('FileListComponent', () => {
-  let component: FileListComponent;
-  let fixture: ComponentFixture<FileListComponent>;
+describe('PendingFilesSharedComponent', () => {
+  let component: PendingFilesSharedComponent;
+  let fixture: ComponentFixture<PendingFilesSharedComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FileListComponent ]
+      declarations: [ PendingFilesSharedComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FileListComponent);
+    fixture = TestBed.createComponent(PendingFilesSharedComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

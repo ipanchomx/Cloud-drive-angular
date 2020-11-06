@@ -1,0 +1,27 @@
+<mat-drawer-container class="file-manager-container">
+
+  <mat-drawer mode="side" opened class="sidebar-drawer">
+    <!-- Drawer content -->
+    <app-sidebar></app-sidebar>
+  </mat-drawer>
+  <mat-drawer-content class="file-manager-main-container">
+    <h1>
+      File Manager
+    </h1>
+    <div class="input-path-section">
+      <div class="input-info">
+        <label for="path"> Path: </label>
+        <input type="text" name="path" id="path" [(ngModel)]="value" placeholder="Type path...">
+      </div>
+      <div class="input-button">
+        <button>Jump!</button>
+      </div>
+      <div class="path-actions">
+        <button id="idCreate" mat-raised-button color="primary">Create folder</button>
+        <button id="idAdd" mat-raised-button color="accent">Add file</button>
+      </div>
+    </div>
+    <app-grid-list></app-grid-list>
+    <!-- Main content -->
+  </mat-drawer-content>
+</mat-drawer-container>
