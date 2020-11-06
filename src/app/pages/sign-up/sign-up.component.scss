@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Bitter&display=swap');
+
+.register{
+    
+    height: calc( 100vh - 50px );
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    vertical-align: top;
+    //background: linear-gradient(to bottom, #f0eeee 0%, #eae0f0 100%);
+    text-align: center;
+    
+    h1 {
+        margin-top: 10vh;
+        font-family: 'Bitter', serif;
+        font-size: 40px;
+    }
+    
+}
+.login{
+    width: 30%;
+    height: 70%;
+    justify-content: space-around;
+    //background-color: #ff408077;
+    background: linear-gradient(to top, #f598b777 0%, #ff408077 100%);
+    margin-top: 15vh;
+    border-radius:  5% 0 0 5%;
+
+}
+
+.signup{
+    width: 30%;
+    height: 70%;
+    //background-color: #f7f7f777;
+    background: linear-gradient(to top, #dce1f78c 0%, #bbc6ff8e  100%);
+    margin-top: 15vh;
+    border-radius:  0 5% 5% 0;
+}
