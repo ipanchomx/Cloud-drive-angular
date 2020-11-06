@@ -1,0 +1,54 @@
+@import 'https://fonts.googleapis.com/css?family=Ubuntu:300, 400, 500, 700';
+@import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
+
+.homePage{
+    font-family: 'Ubuntu', sans-serif;
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+}
+
+
+.gradient {
+  background: linear-gradient(to bottom, #ffffff83 0%, #d8d8db8f 100%);
+  padding: 10ch 0ch 10ch;
+  text-align: center;
+  float: left;
+  overflow: hidden;
+  width: 100%;  
+  height: 100%;
+}
+
+
+.header {
+    
+    //background: linear-gradient( 145deg, #ff05ff9f 0%, #2f0bf7 100%);
+    background: linear-gradient( 145deg, #b805ff9f 0%, #1d05a7 100%);
+    background-color: #3315dfd3;
+    padding: 10ch 0ch 10ch;
+	border-radius: 0 0 85% 85% /15%;
+    width: 100%;
+    
+    .header-content {
+        img {
+            width: 20%;
+            padding: 0;
+        }
+        h1{
+            font-family: 'Cairo', sans-serif;
+            font-size: 60px;
+        }
+        buttom {
+            margin-bottom: 10px;
+        }
+        color: #FFF;
+        text-shadow: 1px 1px 1px #333;
+        text-align: center;
+    
+    }
+
+}
+
+
+
+
