@@ -6,14 +6,15 @@ import { AppComponent } from './app.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FileElementComponent } from './components/file-element/file-element.component';
 import { DirElementComponent } from './components/dir-element/dir-element.component';
+import { HomeComponent } from './pages/home/home.component';
+import { NavBarComponent } from './globals/layouts/nav-bar/nav-bar.component';
 import { SettingsComponent } from './pages/settings/settings.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TestmaterialComponent } from './pages/testmaterial/testmaterial.component';
 import { GridListComponent } from './components/grid-list/grid-list.component';
 import { PendingFilesSharedComponent } from './pages/pending-files-shared/pending-files-shared.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
@@ -30,11 +31,12 @@ import { FileManagerComponent } from './pages/file-manager/file-manager.componen
     SidebarComponent,
     FileElementComponent,
     DirElementComponent,
+    HomeComponent,
+    NavBarComponent,
     SettingsComponent,
     TestmaterialComponent,
     GridListComponent,
     PendingFilesSharedComponent,
-    NavbarComponent,
     FileManagerComponent
   ],
   imports: [
