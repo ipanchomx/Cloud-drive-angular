@@ -29,6 +29,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
+import { HttpClientModule } from '@angular/common/http';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -48,6 +50,7 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
   ],
   imports : [
     AppRoutingModule,
+    HttpClientModule,
     FormsModule,
     MatSliderModule,
     MatMenuModule,
@@ -63,6 +66,7 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatButtonModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

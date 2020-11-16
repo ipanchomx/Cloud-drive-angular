@@ -12,6 +12,14 @@ html, body {
   background-color: #fff;
 }
 
+
+.blue-snackbar {
+  background-color: #2166F3;
+
+  mat-simple-snackbar-action {
+    color: red !important;
+  }
+}
 * {
   box-sizing: border-box;
 }
