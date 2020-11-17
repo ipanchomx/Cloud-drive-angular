@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -14,8 +15,10 @@ import { GridListComponent } from './components/grid-list/grid-list.component';
 import { PendingFilesSharedComponent } from './pages/pending-files-shared/pending-files-shared.component';
 import { FileInformationComponent } from './pages/file-information/file-information.component';
 import { FileManagerComponent } from './pages/file-manager/file-manager.component';
+import { SignUpComponent } from './pages/sign-up/sign-up.component';
+import { UploadFileFormComponent } from './dialogs/upload-file-form/upload-file-form.component';
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatMenuModule } from '@angular/material/menu';
@@ -28,9 +31,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
-import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { HttpClientModule } from '@angular/common/http';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 
 @NgModule({
@@ -46,9 +49,10 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     FileInformationComponent,
     GridListComponent,
     FileManagerComponent,
-    SignUpComponent
+    SignUpComponent,
+    UploadFileFormComponent
   ],
-  imports : [
+  imports: [
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
@@ -66,7 +70,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
