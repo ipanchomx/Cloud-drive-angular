@@ -6,6 +6,8 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
+import { AuthService } from 'src/app/globals/services/auth.service.spec';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -15,7 +17,8 @@ import {
 export class SignUpComponent implements OnInit {
 
   signupForm:FormGroup;
-  constructor(private formBuilder:FormBuilder, private sessionService:SessionService, private _snackBar: MatSnackBar) { }
+  loginForm:FormGroup;
+  constructor(private formBuilder:FormBuilder, private sessionService:SessionService, private _snackBar: MatSnackBar, private authService:AuthService, private router: Router) { }
   
   horizontalPosition: MatSnackBarHorizontalPosition = "center";
   verticalPosition: MatSnackBarVerticalPosition = "top";
@@ -30,6 +33,11 @@ export class SignUpComponent implements OnInit {
     }, {
       validators: this.compararPasswords.bind(this)
     });
+
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]]
+      });
   }
 
   crearUsuario() {
@@ -57,4 +65,24 @@ export class SignUpComponent implements OnInit {
       return { mismatch: true }
     }
   }
+
+
+  iniciarSesion() {
+    if(this.loginForm.valid){
+      this.sessionService.login(this.loginForm.getRawValue()).then(data=>{
+        this.authService.save(data.token)
+        console.log(data);
+        this.router.navigate(["/file-manager"])
+      }).catch(err =>{
+    
+        this._snackBar.open(`Unable to login - ${err.error.message}`, "Close", {
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+        })
+        console.log(err);
+        
+      })
+    }
+  }
+
 }
