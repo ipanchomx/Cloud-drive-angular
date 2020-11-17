@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormGroup, Validators, FormBuilder} from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { SessionService } from 'src/app/globals/services/session.service';
 import {
   MatSnackBar,
@@ -8,6 +8,8 @@ import {
 } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/globals/services/auth.service.spec';
 import { Router } from '@angular/router';
+import { SocialAuthService } from 'angularx-social-login';
+import { GoogleLoginProvider } from "angularx-social-login";
 
 @Component({
   selector: 'app-sign-up',
@@ -16,10 +18,10 @@ import { Router } from '@angular/router';
 })
 export class SignUpComponent implements OnInit {
 
-  signupForm:FormGroup;
-  loginForm:FormGroup;
-  constructor(private formBuilder:FormBuilder, private sessionService:SessionService, private _snackBar: MatSnackBar, private authService:AuthService, private router: Router) { }
-  
+  signupForm: FormGroup;
+  loginForm: FormGroup;
+  constructor(private formBuilder: FormBuilder, private sessionService: SessionService, private _snackBar: MatSnackBar, private authService: AuthService, private router: Router, private googleAuth: SocialAuthService) { }
+
   horizontalPosition: MatSnackBarHorizontalPosition = "center";
   verticalPosition: MatSnackBarVerticalPosition = "top";
 
@@ -37,13 +39,29 @@ export class SignUpComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
-      });
+    });
+
+    this.googleAuth.authState.subscribe((user) => {
+      // console.log(user);
+      this.sessionService.googleLogin(user.idToken).then(data => {
+        this.authService.save(data.token)
+        this.router.navigate(["/file-manager"])
+      }).catch(err => {
+        this._snackBar.open(`Unable to login - ${err.error.message}`, "Close", {
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+        })
+        console.log(err);
+
+      })
+    });
+
   }
 
   crearUsuario() {
-    if(this.signupForm.valid) {
+    if (this.signupForm.valid) {
       console.log('Crear usuario...');
-      this.sessionService.signup(this.signupForm.getRawValue()).then(data=> {
+      this.sessionService.signup(this.signupForm.getRawValue()).then(data => {
         console.log(data);
         this._snackBar.open("User successfully created", "Close", {
           horizontalPosition: this.horizontalPosition,
@@ -57,9 +75,9 @@ export class SignUpComponent implements OnInit {
 
 
   compararPasswords() {
-    if(!this.signupForm) { return null; }
+    if (!this.signupForm) { return null; }
     const values = this.signupForm.getRawValue();
-    if(values.password === values.confirm) {
+    if (values.password === values.confirm) {
       return null;
     } else {
       return { mismatch: true }
@@ -68,21 +86,25 @@ export class SignUpComponent implements OnInit {
 
 
   iniciarSesion() {
-    if(this.loginForm.valid){
-      this.sessionService.login(this.loginForm.getRawValue()).then(data=>{
+    if (this.loginForm.valid) {
+      this.sessionService.login(this.loginForm.getRawValue()).then(data => {
         this.authService.save(data.token)
         console.log(data);
         this.router.navigate(["/file-manager"])
-      }).catch(err =>{
-    
+      }).catch(err => {
+
         this._snackBar.open(`Unable to login - ${err.error.message}`, "Close", {
           horizontalPosition: this.horizontalPosition,
           verticalPosition: this.verticalPosition,
         })
         console.log(err);
-        
+
       })
     }
+  }
+
+  signInWithGoogle(): void {
+    this.googleAuth.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
 
 }

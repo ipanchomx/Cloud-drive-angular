@@ -17,7 +17,6 @@
         <!-- <mat-error *ngIf="emailFormControl.hasError('required')">
             Email is <strong>required</strong> -->
         <!-- </mat-error> -->
-
       </mat-form-field>
 
       <br>
@@ -29,6 +28,8 @@
       <button mat-raised-button color="primary">LOGIN</button>
 
     </form>
+    <p class="or">Or</p>
+    <button mat-raised-button color="warn" (click)="signInWithGoogle()" >Sign in with GOOGLE</button>
 
   </div>
 
