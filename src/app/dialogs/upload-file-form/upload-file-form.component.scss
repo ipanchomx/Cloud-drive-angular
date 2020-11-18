@@ -1,6 +1,7 @@
 .example-form {
     width: 90%;
     width: 100%;
+
 }
 
 .example-full-width {
@@ -12,5 +13,20 @@ h1 {
 }
 
 .btn-dialog-close {
-    float: right
+    float: right;
+}
+
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+}
+
+#radio-group-label {
+    margin-top: 15px;
+    display: block;
+}
+
+.radio-button {
+    margin: 5px;
 }

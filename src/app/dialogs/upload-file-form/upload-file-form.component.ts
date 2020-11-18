@@ -14,6 +14,7 @@ export class UploadFileFormComponent implements OnInit {
   fileName: string = '';
   extension: string = '';
   file: File;
+  needsVerification = false;
 
   ngOnInit(): void {
   }

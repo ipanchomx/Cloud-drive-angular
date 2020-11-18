@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider } from 'angularx-social-login';
 
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -34,7 +35,8 @@ import { MatListModule } from '@angular/material/list';
 import { HttpClientModule } from '@angular/common/http';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider } from 'angularx-social-login';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 import { environment } from './../environments/environment';
 @NgModule({
@@ -56,6 +58,7 @@ import { environment } from './../environments/environment';
   imports: [
     AppRoutingModule,
     HttpClientModule,
+    SocialLoginModule,
     FormsModule,
     MatSliderModule,
     MatMenuModule,
@@ -73,7 +76,8 @@ import { environment } from './../environments/environment';
     MatButtonModule,
     MatSnackBarModule,
     MatGridListModule,
-    SocialLoginModule
+    MatRadioModule,
+    MatAutocompleteModule
   ],
   providers: [
     {
