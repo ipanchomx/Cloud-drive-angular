@@ -5,11 +5,11 @@
     <h1>Log In</h1>
     <p>Sign in with your email and password</p>
 
-    <form class="loginForm">
+    <form class="loginForm" [formGroup]="loginForm" (submit)="iniciarSesion()">
 
       <mat-form-field class="emailInput">
         <mat-label>Email</mat-label>
-        <input type="email" matInput placeholder="Ex. pat@example.com">
+        <input type="email" matInput placeholder="Ex. pat@example.com" formControlName="email">
         <!-- 
         <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
             Please enter a valid email address
@@ -17,18 +17,19 @@
         <!-- <mat-error *ngIf="emailFormControl.hasError('required')">
             Email is <strong>required</strong> -->
         <!-- </mat-error> -->
-
       </mat-form-field>
 
       <br>
 
       <mat-form-field>
-        <mat-label>Password</mat-label> <input type="password" matInput>
+        <mat-label>Password</mat-label> <input type="password" matInput  formControlName="password">
       </mat-form-field>
       <br>
       <button mat-raised-button color="primary">LOGIN</button>
 
     </form>
+    <p class="or">Or</p>
+    <button mat-raised-button color="warn" (click)="signInWithGoogle()" >Sign in with GOOGLE</button>
 
   </div>
 

@@ -15,11 +15,12 @@
 .header {
     
     //background: linear-gradient( 145deg, #ff05ff9f 0%, #2f0bf7 100%);   
-    background-image: url('../../../assets/img/bk.png');
+    background-image: url('/assets/img/bk.png');
     background-repeat: no-repeat;
-    //background-attachment: fixed;
+    // display: flex;
+    // align-items: center;
     background-size: cover;
-    padding: 15vh 0vw 20vh;
+    padding: 25vh 0vw 20vh;
     height: 70%;
     box-sizing: border-box;
     .header-content {
@@ -39,10 +40,11 @@
     }
 
     .astro{
+        position: relative;
         img{
             float: right;
             float: top;
-            width: 30%;
+            width: 400px;
         }
     }
 
