@@ -5,10 +5,14 @@
         <span><h1>Cloud Drive</h1></span>
     </div>
 
-    <span class="nav-links">
-        <a href=#>Settings </a>
-        <a href=#>Sign Up</a>
-        <a href=#>Log In</a>
+    <span class="nav-links" *ngIf='isLoggedIn'>
+        <a routerLink="settings">Settings </a>
+        <a routerLink="file-manager">File Manager</a>
+        <a (click)='logout()'>Log Out</a>
+    </span>
+
+    <span class="nav-links" *ngIf='!isLoggedIn'>
+        <a routerLink="sign-up">Sign Up / Login</a>
     </span>
     
 </div>
