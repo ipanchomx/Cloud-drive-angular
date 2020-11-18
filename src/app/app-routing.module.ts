@@ -7,6 +7,7 @@ import { FileManagerComponent } from './pages/file-manager/file-manager.componen
 import { HomeComponent } from './pages/home/home.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { AuthGuard } from './globals/guards/auth.guard';
+import { UnAuthGuard } from './globals/guards/un-auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -14,8 +15,8 @@ const routes: Routes = [
   { path: "file-info", component: FileInformationComponent, canActivate: [AuthGuard]},
   { path: "pending-files-shared", component: PendingFilesSharedComponent, canActivate: [AuthGuard]},
   { path: "file-manager", component: FileManagerComponent, canActivate: [AuthGuard] },
-  { path: 'home', component: HomeComponent },
-  { path: 'sign-up', component: SignUpComponent }
+  { path: 'home', component: HomeComponent, canActivate: [UnAuthGuard]},
+  { path: 'sign-up', component: SignUpComponent, canActivate: [UnAuthGuard]}
 ];
 
 @NgModule({
