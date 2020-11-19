@@ -53,7 +53,7 @@ import { environment } from './../environments/environment';
     GridListComponent,
     FileManagerComponent,
     SignUpComponent,
-    UploadFileFormComponent
+    // UploadFileFormComponent
   ],
   imports: [
     AppRoutingModule,
