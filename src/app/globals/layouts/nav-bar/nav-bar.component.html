@@ -1,18 +1,30 @@
-<div class="NavBar">
+<mat-toolbar color="#37474F">
+    <mat-toolbar-row>
+        <div class="mat-logo-div">
+            <img class="mat-logo" src="../../../../assets/img/logo-icon-transparent.png" alt="logo">
+            <mat-nav-list class="no-padding">
+                <a mat-list-item routerLink="" id="nav-title">Cloud Drive</a>
+            </mat-nav-list>
+        </div>
+        <span class="example-spacer"></span>
 
-    <div class="logo">
-        <img src="../../../../assets/img/logo-icon-transparent.png" alt="logo">
-        <span><h1>Cloud Drive</h1></span>
-    </div>
+        <mat-nav-list *ngIf='isLoggedIn'>
+            <a mat-icon-button routerLink="file-manager">
+                <mat-icon>home</mat-icon>
+            </a>
+            <a mat-icon-button routerLink="settings">
+                <mat-icon>settings</mat-icon>
+            </a>
+            <a mat-icon-button routerLink="">
+                <mat-icon>notifications</mat-icon>
+            </a>
 
-    <span class="nav-links" *ngIf='isLoggedIn'>
-        <a routerLink="settings">Settings </a>
-        <a routerLink="file-manager">File Manager</a>
-        <a (click)='logout()'>Log Out</a>
-    </span>
+            <a mat-button (click)='logout()'>Log Out</a>
+        </mat-nav-list>
+        
+        <mat-nav-list *ngIf='!isLoggedIn'>
+            <a mat-button routerLink="sign-up">Sign Up / Log In</a>
+        </mat-nav-list>
 
-    <span class="nav-links" *ngIf='!isLoggedIn'>
-        <a routerLink="sign-up">Sign Up / Login</a>
-    </span>
-    
-</div>
+    </mat-toolbar-row>
+</mat-toolbar>
