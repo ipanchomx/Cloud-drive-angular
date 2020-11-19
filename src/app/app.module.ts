@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider } from 'angularx-social-login';
 
+import { HttpClientModule } from '@angular/common/http';
+
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FileElementComponent } from './components/file-element/file-element.component';
@@ -21,24 +23,9 @@ import { UploadFileFormComponent } from './dialogs/upload-file-form/upload-file-
 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSliderModule } from '@angular/material/slider';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatSelectModule } from '@angular/material/select';
-import { MatInputModule } from '@angular/material/input';
-import { MatCardModule } from '@angular/material/card';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatListModule } from '@angular/material/list';
-import { HttpClientModule } from '@angular/common/http';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatRadioModule} from '@angular/material/radio';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 import { environment } from './../environments/environment';
+import { MaterialModule } from './modules/material/material.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,25 +47,10 @@ import { environment } from './../environments/environment';
     HttpClientModule,
     SocialLoginModule,
     FormsModule,
-    MatSliderModule,
-    MatMenuModule,
-    MatIconModule,
-    MatSlideToggleModule,
-    MatSidenavModule,
-    MatSelectModule,
-    MatSelectModule,
-    MatInputModule,
-    MatCardModule,
-    MatDialogModule,
-    MatListModule,
     BrowserModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatSnackBarModule,
-    MatGridListModule,
-    MatRadioModule,
-    MatAutocompleteModule
+    MaterialModule
   ],
   providers: [
     {
