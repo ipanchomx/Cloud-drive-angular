@@ -66,6 +66,7 @@ import { environment } from './../environments/environment';
     MatSlideToggleModule,
     MatSidenavModule,
     MatSelectModule,
+    MatSelectModule,
     MatInputModule,
     MatCardModule,
     MatDialogModule,
