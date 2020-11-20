@@ -4,10 +4,8 @@
 html, body {
   margin: 0;
   padding: 0;
-  // width: 100vw;
-  // height: 100vh;
-  height: 100%;
-  width: 100%;
+  width: 100vw !important;
+  height: 100vh !important;
   font-family: 'Roboto', "Helvetica Neue", Helvetica, sans-serif;
   background-color: #fff;
 }
@@ -111,45 +109,6 @@ $main-color: black;
   }
 }
 
-
-// .grid {
-//   > div {
-//     background-color: lightblue;
-//   }
-// }
-
-// header {
-//   padding: 12px;
-//   background-color: darkblue;
-//   color: lightblue;
-
-//   > span {
-//     font-size: 24px;
-//     font-weight: bold;
-//   }
-
-//   ul {
-//     list-style: none;
-//     display: inline-block;
-
-//     li {
-//       display: inline-block;
-//       margin-left: 10px;
-
-//       a {
-//         color: lightblue;
-//       }
-//     }
-//   }
-// }
-
-// #news-list {
-//   > div {
-//     height: 250px;
-//     border: solid 1px #ddd;
-
-//     img {
-//       width: 100%;
-//     }
-//   }
-// }
+.example-spacer {
+  flex: 1 1 auto;
+}

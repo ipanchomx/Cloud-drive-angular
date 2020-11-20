@@ -19,7 +19,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatFormFieldModule} from '@angular/material/form-field';
-
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
   declarations: [],
@@ -43,7 +43,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatAutocompleteModule,
     MatChipsModule,
     MatToolbarModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatBadgeModule
   ],
   exports: [
     CommonModule,
@@ -65,7 +66,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatAutocompleteModule,
     MatChipsModule,
     MatToolbarModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatBadgeModule
   ]
 })
 export class MaterialModule { }

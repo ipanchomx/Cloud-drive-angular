@@ -19,22 +19,46 @@ export class UploadFileFormComponent implements OnInit {
   file: File;
   needsVerification = false;
   users: any[];
+  fileSharedWith: any[] = [];
   userSearchInput: string = '';
+  shareWithInp: string = '';
+  permission: string = '';
+  currentUser: any;
   subject: BehaviorSubject<string> = new BehaviorSubject('');
 
   ngOnInit(): void {
     this.subject.pipe(
       debounceTime(100)
     ).subscribe((searchInput) => {
-      if(searchInput){
+      if (searchInput) {
         this._user.getUsers(searchInput)
-          .subscribe((users: any)=> { 
-            console.log(users);
-            this.users = users.results;
-           })
+          .subscribe((users: any) => {
+            this.users = users.results.filter(user => !this.fileSharedWith.find(el => el.id ==user.id));
+          })
       }
     })
   }
+
+  selectCurrentUser(user: any) {
+    this.currentUser = user;
+  }
+
+  addUserToSharedList() {
+    if (!this.permission || !this.currentUser) {
+      return
+    }
+    this.fileSharedWith.push({...this.currentUser, permission: this.permission});
+    this.currentUser = null;
+    this.permission = '';
+    this.shareWithInp = '';
+    this.users = [];
+  }
+
+  displayFn(user: any) {
+    return user && user.email;
+  }
+
+
 
   onFileChange(event) {
     this.file = <File>event.target.files[0];
@@ -50,7 +74,18 @@ export class UploadFileFormComponent implements OnInit {
   }
 
   remove(idx: number) {
-    this.users.splice(idx, 1);
+    this.fileSharedWith.splice(idx, 1);
+  }
+
+  uploadFile() {
+    let form = new FormData();
+    form.append('test', '123');
+    form.append('file', this.file, this.fileName);
+    form.append('extension', this.extension);
+    form.append('needsVerification', this.needsVerification.toString());
+    if(this.fileSharedWith) form.append('sharedWith', JSON.stringify(this.fileSharedWith));
+    console.log("subbmiting");
+    console.log(form);
   }
 
   onClose() {

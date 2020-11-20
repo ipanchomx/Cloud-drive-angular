@@ -1,7 +1,6 @@
 .example-form {
     width: 90%;
     width: 100%;
-
 }
 
 .example-full-width {
@@ -29,4 +28,21 @@ h1 {
 
 .radio-button {
     margin: 5px;
+}
+
+.shareWithInputContainer {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    * {
+        min-width: fit-content;
+    }
+
+    #shareWithInput {
+        width: 60% !important;
+    }
 }

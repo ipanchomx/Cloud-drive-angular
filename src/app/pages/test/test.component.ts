@@ -17,8 +17,10 @@ export class TestComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "40%";
-    dialogConfig.minHeight = "400px"
+    dialogConfig.height = "60%";
+    dialogConfig.width = "60%"
+    dialogConfig.minWidth = "360px";
+    dialogConfig.minHeight = "600px"
     this._dialog.open(UploadFileFormComponent, dialogConfig)
   }
 }
