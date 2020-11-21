@@ -14,11 +14,11 @@ export class AuthService {
 
   save(data) {
     this.loginStatus.next(true);
-    localStorage.setItem('token', data.token);
+    localStorage.setItem('token', data);
   }
 
   get() {
-    return localStorage.get('token');
+    return localStorage.getItem('token');
   }
 
   isLoggedIn() {
