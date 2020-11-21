@@ -21,6 +21,16 @@ export class FilesService {
     });
   }
 
+  createFolder(data: any) {
+    const url = `${environment.apiUrl}files/directory`;
+    const httpHeaders = new HttpHeaders({
+      Authorization: this._authService.get()
+    });
+    return this.httpClient.post(url, data, {
+      headers: httpHeaders,
+    }).toPromise();
+  }
+
 
   getPathContent(path: string) {
     const url = `${environment.apiUrl}files?path=${path}`;
@@ -31,4 +41,6 @@ export class FilesService {
       headers: httpHeaders,
     }).toPromise();
   }
+
+
 }

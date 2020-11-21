@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { CreateFolderFormComponent } from 'src/app/dialogs/create-folder-form/create-folder-form.component';
 import { UploadFileFormComponent } from 'src/app/dialogs/upload-file-form/upload-file-form.component';
 import { filesResponse } from 'src/app/globals/models/file.model';
 import { FilesService } from 'src/app/globals/services/files.service';
@@ -15,10 +16,10 @@ export class FileManagerComponent implements OnInit {
   path: string = '/';
   files: any[] = [];
   folders: any[] = [];
-  constructor(private _dialog: MatDialog, private _filesService: FilesService) { }
+  constructor(private _matDialog: MatDialog, private _filesService: FilesService) { }
 
   ngOnInit(): void {
-
+    this.getPathContent();
   }
 
   openUploadFileDialog() {
@@ -30,9 +31,33 @@ export class FileManagerComponent implements OnInit {
     dialogConfig.minWidth = "360px";
     dialogConfig.minHeight = "600px"
     dialogConfig.data = {
-      path: '/'
+      path: this.path
     }
-    this._dialog.open(UploadFileFormComponent, dialogConfig)
+    const dialogRef = this._matDialog.open(UploadFileFormComponent, dialogConfig);
+
+    dialogRef.afterClosed()
+      .subscribe(result => {
+        this.getPathContent();
+      });
+  }
+
+  openCreateFolderDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = "250px";
+    dialogConfig.width = "40%"
+    dialogConfig.minWidth = "360px";
+    dialogConfig.data = {
+      path: this.path
+    }
+
+    const dialogRef = this._matDialog.open(CreateFolderFormComponent, dialogConfig);
+
+    dialogRef.afterClosed()
+      .subscribe(result => {
+        this.getPathContent();
+      });
   }
 
   getPathContent() {

@@ -100,7 +100,6 @@ export class UploadFileFormComponent implements OnInit {
       if (event.type === HttpEventType.UploadProgress) {
         this.progress = event.loaded / event.total;
       } else if (event.type === HttpEventType.Response) {
-        console.log(event);
         this._dialogRef.close();
         this.progress = 0;
         this.inProgress = false;
@@ -110,7 +109,6 @@ export class UploadFileFormComponent implements OnInit {
         })
       }
     }, error => {
-      console.log(event);
       this.inProgress = false;
       this._snackBar.open(`Unable to Upload File - ${error.error.message}`, "Close", {
         horizontalPosition: 'center',
