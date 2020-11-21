@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
+import { AuthService } from 'src/app/globals/services/auth.service';
+import { SessionService } from 'src/app/globals/services/session.service';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-settings',
@@ -11,31 +18,70 @@ export class SettingsComponent implements OnInit {
   passwordForm: FormGroup;
   editableName: boolean = false;
   nameError: boolean = false;
-  name: string = "Mauricio Duran";
-  darkMode:boolean = false;
+  name: string;
+  darkMode: boolean = false;
+  email: string;
+  joined: Date;
+  image: string;
+  usrId: string;
+  showForm = true;
 
-  constructor(private formBuilder: FormBuilder) { }
+  horizontalPosition: MatSnackBarHorizontalPosition = "center";
+  verticalPosition: MatSnackBarVerticalPosition = "top";
+
+  constructor(private formBuilder: FormBuilder, private sessionService: SessionService, private authService: AuthService, private _snackBar: MatSnackBar) { }
+
 
   ngOnInit(): void {
     this.passwordForm = this.formBuilder.group({
-      current: ['', Validators.required], 
-      new: ['', Validators.required],
-      confirm: ['', Validators.required]
+      current: ['', Validators.required],
+      new: ['', [Validators.required, Validators.minLength(6)]],
+      confirm: ['', [Validators.required, Validators.minLength(6)]]
+    }, {
+      validators: this.compararPasswords.bind(this)
     })
+    this.usrId = localStorage.getItem('userId')
+    console.log(this.usrId)
+
+    this.sessionService.getUserInfo(this.usrId).then(data => {
+      console.log(data)
+      this.name = data.user.name;
+      this.email = data.user.email;
+      this.joined = data.user.joined;
+      this.image = data.user.img + ".jpg";
+    })
+
   }
 
-  changePassword(e): void {
-    e.preventDefault();
-    if(this.passwordForm.valid) {
-      console.log("changing pwd");
+  changePassword(): void {
+
+    console.log('changePassword:', this.passwordForm.getRawValue())
+    if (this.passwordForm.valid) {
+      const values = this.passwordForm.getRawValue();
+      let obj = {
+        email: this.email,
+        oldPassword: values.current,
+        newPassword: values.new
+      };
+
+      this.sessionService.changePassword(obj).then(msg => {
+        console.log(msg)
+        this._snackBar.open(msg.message, "Close", {
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+        })
+        this.passwordForm.reset();
+        this.showForm = false;
+        setTimeout(() => this.showForm = true, 250);
+      })
     } else {
       console.log("Invalid form")
     }
   }
 
   toggleEditableName(): void {
-    if(this.editableName) {
-      if(!this.name) {
+    if (this.editableName) {
+      if (!this.name) {
         this.nameError = true
         return
       } else {
@@ -44,5 +90,16 @@ export class SettingsComponent implements OnInit {
       }
     }
     this.editableName = !this.editableName;
+  }
+
+
+  compararPasswords() {
+    if (!this.passwordForm) { return null; }
+    const values = this.passwordForm.getRawValue();
+    if (values.new === values.confirm) {
+      return null;
+    } else {
+      return { mismatch: true }
+    }
   }
 }

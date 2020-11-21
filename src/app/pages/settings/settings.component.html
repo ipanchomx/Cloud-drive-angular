@@ -3,12 +3,16 @@
 
     <h2>My Profile</h2>
     <div class="profileInfoContainer">
-        <div class="dummyImage"></div>
+        <div class="dummyImage">
+            <img src="{{image}}" alt="">
+        </div>
         <div class="userInfo">
-            <input type="text" [(ngModel)]="name" [disabled]="!editableName" value="Mauricio Duran"
-                class="profile-name">
-            <p>is716122@iteso.mx</p>
-            <p class="member-since">Member since 10/13/2020</p>
+            <input type="text" [(ngModel)]="name" [disabled]="!editableName" class="profile-name">
+            <!-- <p [(ngModel)]="email">is716122@iteso.mx</p> -->
+            <!-- <p [(ngModel)]="email">{{}}</p> -->
+            <p >{{email}}</p>
+            <!-- <p [(ngModel)]="joined" class="member-since">Member since 10/13/2020</p> -->
+            <p class="member-since">{{joined}}</p>
         </div>
         <button (click)="toggleEditableName()">{{editableName? "Save": "Edit name"}}</button>
     </div>
@@ -22,8 +26,8 @@
     <h2>Change Password</h2>
 
     <div class="change-password-container">
-        <form [formGroup]="passwordForm" (submit)="changePassword($event)">
-            <div class="group">
+        <form [formGroup]="passwordForm" (submit)="changePassword()" *ngIf="showForm">
+            <!-- <div class="group">
                 <label [ngClass]="{shrink: passwordForm.value.current}" class="form-input-label">Current
                     password</label>
                 <input type="password" class="form-input" name="currentPassword" formControlName="current">
@@ -38,8 +42,32 @@
                 <label [ngClass]="{shrink: passwordForm.value.confirm}" class="form-input-label">Password
                     confirmation</label>
                 <input type="password" class="form-input" name="confirmNewPassword" formControlName="confirm">
+            </div> -->
+
+
+            <div class="">
+                <mat-form-field appearance="standard">
+                    <mat-label>Current password</mat-label>
+                    <input matInput type="password" class="form-input" name="currentPassword" formControlName="current">
+                </mat-form-field>
             </div>
+
+            <div class="">
+                <mat-form-field appearance="standard" >
+                    <mat-label>New password</mat-label>
+                    <input matInput type="password" class="form-input" name="currentPassword" formControlName="new">
+                </mat-form-field>
+            </div>
+
+            <div class="">
+                <mat-form-field appearance="standard" >
+                    <mat-label>Confirm password</mat-label>
+                    <input matInput type="password" class="form-input" name="currentPassword" formControlName="confirm">
+                </mat-form-field>
+            </div>
+
             <button>Change password</button>
+
         </form>
 
     </div>
