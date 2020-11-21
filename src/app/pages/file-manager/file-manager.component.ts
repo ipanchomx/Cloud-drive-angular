@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { UploadFileFormComponent } from 'src/app/dialogs/upload-file-form/upload-file-form.component';
+import { filesResponse } from 'src/app/globals/models/file.model';
+import { FilesService } from 'src/app/globals/services/files.service';
+
 
 @Component({
   selector: 'app-file-manager',
@@ -7,9 +12,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FileManagerComponent implements OnInit {
   value: string = '';
-  constructor() { }
+  path: string = '/';
+  files: any[] = [];
+  folders: any[] = [];
+  constructor(private _dialog: MatDialog, private _filesService: FilesService) { }
 
   ngOnInit(): void {
+
   }
 
+  openUploadFileDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = "70%";
+    dialogConfig.width = "60%"
+    dialogConfig.minWidth = "360px";
+    dialogConfig.minHeight = "600px"
+    dialogConfig.data = {
+      path: '/'
+    }
+    this._dialog.open(UploadFileFormComponent, dialogConfig)
+  }
+
+  getPathContent() {
+    this._filesService.getPathContent(this.path)
+      .then((res: filesResponse) => {
+        this.files = res.files;
+        this.folders = res.folders;
+        console.log(res)
+      });
+  }
 }
