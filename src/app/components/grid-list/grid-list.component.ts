@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 
 export interface File {
@@ -35,17 +35,28 @@ export class GridListComponent implements OnInit {
   isChecked:boolean = true;
   showFiller = false;
 
+  @Input('prop1') objetohijo:any;
+
   @ViewChild(MatMenuTrigger)
   contextMenu: MatMenuTrigger;
 
   contextMenuPosition = { x: '0px', y: '0px' };
 
-  folders: Dir[];
-  files: File[];
+  // folders: Dir[];
+  // files: File[];
+  folders:any = [];
+  files:any = [];
 
   constructor() { }
 
   ngOnInit(): void {
+    setTimeout(()=> {
+      console.log(this.objetohijo)
+      this.folders = this.objetohijo.folders;
+      this.files = this.objetohijo.files;
+    },1500)
+
+
   }
 
   onContextMenu(event: MouseEvent, item: Item) {
