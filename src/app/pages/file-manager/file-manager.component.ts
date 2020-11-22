@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CreateFolderFormComponent } from 'src/app/dialogs/create-folder-form/create-folder-form.component';
 import { UploadFileFormComponent } from 'src/app/dialogs/upload-file-form/upload-file-form.component';
-import { filesResponse } from 'src/app/globals/models/file.model';
 import { FilesService } from 'src/app/globals/services/files.service';
 
+import { File, filesResponse} from '../../globals/models/file.model';
 
 @Component({
   selector: 'app-file-manager',
@@ -14,9 +14,9 @@ import { FilesService } from 'src/app/globals/services/files.service';
 export class FileManagerComponent implements OnInit {
   value: string = '';
   path: string = '/';
-  files: any[] = [];
-  folders: any[] = [];
-  objeto: any = {};
+  files: File[] = [];
+  folders: File[] = [];
+  inProgress: boolean = false;
   constructor(private _matDialog: MatDialog, private _filesService: FilesService) { }
 
   ngOnInit(): void {
@@ -62,17 +62,27 @@ export class FileManagerComponent implements OnInit {
       });
   }
 
+  goToFolderPath($event) {
+    console.log($event);
+    if(this.path!='/') this.path += '/';
+    this.path += $event.fileName ;
+    this.getPathContent();
+  }
+
   getPathContent() {
+    this.inProgress = true;
     this._filesService.getPathContent(this.path)
       .then((res: filesResponse) => {
         this.files = res.files;
+        this.files.sort((file1, file2)=> (file2.fileName<=file1.fileName)?1: -1);
         this.folders = res.folders;
-        this.objeto = {
-          files : this.files,
-          folders : this.folders
-        }
-        
-        // console.log('My objeto: ', this.objeto);
+        this.folders.sort((folder1, folder2)=> (folder2.fileName<=folder1.fileName)?1: -1);
+        console.log(res)
+        this.inProgress = false;
+      })
+      .catch(err=>{
+        console.log(err);
+        this.inProgress = false;
       });
   }
 }

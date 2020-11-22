@@ -1,4 +1,4 @@
-<mat-drawer-container class="file-info-container">
+<mat-drawer-container *ngIf="file" class="file-info-container">
     <mat-drawer-content class="file-information-main">
         <div class="file-action-container">
             <button mat-raised-button color="primary" (click)="downloadFile()">Download</button>
@@ -15,18 +15,21 @@
                 </mat-select>
             </mat-form-field>
         </div>
-        <h1>File: {{file.filename}}</h1>
-        <h2>Path</h2>
-        <p>{{file.path}}</p>
+        <h1>File: {{file.fileName}}</h1>
+        <h2>Path: {{file.path}}</h2>
 
         <h2>Status</h2>
         <p>{{file.status}}</p>
 
         <h2>Date of Creation</h2>
-        <p>{{file.date}}</p>
+        <p>{{dateOfCreation}}</p>
 
         <h2>Owner</h2>
-        <p>{{file.owner}}</p>
+        <p>{{file.owner.email}}</p>
+
+        <h2>Shared With</h2>
+        <p *ngFor="let user of file.sharedWith">{{user.email}}</p>
+        <p *ngIf="!file.sharedWith.length">File has not been shared with anyone.</p>
 
     </mat-drawer-content>
     <mat-drawer mode="side" position="end" class="file-comments-bar" opened>

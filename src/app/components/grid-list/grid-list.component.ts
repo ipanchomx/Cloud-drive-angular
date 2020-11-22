@@ -1,5 +1,7 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { Router } from '@angular/router';
+import { File } from 'src/app/globals/models/file.model';
 
 export interface File {
   name: string;
@@ -26,11 +28,7 @@ export interface Item {
   styleUrls: ['./grid-list.component.scss']
 })
 export class GridListComponent implements OnInit {
-  // items = [
-  //   {id: 1, name: 'Item 1'},
-  //   {id: 2, name: 'Item 2'},
-  //   {id: 3, name: 'Item 3'}
-  // ];
+
 
   isChecked:boolean = true;
   showFiller = false;
@@ -42,12 +40,12 @@ export class GridListComponent implements OnInit {
 
   contextMenuPosition = { x: '0px', y: '0px' };
 
-  // folders: Dir[];
-  // files: File[];
-  folders:any = [];
-  files:any = [];
+  @Input('folders') folders: File[];
+  @Input('files') files: File[];
+  @Output('onFolderClick') onFolderClick = new EventEmitter<File>();
 
-  constructor() { }
+
+  constructor(private _router: Router) { }
 
   ngOnInit(): void {
     setTimeout(()=> {
@@ -59,10 +57,8 @@ export class GridListComponent implements OnInit {
 
   }
 
-  onContextMenu(event: MouseEvent, item: Item) {
+  onContextMenu(event: MouseEvent, item: File) {
     event.preventDefault();
-    console.log("Context menu")
-    console.log(event, item);
     this.contextMenuPosition.x = event.clientX + 'px';
     this.contextMenuPosition.y = event.clientY + 'px';
     this.contextMenu.menuData = { 'item': item };
@@ -70,24 +66,24 @@ export class GridListComponent implements OnInit {
     this.contextMenu.openMenu();
   }
 
-  onContextMenuAction1(item: Item) {
-    console.log('Action: ', item);
-    alert(`Click on Action 1 for ${item.name}`);
+  onContextMenuAction1(item: File) {
+    alert(`Click on Action 1 for ${item.fileName}`);
   }
 
-  onContextMenuAction2(item: Item) {
-    alert(`Click on Action 2 for ${item.name}`);
+  onContextMenuAction2(item: File) {
+    alert(`Click on Action 2 for ${item.fileName}`);
   }
 
-  onContextMenuAction3(item: Item) {
-    alert(`Click on Action 3 for ${item.name}`);
+  onContextMenuAction3(item: File) {
+    alert(`Click on Action 3 for ${item.fileName}`);
   }
 
   clickOnFolder(folder) {
+    this.onFolderClick.emit(folder);
      console.log(folder);
   }
 
   clickOnFile(file) {
-    console.log(file);
+    this._router.navigate(['/file-info',file._id])
  }
 }

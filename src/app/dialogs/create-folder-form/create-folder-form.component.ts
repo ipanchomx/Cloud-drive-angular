@@ -27,8 +27,17 @@ export class CreateFolderFormComponent implements OnInit {
   createFolder() {
     this._files.createFolder({ path: this.data.path, dirName: this.dirName })
       .then(res => {
-        console.log(res);
+        this._dialogRef.close();
       })
+      .catch(error => {
+        this._snackBar.open(`Unable to Create Folder- ${error.error.message}`, "Close", {
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        })
+      })
+
+
+
   }
 
 }

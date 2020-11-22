@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { File } from 'src/app/globals/models/file.model';
+import { FilesService } from 'src/app/globals/services/files.service';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-file-information',
@@ -6,30 +10,35 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./file-information.component.scss']
 })
 export class FileInformationComponent implements OnInit {
-  
-  
-  file: File = {
-    filename: "test-file.txt",
-    date: new Date().toLocaleDateString(),
-    owner: "Mauricio Durán",
-    path: "/var/home/etc/www/ghost/api",
-    status: "Pending Verification",
-    comments: [
-      {
-        date: new Date().toLocaleDateString(),
-        comment: "I checked the file and you're missing some heading",
-        author: "mau4duran"
-      },
-      {
-        date: new Date().toLocaleDateString(),
-        comment: "Ok. Will fix and update",
-        author: "ananisantana"
-      }
-    ]
+
+
+  file: File = null;
+  dateOfCreation: string = '';
+
+  constructor(private _fileService: FilesService, private _activatedRoute: ActivatedRoute, private router: Router) { }
+
+  ngOnInit(): void {
+    this._activatedRoute.params.subscribe(params => {
+      this._fileService.getFile(params.id)
+        .then((file: File) => {
+          this.dateOfCreation = new Date(file.dateOfCreation).toLocaleDateString();
+          this.file = file;
+        })
+        .catch(err => {
+          console.log(err)
+          alert("Can't access resource");
+          this.router.navigate(['file-manager'])
+        });
+
+    })
   }
 
   downloadFile() {
-    alert('file is downloading');
+    this._fileService.downloadFile(this.file._id)
+      .then(file => {
+        saveAs(file, this.file.fileName);
+      })
+      .catch(console.log);
   }
 
   uploadFile(event) {
@@ -43,26 +52,5 @@ export class FileInformationComponent implements OnInit {
 
 
 
-  constructor() { }
-  
-  ngOnInit(): void {
-
-  }
-
-}
-
-export interface FileComment {
-  date: string,
-  comment: string,
-  author: string
-}
-
-export interface File {
-  filename: string,
-  date: string,
-  owner: string,
-  path: string,
-  status: string,
-  comments: FileComment[]
 }
 
