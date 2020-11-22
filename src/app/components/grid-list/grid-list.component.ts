@@ -37,9 +37,8 @@ export class GridListComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onContextMenu(event: MouseEvent, item: Item) {
+  onContextMenu(event: MouseEvent, item: File) {
     event.preventDefault();
-    console.log(event, item);
     this.contextMenuPosition.x = event.clientX + 'px';
     this.contextMenuPosition.y = event.clientY + 'px';
     this.contextMenu.menuData = { 'item': item };
@@ -47,16 +46,16 @@ export class GridListComponent implements OnInit {
     this.contextMenu.openMenu();
   }
 
-  onContextMenuAction1(item: Item) {
-    alert(`Click on Action 1 for ${item.name}`);
+  onContextMenuAction1(item: File) {
+    alert(`Click on Action 1 for ${item.fileName}`);
   }
 
-  onContextMenuAction2(item: Item) {
-    alert(`Click on Action 2 for ${item.name}`);
+  onContextMenuAction2(item: File) {
+    alert(`Click on Action 2 for ${item.fileName}`);
   }
 
-  onContextMenuAction3(item: Item) {
-    alert(`Click on Action 3 for ${item.name}`);
+  onContextMenuAction3(item: File) {
+    alert(`Click on Action 3 for ${item.fileName}`);
   }
 
   clickOnFolder(folder) {
