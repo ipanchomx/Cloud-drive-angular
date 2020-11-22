@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { Router } from '@angular/router';
 import { File } from 'src/app/globals/models/file.model';
 
 export interface Section {
@@ -32,7 +33,7 @@ export class GridListComponent implements OnInit {
   @Input('files') files: File[];
 
 
-  constructor() { }
+  constructor(private _router: Router) { }
 
   ngOnInit(): void {
   }
@@ -63,6 +64,6 @@ export class GridListComponent implements OnInit {
   }
 
   clickOnFile(file) {
-    console.log(file);
+    this._router.navigate(['/file-info',file._id])
  }
 }
