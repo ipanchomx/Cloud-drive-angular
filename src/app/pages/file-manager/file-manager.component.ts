@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CreateFolderFormComponent } from 'src/app/dialogs/create-folder-form/create-folder-form.component';
 import { UploadFileFormComponent } from 'src/app/dialogs/upload-file-form/upload-file-form.component';
-import { filesResponse } from 'src/app/globals/models/file.model';
 import { FilesService } from 'src/app/globals/services/files.service';
 
+import { File, filesResponse} from '../../globals/models/file.model';
 
 @Component({
   selector: 'app-file-manager',
@@ -14,8 +14,8 @@ import { FilesService } from 'src/app/globals/services/files.service';
 export class FileManagerComponent implements OnInit {
   value: string = '';
   path: string = '/';
-  files: any[] = [];
-  folders: any[] = [];
+  files: File[] = [];
+  folders: File[] = [];
   constructor(private _matDialog: MatDialog, private _filesService: FilesService) { }
 
   ngOnInit(): void {
