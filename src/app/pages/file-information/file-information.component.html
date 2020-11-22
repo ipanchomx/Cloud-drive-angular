@@ -25,7 +25,11 @@
         <p>{{dateOfCreation}}</p>
 
         <h2>Owner</h2>
-        <p>{{file.owner}}</p>
+        <p>{{file.owner.email}}</p>
+
+        <h2>Shared With</h2>
+        <p *ngFor="let user of file.sharedWith">{{user.email}}</p>
+        <p *ngIf="!file.sharedWith.length">File has not been shared with anyone.</p>
 
     </mat-drawer-content>
     <mat-drawer mode="side" position="end" class="file-comments-bar" opened>

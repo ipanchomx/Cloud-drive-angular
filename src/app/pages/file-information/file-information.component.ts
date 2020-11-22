@@ -21,13 +21,12 @@ export class FileInformationComponent implements OnInit {
       this._fileService.getFile(params.id)
       .then((file:File) => {
         this.dateOfCreation = new Date(file.dateOfCreation).toLocaleDateString();
-        console.log(file);
-        // this.file = file;
+        this.file = file;
       })
       .catch(err => {
         console.log(err)
-        // alert("Can't access resource");
-        // this.router.navigate(['file-manager'])
+        alert("Can't access resource");
+        this.router.navigate(['file-manager'])
       });
 
     })
