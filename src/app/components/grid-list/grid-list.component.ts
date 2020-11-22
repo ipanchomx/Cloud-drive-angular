@@ -48,12 +48,6 @@ export class GridListComponent implements OnInit {
   constructor(private _router: Router) { }
 
   ngOnInit(): void {
-    setTimeout(()=> {
-      console.log(this.objetohijo)
-      this.folders = this.objetohijo.folders;
-      this.files = this.objetohijo.files;
-    },1500)
-
 
   }
 
