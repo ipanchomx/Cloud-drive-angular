@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { environment } from "./../../../environments/environment"
 import { env } from 'process';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionService {
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient:HttpClient, private authService:AuthService) { }
 
   signup(data:any):Promise<any> {
     const url = `${environment.apiUrl}users/register`;
@@ -29,6 +30,18 @@ export class SessionService {
   changePassword(obj):Promise<any> {
     const url = `${environment.apiUrl}users/changePassword`;
     return this.httpClient.post(url, obj).toPromise();
+  }
+
+  changeName(newName):Promise<any>{
+    const url = `${environment.apiUrl}users/changeName`
+    const httpHeaders = new HttpHeaders({
+      Authorization: this.authService.get()
+    });
+    return this.httpClient.post(url, {newName: newName}, {
+      headers: httpHeaders,
+      reportProgress: true,
+      observe: 'events'
+    }).toPromise();
   }
 
   getUserInfo(id:string):Promise<any> {

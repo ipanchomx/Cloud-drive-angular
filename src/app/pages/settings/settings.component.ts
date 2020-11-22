@@ -41,10 +41,10 @@ export class SettingsComponent implements OnInit {
       validators: this.compararPasswords.bind(this)
     })
     this.usrId = localStorage.getItem('userId')
-    console.log(this.usrId)
+    //console.log(this.usrId)
 
     this.sessionService.getUserInfo(this.usrId).then(data => {
-      console.log(data)
+      //console.log(data)
       this.name = data.user.name;
       this.email = data.user.email;
       this.joined = data.user.joined;
@@ -64,8 +64,8 @@ export class SettingsComponent implements OnInit {
         newPassword: values.new
       };
 
-      this.sessionService.changePassword(obj).then(msg => {
-        console.log(msg)
+      this.sessionService.changePassword(obj).then(msg => {   
+        //console.log(msg)
         this._snackBar.open(msg.message, "Close", {
           horizontalPosition: this.horizontalPosition,
           verticalPosition: this.verticalPosition,
@@ -75,7 +75,10 @@ export class SettingsComponent implements OnInit {
         setTimeout(() => this.showForm = true, 250);
       })
     } else {
-      console.log("Invalid form")
+      this._snackBar.open("Invalid form", "Close", {
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+      })
     }
   }
 
@@ -87,6 +90,21 @@ export class SettingsComponent implements OnInit {
       } else {
         this.nameError = false;
         console.log("Saving new name");
+        this.sessionService.changeName(this.name)
+        .then(msg =>{
+          console.log("Cambiar nombre is okay");
+          console.log(msg);
+          this._snackBar.open(msg.body.message, "Close", {
+            horizontalPosition: this.horizontalPosition,
+            verticalPosition: this.verticalPosition,
+          }) 
+        })
+        .catch(err =>{
+          this._snackBar.open(err, "Close", {
+            horizontalPosition: this.horizontalPosition,
+            verticalPosition: this.verticalPosition,
+          })
+        })
       }
     }
     this.editableName = !this.editableName;
