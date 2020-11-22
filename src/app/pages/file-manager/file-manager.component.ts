@@ -64,7 +64,9 @@ export class FileManagerComponent implements OnInit {
     this._filesService.getPathContent(this.path)
       .then((res: filesResponse) => {
         this.files = res.files;
+        this.files.sort((file1, file2)=> (file2.fileName<=file1.fileName)?1: -1);
         this.folders = res.folders;
+        this.folders.sort((folder1, folder2)=> (folder2.fileName<=folder1.fileName)?1: -1);
         console.log(res)
       });
   }
