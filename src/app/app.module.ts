@@ -27,6 +27,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from './../environments/environment';
 import { MaterialModule } from './modules/material/material.module';
 import { CreateFolderFormComponent } from './dialogs/create-folder-form/create-folder-form.component';
+import { SharedFilesComponent } from './pages/shared-files/shared-files.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +43,8 @@ import { CreateFolderFormComponent } from './dialogs/create-folder-form/create-f
     FileManagerComponent,
     SignUpComponent,
     UploadFileFormComponent,
-    CreateFolderFormComponent
+    CreateFolderFormComponent,
+    SharedFilesComponent
   ],
   imports: [
     AppRoutingModule,
