@@ -1,8 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 
-export interface Section {
+export interface File {
   name: string;
+  status: string;
+  path: string;
+  updated: Date;
+}
+
+export interface Dir {
+  name: string;
+  status: string;
+  path: string;
   updated: Date;
 }
 
@@ -31,37 +40,8 @@ export class GridListComponent implements OnInit {
 
   contextMenuPosition = { x: '0px', y: '0px' };
 
-  folders: Section[] = [
-    {
-      name: 'Photos',
-      updated: new Date('1/1/16'),
-    },
-    {
-      name: 'Recipes',
-      updated: new Date('1/17/16'),
-    },
-    {
-      name: 'Work',
-      updated: new Date('1/28/16'),
-    }
-  ];
-
-  // folders: Section[] = [];
-
-  files: Section[] = [
-    {
-      name: 'Vacation Itinerary Wapi',
-      updated: new Date('2/20/16'),
-    },
-    {
-      name: 'Kitchen Remodel',
-      updated: new Date('1/18/16'),
-    },
-    {
-      name: 'TUSA Remodel',
-      updated: new Date('11/10/19'),
-    }
-  ];
+  folders: Dir[];
+  files: File[];
 
   constructor() { }
 
@@ -70,6 +50,7 @@ export class GridListComponent implements OnInit {
 
   onContextMenu(event: MouseEvent, item: Item) {
     event.preventDefault();
+    console.log("Context menu")
     console.log(event, item);
     this.contextMenuPosition.x = event.clientX + 'px';
     this.contextMenuPosition.y = event.clientY + 'px';
@@ -79,6 +60,7 @@ export class GridListComponent implements OnInit {
   }
 
   onContextMenuAction1(item: Item) {
+    console.log('Action: ', item);
     alert(`Click on Action 1 for ${item.name}`);
   }
 

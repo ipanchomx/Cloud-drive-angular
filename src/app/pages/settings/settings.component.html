@@ -8,10 +8,7 @@
         </div>
         <div class="userInfo">
             <input type="text" [(ngModel)]="name" [disabled]="!editableName" class="profile-name">
-            <!-- <p [(ngModel)]="email">is716122@iteso.mx</p> -->
-            <!-- <p [(ngModel)]="email">{{}}</p> -->
             <p >{{email}}</p>
-            <!-- <p [(ngModel)]="joined" class="member-since">Member since 10/13/2020</p> -->
             <p class="member-since">{{joined}}</p>
         </div>
         <button (click)="toggleEditableName()">{{editableName? "Save": "Edit name"}}</button>
@@ -27,23 +24,6 @@
 
     <div class="change-password-container">
         <form [formGroup]="passwordForm" (submit)="changePassword()" *ngIf="showForm">
-            <!-- <div class="group">
-                <label [ngClass]="{shrink: passwordForm.value.current}" class="form-input-label">Current
-                    password</label>
-                <input type="password" class="form-input" name="currentPassword" formControlName="current">
-            </div>
-
-            <div class="group">
-                <label [ngClass]="{shrink: passwordForm.value.new}" class="form-input-label">New password</label>
-                <input type="password" class="form-input" name="newPassword" formControlName="new">
-            </div>
-
-            <div class="group">
-                <label [ngClass]="{shrink: passwordForm.value.confirm}" class="form-input-label">Password
-                    confirmation</label>
-                <input type="password" class="form-input" name="confirmNewPassword" formControlName="confirm">
-            </div> -->
-
 
             <div class="">
                 <mat-form-field appearance="standard">
