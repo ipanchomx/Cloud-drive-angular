@@ -13,7 +13,7 @@ import { TestComponent } from './pages/test/test.component';
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: "settings", component: SettingsComponent, canActivate: [AuthGuard]},
-  { path: "file-info", component: FileInformationComponent, canActivate: [AuthGuard]},
+  { path: "file-info/:id", component: FileInformationComponent, canActivate: [AuthGuard]},
   { path: "pending-files-shared", component: PendingFilesSharedComponent, canActivate: [AuthGuard]},
   { path: "file-manager", component: FileManagerComponent, canActivate: [AuthGuard] },
   { path: 'home', component: HomeComponent, canActivate: [UnAuthGuard]},
