@@ -16,10 +16,12 @@ export class FileManagerComponent implements OnInit {
   path: string = '/';
   files: any[] = [];
   folders: any[] = [];
+  objeto: any = {};
   constructor(private _matDialog: MatDialog, private _filesService: FilesService) { }
 
   ngOnInit(): void {
     this.getPathContent();
+
   }
 
   openUploadFileDialog() {
@@ -65,7 +67,12 @@ export class FileManagerComponent implements OnInit {
       .then((res: filesResponse) => {
         this.files = res.files;
         this.folders = res.folders;
-        console.log(res)
+        this.objeto = {
+          files : this.files,
+          folders : this.folders
+        }
+        
+        // console.log('My objeto: ', this.objeto);
       });
   }
 }
