@@ -16,6 +16,7 @@ export class FileManagerComponent implements OnInit {
   path: string = '/';
   files: File[] = [];
   folders: File[] = [];
+  inProgress: boolean = false;
   constructor(private _matDialog: MatDialog, private _filesService: FilesService) { }
 
   ngOnInit(): void {
@@ -61,6 +62,7 @@ export class FileManagerComponent implements OnInit {
   }
 
   getPathContent() {
+    this.inProgress = true;
     this._filesService.getPathContent(this.path)
       .then((res: filesResponse) => {
         this.files = res.files;
@@ -68,6 +70,11 @@ export class FileManagerComponent implements OnInit {
         this.folders = res.folders;
         this.folders.sort((folder1, folder2)=> (folder2.fileName<=folder1.fileName)?1: -1);
         console.log(res)
+        this.inProgress = false;
+      })
+      .catch(err=>{
+        console.log(err);
+        this.inProgress = false;
       });
   }
 }

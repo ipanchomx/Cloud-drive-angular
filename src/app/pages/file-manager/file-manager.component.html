@@ -8,6 +8,7 @@
     <h1>
       File Manager
     </h1>
+
     <div class="input-path-section">
       <div class="input-info">
         <label for="path"> Path: </label>
@@ -17,11 +18,16 @@
         <button>Jump!</button>
       </div>
       <div class="path-actions">
-        <button id="idCreate" mat-raised-button color="primary" (click)="openCreateFolderDialog()">Create folder</button>
+        <button id="idCreate" mat-raised-button color="primary" (click)="openCreateFolderDialog()">Create
+          folder</button>
         <button id="idAdd" mat-raised-button color="accent" (click)="openUploadFileDialog()">Add file</button>
       </div>
     </div>
-    <app-grid-list [folders]="folders" [files]="files"></app-grid-list>
+    <div *ngIf="inProgress" style="width: 100%; display: flex; align-items: center; flex-direction: column;">
+      <h1>Loading</h1>
+      <mat-spinner></mat-spinner>
+    </div>
+    <app-grid-list *ngIf="!inProgress" [folders]="folders" [files]="files"></app-grid-list>
     <!-- Main content -->
   </mat-drawer-content>
 </mat-drawer-container>
