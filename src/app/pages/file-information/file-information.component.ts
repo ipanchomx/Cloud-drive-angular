@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { File } from 'src/app/globals/models/file.model';
 import { FilesService } from 'src/app/globals/services/files.service';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-file-information',
@@ -34,7 +35,9 @@ export class FileInformationComponent implements OnInit {
 
   downloadFile() {
     this._fileService.downloadFile(this.file._id)
-      .then(console.log)
+      .then(file => {
+        saveAs(file, this.file.fileName);
+      })
       .catch(console.log);
   }
 
