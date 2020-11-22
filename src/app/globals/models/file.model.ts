@@ -12,7 +12,7 @@ export interface FileComment {
 export interface File {
     fileName: string,
     dateOfCreation: string,
-    owner: string,
+    owner: {id: string, email:string},
     path: string,
     status: string,
     requiresVerification: boolean,
