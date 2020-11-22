@@ -4,7 +4,7 @@ import { CreateFolderFormComponent } from 'src/app/dialogs/create-folder-form/cr
 import { UploadFileFormComponent } from 'src/app/dialogs/upload-file-form/upload-file-form.component';
 import { FilesService } from 'src/app/globals/services/files.service';
 
-import { File, filesResponse} from '../../globals/models/file.model';
+import { File, filesResponse } from '../../globals/models/file.model';
 
 @Component({
   selector: 'app-file-manager',
@@ -64,8 +64,8 @@ export class FileManagerComponent implements OnInit {
 
   goToFolderPath($event) {
     console.log($event);
-    if(this.path!='/') this.path += '/';
-    this.path += $event.fileName ;
+    if (this.path != '/') this.path += '/';
+    this.path += $event.fileName;
     this.getPathContent();
   }
 
@@ -73,14 +73,17 @@ export class FileManagerComponent implements OnInit {
     this.inProgress = true;
     this._filesService.getPathContent(this.path)
       .then((res: filesResponse) => {
-        this.files = res.files;
-        this.files.sort((file1, file2)=> (file2.fileName<=file1.fileName)?1: -1);
-        this.folders = res.folders;
-        this.folders.sort((folder1, folder2)=> (folder2.fileName<=folder1.fileName)?1: -1);
-        console.log(res)
-        this.inProgress = false;
+        if (res && res.files && res.folders) {
+          this.files = res.files;
+          this.files.sort((file1, file2) => (file2.fileName <= file1.fileName) ? 1 : -1);
+          this.folders = res.folders;
+          this.folders.sort((folder1, folder2) => (folder2.fileName <= folder1.fileName) ? 1 : -1);
+          console.log(res)
+          this.inProgress = false;
+
+        }
       })
-      .catch(err=>{
+      .catch(err => {
         console.log(err);
         this.inProgress = false;
       });
