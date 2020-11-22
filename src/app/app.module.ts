@@ -28,6 +28,7 @@ import { environment } from './../environments/environment';
 import { MaterialModule } from './modules/material/material.module';
 import { CreateFolderFormComponent } from './dialogs/create-folder-form/create-folder-form.component';
 import { SharedFilesComponent } from './pages/shared-files/shared-files.component';
+import { Page404Component } from './pages/page404/page404.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +45,8 @@ import { SharedFilesComponent } from './pages/shared-files/shared-files.componen
     SignUpComponent,
     UploadFileFormComponent,
     CreateFolderFormComponent,
-    SharedFilesComponent
+    SharedFilesComponent,
+    Page404Component
   ],
   imports: [
     AppRoutingModule,

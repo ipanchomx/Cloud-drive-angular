@@ -7,6 +7,7 @@ import {SharedFilesComponent} from './pages/shared-files/shared-files.component'
 import { FileManagerComponent } from './pages/file-manager/file-manager.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
+import {Page404Component} from './pages/page404/page404.component';
 import { AuthGuard } from './globals/guards/auth.guard';
 import { UnAuthGuard } from './globals/guards/un-auth.guard';
 import { TestComponent } from './pages/test/test.component';
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: "file-manager", component: FileManagerComponent, canActivate: [AuthGuard] },
   { path: 'home', component: HomeComponent, canActivate: [UnAuthGuard]},
   { path: 'sign-up', component: SignUpComponent, canActivate: [UnAuthGuard]},
-  { path: 'test', component: TestComponent }
+  { path: 'test', component: TestComponent },
+  { path: '404', component: Page404Component}
 ];
 
 @NgModule({
