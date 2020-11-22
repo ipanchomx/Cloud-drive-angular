@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { File } from 'src/app/globals/models/file.model';
 
 export interface Section {
   name: string;
@@ -17,11 +18,7 @@ export interface Item {
   styleUrls: ['./grid-list.component.scss']
 })
 export class GridListComponent implements OnInit {
-  // items = [
-  //   {id: 1, name: 'Item 1'},
-  //   {id: 2, name: 'Item 2'},
-  //   {id: 3, name: 'Item 3'}
-  // ];
+
 
   isChecked:boolean = true;
   showFiller = false;
@@ -31,37 +28,9 @@ export class GridListComponent implements OnInit {
 
   contextMenuPosition = { x: '0px', y: '0px' };
 
-  folders: Section[] = [
-    {
-      name: 'Photos',
-      updated: new Date('1/1/16'),
-    },
-    {
-      name: 'Recipes',
-      updated: new Date('1/17/16'),
-    },
-    {
-      name: 'Work',
-      updated: new Date('1/28/16'),
-    }
-  ];
+  @Input('folders') folders: File[];
+  @Input('files') files: File[];
 
-  // folders: Section[] = [];
-
-  files: Section[] = [
-    {
-      name: 'Vacation Itinerary Wapi',
-      updated: new Date('2/20/16'),
-    },
-    {
-      name: 'Kitchen Remodel',
-      updated: new Date('1/18/16'),
-    },
-    {
-      name: 'TUSA Remodel',
-      updated: new Date('11/10/19'),
-    }
-  ];
 
   constructor() { }
 

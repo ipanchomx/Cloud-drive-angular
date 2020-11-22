@@ -21,7 +21,7 @@
         <button id="idAdd" mat-raised-button color="accent" (click)="openUploadFileDialog()">Add file</button>
       </div>
     </div>
-    <app-grid-list></app-grid-list>
+    <app-grid-list [folders]="folders" [files]="files"></app-grid-list>
     <!-- Main content -->
   </mat-drawer-content>
 </mat-drawer-container>
