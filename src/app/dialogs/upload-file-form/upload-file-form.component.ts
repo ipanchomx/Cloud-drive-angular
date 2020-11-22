@@ -109,6 +109,7 @@ export class UploadFileFormComponent implements OnInit {
         })
       }
     }, error => {
+      console.log(error);
       this.inProgress = false;
       this._snackBar.open(`Unable to Upload File - ${error.error.message}`, "Close", {
         horizontalPosition: 'center',
