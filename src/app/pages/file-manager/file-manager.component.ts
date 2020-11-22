@@ -61,6 +61,13 @@ export class FileManagerComponent implements OnInit {
       });
   }
 
+  goToFolderPath($event) {
+    console.log($event);
+    if(this.path!='/') this.path += '/';
+    this.path += $event.fileName ;
+    this.getPathContent();
+  }
+
   getPathContent() {
     this.inProgress = true;
     this._filesService.getPathContent(this.path)

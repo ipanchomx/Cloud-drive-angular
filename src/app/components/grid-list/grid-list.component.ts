@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { Router } from '@angular/router';
 import { File } from 'src/app/globals/models/file.model';
@@ -31,6 +31,7 @@ export class GridListComponent implements OnInit {
 
   @Input('folders') folders: File[];
   @Input('files') files: File[];
+  @Output('onFolderClick') onFolderClick = new EventEmitter<File>();
 
 
   constructor(private _router: Router) { }
@@ -60,6 +61,7 @@ export class GridListComponent implements OnInit {
   }
 
   clickOnFolder(folder) {
+    this.onFolderClick.emit(folder);
      console.log(folder);
   }
 
