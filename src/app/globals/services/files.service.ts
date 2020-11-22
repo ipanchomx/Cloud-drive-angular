@@ -42,5 +42,15 @@ export class FilesService {
     }).toPromise();
   }
 
+  getFile(id: string) {
+    const url = `${environment.apiUrl}files/${id}`;
+    const httpHeaders = new HttpHeaders({
+      Authorization: this._authService.get()
+    });
+    return this.httpClient.get(url, {
+      headers: httpHeaders,
+    }).toPromise();
+  }
+
 
 }
