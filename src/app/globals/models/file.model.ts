@@ -10,6 +10,7 @@ export interface FileComment {
 }
 
 export interface File {
+    _id: string,
     fileName: string,
     dateOfCreation: string,
     owner: {id: string, email:string},

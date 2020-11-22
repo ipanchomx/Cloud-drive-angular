@@ -19,21 +19,23 @@ export class FileInformationComponent implements OnInit {
   ngOnInit(): void {
     this._activatedRoute.params.subscribe(params => {
       this._fileService.getFile(params.id)
-      .then((file:File) => {
-        this.dateOfCreation = new Date(file.dateOfCreation).toLocaleDateString();
-        this.file = file;
-      })
-      .catch(err => {
-        console.log(err)
-        alert("Can't access resource");
-        this.router.navigate(['file-manager'])
-      });
+        .then((file: File) => {
+          this.dateOfCreation = new Date(file.dateOfCreation).toLocaleDateString();
+          this.file = file;
+        })
+        .catch(err => {
+          console.log(err)
+          alert("Can't access resource");
+          this.router.navigate(['file-manager'])
+        });
 
     })
   }
 
   downloadFile() {
-    alert('file is downloading');
+    this._fileService.downloadFile(this.file._id)
+      .then(console.log)
+      .catch(console.log);
   }
 
   uploadFile(event) {

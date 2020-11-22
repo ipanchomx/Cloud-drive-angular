@@ -52,5 +52,16 @@ export class FilesService {
     }).toPromise();
   }
 
+  downloadFile(id: string) {
+    const url = `${environment.apiUrl}files/download/${id}`;
+    const httpHeaders = new HttpHeaders({
+      Authorization: this._authService.get()
+    });
+    return this.httpClient.get(url, {
+      headers: httpHeaders,
+      responseType: 'blob'
+    }).toPromise();
+  }
+
 
 }
