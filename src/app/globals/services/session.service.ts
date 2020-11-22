@@ -39,8 +39,7 @@ export class SessionService {
     });
     return this.httpClient.post(url, {newName: newName}, {
       headers: httpHeaders,
-      reportProgress: true,
-      observe: 'events'
+      reportProgress: true
     }).toPromise();
   }
 

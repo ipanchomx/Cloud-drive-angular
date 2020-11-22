@@ -94,7 +94,7 @@ export class SettingsComponent implements OnInit {
         .then(msg =>{
           console.log("Cambiar nombre is okay");
           console.log(msg);
-          this._snackBar.open(msg.body.message, "Close", {
+          this._snackBar.open(msg.message, "Close", {
             horizontalPosition: this.horizontalPosition,
             verticalPosition: this.verticalPosition,
           }) 
