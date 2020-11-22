@@ -88,7 +88,8 @@
   <mat-list>
 
     <div *ngFor="let folder of folders" class="border xs-100 md-50 lg-33 item-grid">
-      <mat-list-item (contextmenu)="onContextMenu($event, folder)" class="border container-info" (click)="clickOnFolder(folder)">
+      <!-- (contextmenu)="onContextMenu($event, folder)" -->
+      <mat-list-item class="border container-info" (click)="clickOnFolder(folder)">
         <mat-icon matListIcon class="border">folder</mat-icon>
         <div class="info-section">
           <h4 matLine class="border">{{folder.fileName}}</h4>
