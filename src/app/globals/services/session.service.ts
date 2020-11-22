@@ -44,7 +44,13 @@ export class SessionService {
   }
 
   getUserInfo(id:string):Promise<any> {
-    const url = `${environment.apiUrl}users/getUser`;
-    return this.httpClient.post(url, {id}).toPromise();
+    const url = `${environment.apiUrl}users/getProfileInfo`;
+    const httpHeaders = new HttpHeaders({
+      Authorization: this.authService.get()
+    });
+    // return this.httpClient.post(url, {id}).toPromise();
+    return this.httpClient.get(url, {
+      headers: httpHeaders
+    }).toPromise();
   }
 }
