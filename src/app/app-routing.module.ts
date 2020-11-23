@@ -22,6 +22,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [UnAuthGuard]},
   { path: 'sign-up', component: SignUpComponent, canActivate: [UnAuthGuard]},
   { path: 'test', component: TestComponent },
+  { path: '**', component: Page404Component},
   { path: '404', component: Page404Component}
 ];
 
