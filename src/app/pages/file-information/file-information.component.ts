@@ -23,6 +23,7 @@ export class FileInformationComponent implements OnInit {
         .then((file: File) => {
           this.dateOfCreation = new Date(file.dateOfCreation).toLocaleDateString();
           this.file = file;
+          console.log(this.file);
         })
         .catch(err => {
           console.log(err)
