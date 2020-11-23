@@ -28,7 +28,9 @@ export class GridListComponent implements OnInit {
 
   constructor(private _router: Router) { }
 
-  ngOnInit(): void {  }
+  ngOnInit(): void {
+
+  }
 
   onContextMenu(event: MouseEvent, item: File) {
     event.preventDefault();

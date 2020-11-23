@@ -44,7 +44,6 @@ export class SettingsComponent implements OnInit {
     //console.log(this.usrId)
 
     this.sessionService.getUserInfo(this.usrId).then(data => {
-      //console.log(data)
       this.name = data.user.name;
       this.email = data.user.email;
       this.joined = data.user.joined;
