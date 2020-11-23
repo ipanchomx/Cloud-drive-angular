@@ -29,6 +29,7 @@ import { MaterialModule } from './modules/material/material.module';
 import { CreateFolderFormComponent } from './dialogs/create-folder-form/create-folder-form.component';
 import { SharedFilesComponent } from './pages/shared-files/shared-files.component';
 import { Page404Component } from './pages/page404/page404.component';
+import { NotificationsComponent } from './dialogs/notifications/notifications.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +47,8 @@ import { Page404Component } from './pages/page404/page404.component';
     UploadFileFormComponent,
     CreateFolderFormComponent,
     SharedFilesComponent,
-    Page404Component
+    Page404Component,
+    NotificationsComponent
   ],
   imports: [
     AppRoutingModule,
