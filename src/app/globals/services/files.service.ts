@@ -42,6 +42,26 @@ export class FilesService {
     }).toPromise();
   }
 
+  getSharedContent(path: string) {
+    const url = `${environment.apiUrl}files/sharedFiles?path=${path}`;
+    const httpHeaders = new HttpHeaders({
+      Authorization: this._authService.get()
+    });
+    return this.httpClient.get(url, {
+      headers: httpHeaders,
+    }).toPromise();
+  }
+
+  getPendingContent(path: string) {
+    const url = `${environment.apiUrl}files/pendingFiles?path=${path}`;
+    const httpHeaders = new HttpHeaders({
+      Authorization: this._authService.get()
+    });
+    return this.httpClient.get(url, {
+      headers: httpHeaders,
+    }).toPromise();
+  }
+
   getFile(id: string) {
     const url = `${environment.apiUrl}files/${id}`;
     const httpHeaders = new HttpHeaders({
