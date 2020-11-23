@@ -88,4 +88,14 @@ export class FileManagerComponent implements OnInit {
         this.inProgress = false;
       });
   }
+
+  backFolder() {
+    let splitIndex = this.path.lastIndexOf("/");
+    let prevPath = this.path.substring(0, splitIndex);
+    let currentDirName = this.path.substring(splitIndex+1);
+
+    if(prevPath.length == 0) this.path = '/';
+    else this.path = prevPath;
+    this.getPathContent();
+  }
 }
