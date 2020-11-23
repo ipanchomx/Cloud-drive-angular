@@ -12,14 +12,15 @@
     <div class="input-path-section">
       <div class="input-info">
         <div class="back-button">
-          <button mat-mini-fab color="warn" *ngIf="!(path == '/')" (click)="backFolder()">
+          <button mat-mini-fab color="warn" *ngIf="!(pathMove == '/')" (click)="backFolder()">
             <mat-icon>arrow_back</mat-icon>
           </button>
         </div>
 
         <div class="path-control">
           <label for="path"> Path: </label>
-          <input type="text" name="path" id="path" disabled [(ngModel)]="path" placeholder="Type path...">
+          <!-- <input type="text" name="path" id="path" disabled [(ngModel)]="path" placeholder="Type path..."> -->
+          <input type="text" name="path" id="path" [(ngModel)]="path" placeholder="Type path..." (keyup)="jumpTo($event)">
         </div>
       </div>
       <div class="input-button">
