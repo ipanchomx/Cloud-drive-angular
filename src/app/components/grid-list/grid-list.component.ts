@@ -3,25 +3,6 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { Router } from '@angular/router';
 import { File } from 'src/app/globals/models/file.model';
 
-export interface File {
-  name: string;
-  status: string;
-  path: string;
-  updated: Date;
-}
-
-export interface Dir {
-  name: string;
-  status: string;
-  path: string;
-  updated: Date;
-}
-
-export interface Item {
-  id: number;
-  name: string;
-}
-
 @Component({
   selector: 'app-grid-list',
   templateUrl: './grid-list.component.html',
@@ -47,15 +28,7 @@ export class GridListComponent implements OnInit {
 
   constructor(private _router: Router) { }
 
-  ngOnInit(): void {
-    setTimeout(()=> {
-      console.log(this.objetohijo)
-      this.folders = this.objetohijo.folders;
-      this.files = this.objetohijo.files;
-    },1500)
-
-
-  }
+  ngOnInit(): void {  }
 
   onContextMenu(event: MouseEvent, item: File) {
     event.preventDefault();
