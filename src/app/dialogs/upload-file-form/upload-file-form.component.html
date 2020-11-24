@@ -36,8 +36,8 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Choose an option</mat-label>
                     <mat-select [(ngModel)]="permission" name="filePermission">
-                        <mat-option value="read">Can Read and verify</mat-option>
-                        <mat-option value="write">Can read and write</mat-option>
+                        <mat-option value="read">Can Read</mat-option>
+                        <mat-option value="write">Can read write and verify</mat-option>
                         <mat-option value="owner">Is owner of file</mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -86,5 +86,5 @@
                 [disabled]="!fileName || !extension || !file">Upload File</button>
         </form>
     </div>
-
+    
 </div>
