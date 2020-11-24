@@ -19,7 +19,6 @@
 
         <div class="path-control">
           <label for="path"> Path: </label>
-          <!-- <input type="text" name="path" id="path" disabled [(ngModel)]="path" placeholder="Type path..."> -->
           <input type="text" name="path" id="path" [(ngModel)]="path" placeholder="Type path..." (keyup)="jumpTo($event)">
         </div>
       </div>

@@ -65,7 +65,6 @@ export class FileManagerComponent implements OnInit {
   }
 
   goToFolderPath($event) {
-    // console.log($event);
     if (this.path != '/') this.path += '/';
     this.path += $event.fileName;
     this.getPathContent();
@@ -81,9 +80,7 @@ export class FileManagerComponent implements OnInit {
           this.files.sort((file1, file2) => (file2.fileName <= file1.fileName) ? 1 : -1);
           this.folders = res.folders;
           this.folders.sort((folder1, folder2) => (folder2.fileName <= folder1.fileName) ? 1 : -1);
-          // console.log(res)
           this.inProgress = false;
-
         }
       })
       .catch(err => {
@@ -107,35 +104,26 @@ export class FileManagerComponent implements OnInit {
   }
 
   jumpTo(e) {
-    // console.log(e);
-    // || e.isTrusted
     if (e.key == 'Enter' || (e.isTrusted && e.type == 'click')) {
-      // console.log('JumpTo')
       let url = this.path;
-      // console.log('Url: ', url);
       if (url[0] != '/') {
         url = '/' + this.path;
       }
       if (url.charAt(url.length - 1) == '/' && url.length != 1) url = url.substring(0, url.length - 1)
-      // console.log('Url después del if: ', url);
       if (url == '/') {
         this.getPathContent();
         this.path = url;
-      } 
+      }
       else {
         this._filesService.existDirectory(url).then(response => {
-          // console.log(response)
-          if (response) {
-            this.path = url;
-            // this.pathMove = url;
-          }
-          else this.path = this.prevPath
-
+          console.log(response);
+          this.path = url;
           this.getPathContent();
           this.pathMove = this.path;
 
         }).catch(err => {
           console.log(err);
+          this.path = this.pathMove;
         })
       }
     }
