@@ -21,5 +21,6 @@ export interface File {
     storageId: string,
     sharedWith: any[],
     isDirectory: boolean,
+    version: number;
     comments: FileComment[]
 }

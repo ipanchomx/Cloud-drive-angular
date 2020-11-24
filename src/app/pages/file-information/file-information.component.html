@@ -2,8 +2,7 @@
     <mat-drawer-content class="file-information-main">
         <div class="file-action-container">
             <button class="controls" mat-raised-button color="primary" (click)="downloadFile()">Download</button>
-            <button class="controls" mat-raised-button type="file" (click)="fileInput.click()" [disabled]="!(permission=='owner' || permission=='write')">Update</button>
-            <input  class="controls" hidden (change)="uploadFile($event)" #fileInput type="file" id="file">
+            <button class="controls" mat-raised-button type="file" (click)="updateFile()" [disabled]="!(permission=='owner' || permission=='write')">Update</button>
             <button class="controls" mat-raised-button color="primary" (click)="shareFile()" [disabled]="!(permission=='owner')">Share</button>
             <mat-form-field appearance="fill"  class="controls">
                 <mat-label  >Versions</mat-label >
@@ -21,6 +20,9 @@
 
         <h2>Status</h2>
         <p>{{file.status}}</p>
+
+        <h2>Version</h2>
+        <p>{{file.version}}</p>
 
         <h2>Date of Creation</h2>
         <p>{{dateOfCreation}}</p>

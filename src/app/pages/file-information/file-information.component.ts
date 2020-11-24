@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { File } from 'src/app/globals/models/file.model';
 import { FilesService } from 'src/app/globals/services/files.service';
 import { saveAs } from 'file-saver';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ShareFileDialogComponent } from 'src/app/dialogs/share-file-dialog/share-file-dialog.component';
+import { UpdateFileDialogComponent } from 'src/app/dialogs/update-file-dialog/update-file-dialog.component';
 
 @Component({
   selector: 'app-file-information',
@@ -16,7 +17,7 @@ export class FileInformationComponent implements OnInit {
 
   file: File = null;
   dateOfCreation: string = '';
-  permission: string= 'owner';
+  permission: string = 'owner';
 
   constructor(private _fileService: FilesService, private _activatedRoute: ActivatedRoute, private router: Router, private _matDialog: MatDialog) { }
 
@@ -26,13 +27,13 @@ export class FileInformationComponent implements OnInit {
         .then((file: File) => {
           this.dateOfCreation = new Date(file.dateOfCreation).toLocaleDateString();
           this.file = file;
+          console.log(this.file);
 
-          this.file.sharedWith.forEach(share =>{
-            if(share.userId == localStorage.userId){
+          this.file.sharedWith.forEach(share => {
+            if (share.userId == localStorage.userId) {
               this.permission = share.permission;
             }
           });
-           console.log(this.permission);
         })
         .catch(err => {
           console.log(err)
@@ -47,14 +48,23 @@ export class FileInformationComponent implements OnInit {
       .then(file => {
         saveAs(file, this.file.fileName);
       })
-      .catch(err =>{
+      .catch(err => {
         console.log(err);
       });
   }
 
-  uploadFile(event) {
-    console.log(event);
-    alert('file is uploading');
+  updateFile(event) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = "300";
+    dialogConfig.width = "40%"
+    dialogConfig.minWidth = "360px";
+    dialogConfig.minHeight = "300px"
+    dialogConfig.data = {
+      file: this.file
+    }
+    this._matDialog.open(UpdateFileDialogComponent, dialogConfig);
   }
 
   shareFile() {
@@ -72,7 +82,7 @@ export class FileInformationComponent implements OnInit {
 
     dialogRef.afterClosed()
       .subscribe(result => {
-        
+        // Should update shared with property
       });
   }
 
