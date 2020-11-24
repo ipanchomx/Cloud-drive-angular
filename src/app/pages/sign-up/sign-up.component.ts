@@ -42,7 +42,6 @@ export class SignUpComponent implements OnInit {
     });
 
     this.googleAuth.authState.subscribe((user) => {
-      // console.log(user);
       this.sessionService.googleLogin(user.idToken).then(data => {
         localStorage.setItem('userId', data.userId);
         this.authService.save(data.token)
