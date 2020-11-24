@@ -14,7 +14,7 @@
                     <mat-option value="1">01/10/2020</mat-option>
                 </mat-select>
             </mat-form-field>
-            <button class="controls" mat-raised-button color="warn" (click)="deleteFile()">Delete</button>
+            <button class="controls" mat-raised-button color="warn" (click)="deleteFile()"  [disabled]="!(permission=='owner')">Delete</button>
         </div>
         <h1>File: {{file.fileName}}</h1>
         <h2>Path: {{file.path}}</h2>
@@ -40,14 +40,14 @@
 
             <mat-form-field class="select-verification">
                 <mat-label>Verification Status</mat-label>
-                <mat-select value="4">
+                <mat-select   value="4" [disabled]="!(permission=='write')">
                     <mat-option value="4">Does not apply</mat-option>
                     <mat-option value="3">Pending Verification</mat-option>
                     <mat-option value="2">Verified</mat-option>
                     <mat-option value="1">Not verified</mat-option>
                 </mat-select>
             </mat-form-field>
-            <button mat-raised-button color="primary" (click)="verifyFile()" [disabled]="!(permission=='read')">Verify</button>
+            <button mat-raised-button color="primary" (click)="verifyFile()" [disabled]="!(permission=='write')">Verify</button>
 
             <h1>Comments</h1>
 
