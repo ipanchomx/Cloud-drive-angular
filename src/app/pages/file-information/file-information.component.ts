@@ -14,6 +14,7 @@ export class FileInformationComponent implements OnInit {
 
   file: File = null;
   dateOfCreation: string = '';
+  permission: string= 'owner';
 
   constructor(private _fileService: FilesService, private _activatedRoute: ActivatedRoute, private router: Router) { }
 
@@ -23,7 +24,13 @@ export class FileInformationComponent implements OnInit {
         .then((file: File) => {
           this.dateOfCreation = new Date(file.dateOfCreation).toLocaleDateString();
           this.file = file;
-          console.log(this.file);
+
+          this.file.sharedWith.forEach(share =>{
+            if(share.userId == localStorage.userId){
+              this.permission = share.permission;
+            }
+          });
+           console.log(this.permission);
         })
         .catch(err => {
           console.log(err)

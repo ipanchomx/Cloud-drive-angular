@@ -2,12 +2,12 @@
     <mat-drawer-content class="file-information-main">
         <div class="file-action-container">
             <button mat-raised-button color="primary" (click)="downloadFile()">Download</button>
-            <button mat-raised-button type="file" (click)="fileInput.click()">Update</button>
+            <button mat-raised-button type="file" (click)="fileInput.click()" [disabled]="!(permission=='owner' || permission=='write')">Update</button>
             <input hidden (change)="uploadFile($event)" #fileInput type="file" id="file">
-            <button mat-raised-button color="primary" (click)="shareFile()">Share</button>
+            <button mat-raised-button color="primary" (click)="shareFile()" [disabled]="!(permission=='owner')">Share</button>
             <mat-form-field appearance="fill">
-                <mat-label>Versions</mat-label>
-                <mat-select value="4">
+                <mat-label  >Versions</mat-label>
+                <mat-select value="4" disabled>
                     <mat-option value="4">04/10/2020</mat-option>
                     <mat-option value="3">03/10/2020</mat-option>
                     <mat-option value="2">02/10/2020</mat-option>
@@ -30,6 +30,7 @@
         <h2>Shared With</h2>
         <p *ngFor="let user of file.sharedWith">{{user.email}}</p>
         <p *ngIf="!file.sharedWith.length">File has not been shared with anyone.</p>
+
 
     </mat-drawer-content>
     <mat-drawer mode="side" position="end" class="file-comments-bar" opened>
