@@ -27,8 +27,7 @@ export class FileInformationComponent implements OnInit {
         })
         .catch(err => {
           console.log(err)
-          alert("Can't access resource");
-          this.router.navigate(['file-manager'])
+          this.router.navigate(['/404'])
         });
 
     })
@@ -39,7 +38,9 @@ export class FileInformationComponent implements OnInit {
       .then(file => {
         saveAs(file, this.file.fileName);
       })
-      .catch(console.log);
+      .catch(err =>{
+        console.log(err);
+      });
   }
 
   uploadFile(event) {

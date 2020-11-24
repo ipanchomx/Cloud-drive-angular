@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { environment } from "./../../../environments/environment"
-import { env } from 'process';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -21,6 +20,17 @@ export class SessionService {
     const url = `${environment.apiUrl}users/login`;
     return this.httpClient.post(url, credentials).toPromise();
   }
+
+  logout():Promise<any> {
+    const httpHeaders = new HttpHeaders({
+      Authorization: this.authService.get()
+    });
+    const url = `${environment.apiUrl}users/logout`;
+    return this.httpClient.post(url, {}, {
+      headers: httpHeaders
+    }).toPromise();
+  }
+
 
   googleLogin(id:string):Promise<any> {
     const url = `${environment.apiUrl}users/login/google`;

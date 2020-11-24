@@ -17,6 +17,14 @@ export class AuthService {
     localStorage.setItem('token', data);
   }
 
+  saveUserId(id: string) {
+    localStorage.setItem('userId', id);
+  }
+
+  getUserId() {
+    return localStorage.getItem('userId');
+  }
+
   get() {
     return localStorage.getItem('token');
   }
@@ -26,7 +34,8 @@ export class AuthService {
   }
 
   clear() {
-    this.loginStatus.next(false);
     localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    this.loginStatus.next(false);
   }
 }
