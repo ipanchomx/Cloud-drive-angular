@@ -14,6 +14,8 @@ import { File, filesResponse } from '../../globals/models/file.model';
 export class FileManagerComponent implements OnInit {
   value: string = '';
   path: string = '/';
+  pathMove: string = '/';
+  prevPath: string = '/';
   files: File[] = [];
   folders: File[] = [];
   inProgress: boolean = false;
@@ -63,10 +65,11 @@ export class FileManagerComponent implements OnInit {
   }
 
   goToFolderPath($event) {
-    console.log($event);
+    // console.log($event);
     if (this.path != '/') this.path += '/';
     this.path += $event.fileName;
     this.getPathContent();
+    this.pathMove = this.path;
   }
 
   getPathContent() {
@@ -78,7 +81,7 @@ export class FileManagerComponent implements OnInit {
           this.files.sort((file1, file2) => (file2.fileName <= file1.fileName) ? 1 : -1);
           this.folders = res.folders;
           this.folders.sort((folder1, folder2) => (folder2.fileName <= folder1.fileName) ? 1 : -1);
-          console.log(res)
+          // console.log(res)
           this.inProgress = false;
 
         }
@@ -87,5 +90,54 @@ export class FileManagerComponent implements OnInit {
         console.log(err);
         this.inProgress = false;
       });
+  }
+
+  backFolder() {
+    let splitIndex = this.path.lastIndexOf("/");
+    let prevPath = this.path.substring(0, splitIndex);
+    // let currentDirName = this.path.substring(splitIndex+1);
+
+    if (prevPath.length == 0) this.path = '/';
+    else this.path = prevPath;
+    // this.prevPath = prevPath;
+    // if(this.prevPath == '') this.prevPath = '/';
+    // console.log(this.prevPath)
+    this.getPathContent();
+    this.pathMove = this.path;
+  }
+
+  jumpTo(e) {
+    // console.log(e);
+    // || e.isTrusted
+    if (e.key == 'Enter' || (e.isTrusted && e.type == 'click')) {
+      // console.log('JumpTo')
+      let url = this.path;
+      // console.log('Url: ', url);
+      if (url[0] != '/') {
+        url = '/' + this.path;
+      }
+      if (url.charAt(url.length - 1) == '/' && url.length != 1) url = url.substring(0, url.length - 1)
+      // console.log('Url después del if: ', url);
+      if (url == '/') {
+        this.getPathContent();
+        this.path = url;
+      } 
+      else {
+        this._filesService.existDirectory(url).then(response => {
+          // console.log(response)
+          if (response) {
+            this.path = url;
+            // this.pathMove = url;
+          }
+          else this.path = this.prevPath
+
+          this.getPathContent();
+          this.pathMove = this.path;
+
+        }).catch(err => {
+          console.log(err);
+        })
+      }
+    }
   }
 }

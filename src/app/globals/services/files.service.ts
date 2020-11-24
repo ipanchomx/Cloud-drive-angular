@@ -62,6 +62,16 @@ export class FilesService {
     }).toPromise();
   }
 
+  existDirectory(path: string) {
+    const url = `${environment.apiUrl}files/existDirectory?path=${path}`;
+    const httpHeaders = new HttpHeaders({
+      Authorization: this._authService.get()
+    });
+    return this.httpClient.get(url, {
+      headers: httpHeaders,
+    }).toPromise();
+  }
+
   getFile(id: string) {
     const url = `${environment.apiUrl}files/${id}`;
     const httpHeaders = new HttpHeaders({
