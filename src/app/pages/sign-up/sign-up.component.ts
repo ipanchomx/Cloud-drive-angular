@@ -107,7 +107,6 @@ export class SignUpComponent implements OnInit {
   }
 
   signInWithGoogle(): void {
-    console.log("WUT")
     this.googleAuth.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
 

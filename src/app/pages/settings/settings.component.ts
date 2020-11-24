@@ -21,7 +21,7 @@ export class SettingsComponent implements OnInit {
   name: string;
   darkMode: boolean = false;
   email: string;
-  joined: Date;
+  joined: string;
   image: string;
   usrId: string;
   showForm = true;
@@ -45,7 +45,7 @@ export class SettingsComponent implements OnInit {
     this.sessionService.getUserInfo(this.usrId).then(data => {
       this.name = data.user.name;
       this.email = data.user.email;
-      this.joined = data.user.joined;
+      this.joined = new Date(data.user.joined).toLocaleDateString();
       this.image = data.user.img + ".jpg";
     })
 
@@ -87,11 +87,8 @@ export class SettingsComponent implements OnInit {
         return
       } else {
         this.nameError = false;
-        console.log("Saving new name");
         this.sessionService.changeName(this.name)
         .then(msg =>{
-          console.log("Cambiar nombre is okay");
-          console.log(msg);
           this._snackBar.open(msg.message, "Close", {
             horizontalPosition: this.horizontalPosition,
             verticalPosition: this.verticalPosition,

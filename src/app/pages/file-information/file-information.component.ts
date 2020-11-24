@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { File } from 'src/app/globals/models/file.model';
 import { FilesService } from 'src/app/globals/services/files.service';
 import { saveAs } from 'file-saver';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ShareFileDialogComponent } from 'src/app/dialogs/share-file-dialog/share-file-dialog.component';
 
 @Component({
   selector: 'app-file-information',
@@ -16,7 +18,7 @@ export class FileInformationComponent implements OnInit {
   dateOfCreation: string = '';
   permission: string= 'owner';
 
-  constructor(private _fileService: FilesService, private _activatedRoute: ActivatedRoute, private router: Router) { }
+  constructor(private _fileService: FilesService, private _activatedRoute: ActivatedRoute, private router: Router, private _matDialog: MatDialog) { }
 
   ngOnInit(): void {
     this._activatedRoute.params.subscribe(params => {
@@ -56,7 +58,22 @@ export class FileInformationComponent implements OnInit {
   }
 
   shareFile() {
-    alert('shared file with...');
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = "40%";
+    dialogConfig.width = "60%"
+    dialogConfig.minWidth = "360px";
+    dialogConfig.minHeight = "500px"
+    dialogConfig.data = {
+      file: this.file
+    }
+    const dialogRef = this._matDialog.open(ShareFileDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed()
+      .subscribe(result => {
+        
+      });
   }
 
   deleteFile() {
