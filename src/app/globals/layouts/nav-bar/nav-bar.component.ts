@@ -9,6 +9,7 @@ export interface notification {
   date: Date;
   emiterEmail: string;
   fileName: string;
+  read: boolean;
 }
 
 @Component({
@@ -25,34 +26,40 @@ export class NavBarComponent implements OnInit {
       message: 'shared a file with you',
       date: new Date(),
       emiterEmail: 'ejemplo@gmail.com',
-      fileName: 'presupuesto.xxl'
+      fileName: 'presupuesto.xxl',
+      read: false
     },
     {
       message: 'shared a file with you',
       date: new Date(),
       emiterEmail: 'ej2@gmail.com',
-      fileName: 'img.png'
+      fileName: 'img.png',
+      read: false
     },
     {
       message: 'updated a file',
       date: new Date(),
       emiterEmail: 'amoLosGatos@gmail.com',
-      fileName: 'ensayoGatos.docx'
+      fileName: 'ensayoGatos.docx',
+      read: false
     },
     {
       message: 'shared a file with you',
       date: new Date(),
       emiterEmail: 'amoLosGatos@gmail.com',
-      fileName: 'ensayoGatos.docx'
+      fileName: 'ensayoGatos.docx',
+      read: true
     },
     {
       message: 'commented on a file',
       date: new Date('11/23/20'),
       emiterEmail: 'panchito@gmail.com',
-      fileName: 'precios.xxl'
+      fileName: 'precios.xxl',
+      read: true
     }
   ];
-  noSize = this.notifications.length; 
+  noSize = 0;
+ 
   
   constructor(private authService: AuthService, private router: Router,private _matDialog: MatDialog) { 
 
@@ -63,6 +70,10 @@ export class NavBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.notifications.forEach(e=>{
+      if(!e.read) this.noSize++;
+    });
+
   }
 
   logout() {
@@ -80,6 +91,7 @@ export class NavBarComponent implements OnInit {
     const dialogRef = this._matDialog.open(NotificationsComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       this.noSize = 0;
+      //delete notifications
     });
 
   }
