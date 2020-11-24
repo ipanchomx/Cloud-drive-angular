@@ -9,7 +9,7 @@
         <div class="userInfo">
             <input type="text" [(ngModel)]="name" [disabled]="!editableName" class="profile-name">
             <p >{{email}}</p>
-            <p class="member-since">{{joined}}</p>
+            <p class="member-since">Joined on {{joined}}</p>
         </div>
         <button (click)="toggleEditableName()">{{editableName? "Save": "Edit name"}}</button>
     </div>
