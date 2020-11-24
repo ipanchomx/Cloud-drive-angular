@@ -15,8 +15,8 @@
             <a mat-icon-button class="icon-big"  routerLink="settings">
                 <mat-icon>settings</mat-icon>
             </a>
-            <a mat-icon-button class="icon-big" routerLink="">
-                <mat-icon matBadge="1" matBadgeSize="small" matBadgeColor="warn">notifications</mat-icon>
+            <a mat-icon-button class="icon-big">
+                <mat-icon matBadge="{{noSize}}" [matBadgeHidden]="noSize===0" matBadgeSize="small" matBadgeColor="warn"  (click)="openNotifications()">notifications</mat-icon>
             </a>
 
             <a mat-button (click)='logout()'>Log Out</a>
