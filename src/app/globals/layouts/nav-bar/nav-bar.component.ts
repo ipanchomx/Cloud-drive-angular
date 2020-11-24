@@ -1,6 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import{NotificationsComponent} from 'src/app/dialogs/notifications/notifications.component';
+
+export interface notification {
+  message: string;
+  date: Date;
+  emiterEmail: string;
+  fileName: string;
+  read: boolean;
+}
 import { SessionService } from '../../services/session.service';
 import { SocialAuthService } from 'angularx-social-login';
 import { GoogleLoginProvider } from "angularx-social-login";
@@ -12,8 +22,50 @@ import { GoogleLoginProvider } from "angularx-social-login";
 })
 export class NavBarComponent implements OnInit {
   isLoggedIn:boolean = false;
+  
+  name = "anai";
+  notifications: notification[] = [
+    {
+      message: 'shared a file with you',
+      date: new Date(),
+      emiterEmail: 'ejemplo@gmail.com',
+      fileName: 'presupuesto.xxl',
+      read: false
+    },
+    {
+      message: 'shared a file with you',
+      date: new Date(),
+      emiterEmail: 'ej2@gmail.com',
+      fileName: 'img.png',
+      read: false
+    },
+    {
+      message: 'updated a file',
+      date: new Date(),
+      emiterEmail: 'amoLosGatos@gmail.com',
+      fileName: 'ensayoGatos.docx',
+      read: false
+    },
+    {
+      message: 'shared a file with you',
+      date: new Date(),
+      emiterEmail: 'amoLosGatos@gmail.com',
+      fileName: 'ensayoGatos.docx',
+      read: true
+    },
+    {
+      message: 'commented on a file',
+      date: new Date('11/23/20'),
+      emiterEmail: 'panchito@gmail.com',
+      fileName: 'precios.xxl',
+      read: true
+    }
+  ];
+  noSize = 0;
+ 
+  
 
-  constructor(private authService: AuthService, private router: Router, private sessionService: SessionService, private googleAuthService: SocialAuthService) { 
+  constructor(private authService: AuthService, private router: Router,private _matDialog: MatDialog,  private sessionService: SessionService, private googleAuthService: SocialAuthService) { 
 
     this.authService.loginStatus.subscribe(status=>{
       this.isLoggedIn = status;
@@ -22,6 +74,10 @@ export class NavBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.notifications.forEach(e=>{
+      if(!e.read) this.noSize++;
+    });
+
   }
 
   logout() {
@@ -32,6 +88,21 @@ export class NavBarComponent implements OnInit {
       this.router.navigate(['/home']);
     })
     .catch(console.log)
+  }
+
+  openNotifications() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.minWidth = "20px";
+    dialogConfig.minHeight = "10px";
+    dialogConfig.position = { top: '50px', right: '50px' };
+    dialogConfig.data =  {notifications: this.notifications, name: this.name};
+
+    const dialogRef = this._matDialog.open(NotificationsComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      this.noSize = 0;
+      //delete notifications
+    });
+
   }
 
 }

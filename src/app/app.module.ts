@@ -30,6 +30,8 @@ import { CreateFolderFormComponent } from './dialogs/create-folder-form/create-f
 import { SharedFilesComponent } from './pages/shared-files/shared-files.component';
 import { Page404Component } from './pages/page404/page404.component';
 import { ShareFileDialogComponent } from './dialogs/share-file-dialog/share-file-dialog.component';
+import { NotificationsComponent } from './dialogs/notifications/notifications.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +50,8 @@ import { ShareFileDialogComponent } from './dialogs/share-file-dialog/share-file
     CreateFolderFormComponent,
     SharedFilesComponent,
     Page404Component,
-    ShareFileDialogComponent
+    ShareFileDialogComponent,
+    NotificationsComponent
   ],
   imports: [
     AppRoutingModule,
