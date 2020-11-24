@@ -9,7 +9,6 @@ export interface notification {
   date: Date;
   emiterEmail: string;
   fileName: string;
-  read: boolean;
 }
 import { SessionService } from '../../services/session.service';
 import { SocialAuthService } from 'angularx-social-login';
@@ -29,36 +28,31 @@ export class NavBarComponent implements OnInit {
       message: 'shared a file with you',
       date: new Date(),
       emiterEmail: 'ejemplo@gmail.com',
-      fileName: 'presupuesto.xxl',
-      read: false
+      fileName: 'presupuesto.xxl'
     },
     {
       message: 'shared a file with you',
       date: new Date(),
       emiterEmail: 'ej2@gmail.com',
-      fileName: 'img.png',
-      read: false
+      fileName: 'img.png'
     },
     {
       message: 'updated a file',
       date: new Date(),
       emiterEmail: 'amoLosGatos@gmail.com',
-      fileName: 'ensayoGatos.docx',
-      read: false
+      fileName: 'ensayoGatos.docx'
     },
     {
       message: 'shared a file with you',
       date: new Date(),
       emiterEmail: 'amoLosGatos@gmail.com',
-      fileName: 'ensayoGatos.docx',
-      read: true
+      fileName: 'ensayoGatos.docx'
     },
     {
       message: 'commented on a file',
       date: new Date('11/23/20'),
       emiterEmail: 'panchito@gmail.com',
-      fileName: 'precios.xxl',
-      read: true
+      fileName: 'precios.xxl'
     }
   ];
   noSize = 0;
@@ -74,9 +68,7 @@ export class NavBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.notifications.forEach(e=>{
-      if(!e.read) this.noSize++;
-    });
+    this.noSize = this.notifications.length;
 
   }
 
@@ -92,7 +84,7 @@ export class NavBarComponent implements OnInit {
 
   openNotifications() {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.minWidth = "20px";
+    dialogConfig.minWidth = "40px";
     dialogConfig.minHeight = "10px";
     dialogConfig.position = { top: '50px', right: '50px' };
     dialogConfig.data =  {notifications: this.notifications, name: this.name};
