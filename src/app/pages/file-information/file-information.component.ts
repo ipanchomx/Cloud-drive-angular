@@ -51,6 +51,10 @@ export class FileInformationComponent implements OnInit {
     alert('shared file with...');
   }
 
+  deleteFile() {
+    alert('Deleting file...')
+  }
+
 
 
 }
