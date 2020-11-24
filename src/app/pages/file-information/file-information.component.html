@@ -1,11 +1,11 @@
 <mat-drawer-container *ngIf="file" class="file-info-container">
     <mat-drawer-content class="file-information-main">
         <div class="file-action-container">
-            <button mat-raised-button color="primary" (click)="downloadFile()">Download</button>
-            <button mat-raised-button type="file" (click)="fileInput.click()" [disabled]="!(permission=='owner' || permission=='write')">Update</button>
-            <input hidden (change)="uploadFile($event)" #fileInput type="file" id="file">
-            <button mat-raised-button color="primary" (click)="shareFile()" [disabled]="!(permission=='owner')">Share</button>
-            <mat-form-field appearance="fill">
+            <button class="controls" mat-raised-button color="primary" (click)="downloadFile()">Download</button>
+            <button class="controls" mat-raised-button type="file" (click)="fileInput.click()" [disabled]="!(permission=='owner' || permission=='write')">Update</button>
+            <input  class="controls" hidden (change)="uploadFile($event)" #fileInput type="file" id="file">
+            <button class="controls" mat-raised-button color="primary" (click)="shareFile()" [disabled]="!(permission=='owner')">Share</button>
+            <mat-form-field appearance="fill"  class="controls">
                 <mat-label  >Versions</mat-label >
                 <mat-select value="4" >
                     <mat-option value="4">04/10/2020</mat-option>
@@ -14,6 +14,7 @@
                     <mat-option value="1">01/10/2020</mat-option>
                 </mat-select>
             </mat-form-field>
+            <button class="controls" mat-raised-button color="warn" (click)="deleteFile()">Delete</button>
         </div>
         <h1>File: {{file.fileName}}</h1>
         <h2>Path: {{file.path}}</h2>
