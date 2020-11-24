@@ -2,12 +2,12 @@
     <mat-drawer-content class="file-information-main">
         <div class="file-action-container">
             <button class="controls" mat-raised-button color="primary" (click)="downloadFile()">Download</button>
-            <button class="controls" mat-raised-button type="file" (click)="fileInput.click()">Update</button>
-            <input class="controls" hidden (change)="uploadFile($event)" #fileInput type="file" id="file">
-            <button class="controls" mat-raised-button color="primary" (click)="shareFile()">Share</button>
-            <mat-form-field appearance="fill" class="controls">
-                <mat-label>Versions</mat-label>
-                <mat-select value="4">
+            <button class="controls" mat-raised-button type="file" (click)="fileInput.click()" [disabled]="!(permission=='owner' || permission=='write')">Update</button>
+            <input  class="controls" hidden (change)="uploadFile($event)" #fileInput type="file" id="file">
+            <button class="controls" mat-raised-button color="primary" (click)="shareFile()" [disabled]="!(permission=='owner')">Share</button>
+            <mat-form-field appearance="fill"  class="controls">
+                <mat-label  >Versions</mat-label >
+                <mat-select value="4" >
                     <mat-option value="4">04/10/2020</mat-option>
                     <mat-option value="3">03/10/2020</mat-option>
                     <mat-option value="2">02/10/2020</mat-option>
@@ -32,6 +32,7 @@
         <p *ngFor="let user of file.sharedWith">{{user.email}}</p>
         <p *ngIf="!file.sharedWith.length">File has not been shared with anyone.</p>
 
+
     </mat-drawer-content>
     <mat-drawer mode="side" position="end" class="file-comments-bar" opened>
         <div class="file-comments-content">
@@ -46,6 +47,7 @@
                     <mat-option value="1">Not verified</mat-option>
                 </mat-select>
             </mat-form-field>
+            <button mat-raised-button color="primary" (click)="verifyFile()" [disabled]="!(permission=='read')">Verify</button>
 
             <h1>Comments</h1>
 
