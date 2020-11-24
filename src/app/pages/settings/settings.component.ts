@@ -40,8 +40,7 @@ export class SettingsComponent implements OnInit {
     }, {
       validators: this.compararPasswords.bind(this)
     })
-    this.usrId = localStorage.getItem('userId')
-    //console.log(this.usrId)
+    this.usrId = this.authService.getUserId();
 
     this.sessionService.getUserInfo(this.usrId).then(data => {
       this.name = data.user.name;

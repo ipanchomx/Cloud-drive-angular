@@ -43,7 +43,7 @@ export class SignUpComponent implements OnInit {
 
     this.googleAuth.authState.subscribe((user) => {
       this.sessionService.googleLogin(user.idToken).then(data => {
-        localStorage.setItem('userId', data.userId);
+        this.authService.saveUserId(data.userId);
         this.authService.save(data.token)
         this.router.navigate(["/file-manager"])
       }).catch(err => {
@@ -88,9 +88,8 @@ export class SignUpComponent implements OnInit {
   iniciarSesion() {
     if (this.loginForm.valid) {
       this.sessionService.login(this.loginForm.getRawValue()).then(data => {
-        localStorage.setItem('userId', data.userId);
+        this.authService.saveUserId(data.userId);
         this.authService.save(data.token)
-        console.log(data);
         this.router.navigate(["/file-manager"])
       }).catch(err => {
 
