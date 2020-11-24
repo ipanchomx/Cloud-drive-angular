@@ -11,6 +11,9 @@ export interface notification {
   fileName: string;
   read: boolean;
 }
+import { SessionService } from '../../services/session.service';
+import { SocialAuthService } from 'angularx-social-login';
+import { GoogleLoginProvider } from "angularx-social-login";
 
 @Component({
   selector: 'app-nav-bar',
@@ -61,7 +64,8 @@ export class NavBarComponent implements OnInit {
   noSize = 0;
  
   
-  constructor(private authService: AuthService, private router: Router,private _matDialog: MatDialog) { 
+
+  constructor(private authService: AuthService, private router: Router,private _matDialog: MatDialog,  private sessionService: SessionService, private googleAuthService: SocialAuthService) { 
 
     this.authService.loginStatus.subscribe(status=>{
       this.isLoggedIn = status;
@@ -77,8 +81,13 @@ export class NavBarComponent implements OnInit {
   }
 
   logout() {
-    this.authService.clear();
-    this.router.navigate(['/home']);
+    this.sessionService.logout()
+    .then((res)=>{
+      this.googleAuthService.signOut(true);
+      this.authService.clear();
+      this.router.navigate(['/home']);
+    })
+    .catch(console.log)
   }
 
   openNotifications() {

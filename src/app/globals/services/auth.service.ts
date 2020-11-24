@@ -34,8 +34,8 @@ export class AuthService {
   }
 
   clear() {
-    this.loginStatus.next(false);
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
+    this.loginStatus.next(false);
   }
 }

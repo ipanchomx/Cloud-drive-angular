@@ -42,6 +42,9 @@ export class SignUpComponent implements OnInit {
     });
 
     this.googleAuth.authState.subscribe((user) => {
+      if (!user) {
+        return;
+      }
       this.sessionService.googleLogin(user.idToken).then(data => {
         this.authService.saveUserId(data.userId);
         this.authService.save(data.token)
@@ -104,6 +107,7 @@ export class SignUpComponent implements OnInit {
   }
 
   signInWithGoogle(): void {
+    console.log("WUT")
     this.googleAuth.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
 
