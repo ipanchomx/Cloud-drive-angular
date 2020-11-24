@@ -6,8 +6,8 @@
             <input hidden (change)="uploadFile($event)" #fileInput type="file" id="file">
             <button mat-raised-button color="primary" (click)="shareFile()" [disabled]="!(permission=='owner')">Share</button>
             <mat-form-field appearance="fill">
-                <mat-label  >Versions</mat-label>
-                <mat-select value="4" disabled>
+                <mat-label  >Versions</mat-label >
+                <mat-select value="4" >
                     <mat-option value="4">04/10/2020</mat-option>
                     <mat-option value="3">03/10/2020</mat-option>
                     <mat-option value="2">02/10/2020</mat-option>
@@ -46,6 +46,7 @@
                     <mat-option value="1">Not verified</mat-option>
                 </mat-select>
             </mat-form-field>
+            <button mat-raised-button color="primary" (click)="verifyFile()" [disabled]="!(permission=='read')">Verify</button>
 
             <h1>Comments</h1>
 

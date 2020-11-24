@@ -59,6 +59,9 @@ export class FileInformationComponent implements OnInit {
     alert('shared file with...');
   }
 
+  verifyFile() {
+    alert('Verifying file...')
+  }
 
 
 }
