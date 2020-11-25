@@ -87,7 +87,15 @@ export class FileInformationComponent implements OnInit {
   }
 
   deleteFile() {
-    alert('Deleting file...')
+    console.log("deleteFile");
+    this._fileService.deleteFile(this.file._id).then(data => {
+      console.log('Archivos elminados:', data);
+      this.router.navigate(['/file-manager']);
+    }).catch(err => {
+      console.log("No se armó");
+      console.log(err);
+      this.router.navigate(['/file-manager']);
+    })
   }
 
   verifyFile() {
