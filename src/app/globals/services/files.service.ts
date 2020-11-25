@@ -113,4 +113,15 @@ export class FilesService {
       headers: httpHeaders
     }).toPromise();
   }
+
+  getVersions(id: string) {
+    const url = `${environment.apiUrl}files/getVersions/${id}`;
+    console.log(url)
+    const httpHeaders = new HttpHeaders({
+      Authorization: this._authService.get()
+    });
+    return this.httpClient.get(url, {
+      headers: httpHeaders
+    }).toPromise();
+  }
 }
