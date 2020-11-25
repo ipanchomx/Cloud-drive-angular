@@ -24,3 +24,11 @@ export interface File {
     version: number;
     comments: FileComment[]
 }
+
+export interface Version {
+    id : string,
+    date : string,
+    version : number,
+    status : string,
+    versionWithNumber : string
+}
