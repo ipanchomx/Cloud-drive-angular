@@ -30,10 +30,11 @@ export class CreateFolderFormComponent implements OnInit {
         this._dialogRef.close();
       })
       .catch(error => {
-        this._snackBar.open(`Unable to Create Folder- ${error.error.message}`, "Close", {
+        const snackbarRef = this._snackBar.open(`Unable to Create Folder- ${error.error.message}`, "Close", {
           horizontalPosition: 'center',
           verticalPosition: 'top'
         })
+        snackbarRef._dismissAfter(3000);
       })
 
 

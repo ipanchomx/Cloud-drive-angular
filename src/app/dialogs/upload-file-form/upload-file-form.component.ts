@@ -103,18 +103,24 @@ export class UploadFileFormComponent implements OnInit {
         this._dialogRef.close();
         this.progress = 0;
         this.inProgress = false;
-        this._snackBar.open("File uploaded successfully", "Close", {
+        
+        const snackbarRef = this._snackBar.open("File uploaded successfully", "Close", {
           horizontalPosition: 'center',
           verticalPosition: 'top'
         })
+
+        snackbarRef._dismissAfter(3000);
+
       }
     }, error => {
       console.log(error);
       this.inProgress = false;
-      this._snackBar.open(`Unable to Upload File - ${error.error.message}`, "Close", {
+      const snackbarRef = this._snackBar.open(`Unable to Upload File - ${error.error.message}`, "Close", {
         horizontalPosition: 'center',
         verticalPosition: 'top'
       })
+
+      snackbarRef._dismissAfter(3000);
     })
 
   }
