@@ -103,5 +103,14 @@ export class FilesService {
     }).toPromise();
   }
 
-
+  deleteFile(id: string) {
+    const url = `${environment.apiUrl}files/deleteFile/${id}`;
+    console.log(url)
+    const httpHeaders = new HttpHeaders({
+      Authorization: this._authService.get()
+    });
+    return this.httpClient.delete(url, {
+      headers: httpHeaders
+    }).toPromise();
+  }
 }
