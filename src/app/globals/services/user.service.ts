@@ -22,4 +22,14 @@ export class UserService {
       headers: httpHeaders
     });
   }
+
+  changePhoto(data: any) {
+    const url = `${environment.apiUrl}users/updateImage`;
+    const httpHeaders = new HttpHeaders({
+      Authorization: this._authService.get()
+    });
+    return this.httpClient.put(url, data, {
+      headers: httpHeaders
+    });
+  }
 }
