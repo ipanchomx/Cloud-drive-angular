@@ -5,6 +5,8 @@ import { FilesService } from 'src/app/globals/services/files.service';
 import { saveAs } from 'file-saver';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ShareFileDialogComponent } from 'src/app/dialogs/share-file-dialog/share-file-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-file-information',
@@ -17,8 +19,9 @@ export class FileInformationComponent implements OnInit {
   file: File = null;
   dateOfCreation: string = '';
   permission: string= 'owner';
+  statusType: number = 1;
 
-  constructor(private _fileService: FilesService, private _activatedRoute: ActivatedRoute, private router: Router, private _matDialog: MatDialog) { }
+  constructor(private _fileService: FilesService, private _activatedRoute: ActivatedRoute, private router: Router, private _matDialog: MatDialog, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this._activatedRoute.params.subscribe(params => {
@@ -32,7 +35,14 @@ export class FileInformationComponent implements OnInit {
               this.permission = share.permission;
             }
           });
-           console.log(this.permission);
+          
+           switch(this.file.verificationStatus){
+             case "rejected": this.statusType = 1; break;
+             case "verified": this.statusType = 2; break;
+             case "pending": this.statusType = 3; break;
+             default: this.statusType = 4;
+           }
+           console.log(this.file.verificationStatus);
         })
         .catch(err => {
           console.log(err)
