@@ -1,0 +1,42 @@
+<button class="btn-dialog-close" style="display: relative;" mat-stroked-button (click)="onClose()" tabIndex="-1">
+    <mat-icon>clear</mat-icon>
+</button>
+
+<div
+    style="height: 95%; width: calc( 100% - 65px); display: flex; flex-direction: column; justify-content: space-between;">
+
+
+    <div>
+        <h1>Update a file</h1>
+        <h2><small>Path: </small>{{fileInfo.path}}</h2>
+
+        <div *ngIf="inProgress" style="width: 100%; display: flex; align-items: center; flex-direction: column;">
+            <h1>Upload in progress</h1>
+            <mat-spinner></mat-spinner>
+        </div>
+        <form *ngIf="!inProgress" class="example-form">
+            <button mat-raised-button class="example-full-width" (click)="inputFile.click()" color="primary">
+                Select File to upload
+            </button>
+            <mat-form-field class="example-full-width">
+                <mat-label>File Name </mat-label>
+                <input matInput name="filename" [(ngModel)]="fileInfo.fileName">
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Extension</mat-label>
+                <input matInput name="ext" disabled [value]="extension">
+            </mat-form-field>
+
+            <input #inputFile (change)="onFileChange($event)" style="display: none;" type="file">
+
+
+            <div>
+            <button type="button" mat-raised-button style="margin-right: 15px;" color="primary" (click)="updateFile($event)"
+                [disabled]="!fileName || !extension || !file">Upload File</button>
+                <button type="button" style="float: right;" (click)="onClose()">Close</button>
+            </div>
+        </form>
+    </div>
+
+</div>

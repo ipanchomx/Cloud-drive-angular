@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { File } from 'src/app/globals/models/file.model';
 import { FilesService } from 'src/app/globals/services/files.service';
 import { saveAs } from 'file-saver';
@@ -7,6 +7,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ShareFileDialogComponent } from 'src/app/dialogs/share-file-dialog/share-file-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+import { UpdateFileDialogComponent } from 'src/app/dialogs/update-file-dialog/update-file-dialog.component';
 
 @Component({
   selector: 'app-file-information',
@@ -29,9 +30,10 @@ export class FileInformationComponent implements OnInit {
         .then((file: File) => {
           this.dateOfCreation = new Date(file.dateOfCreation).toLocaleDateString();
           this.file = file;
+          console.log(this.file);
 
-          this.file.sharedWith.forEach(share =>{
-            if(share.userId == localStorage.userId){
+          this.file.sharedWith.forEach(share => {
+            if (share.userId == localStorage.userId) {
               this.permission = share.permission;
             }
           });
@@ -57,14 +59,23 @@ export class FileInformationComponent implements OnInit {
       .then(file => {
         saveAs(file, this.file.fileName);
       })
-      .catch(err =>{
+      .catch(err => {
         console.log(err);
       });
   }
 
-  uploadFile(event) {
-    console.log(event);
-    alert('file is uploading');
+  updateFile(event) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = "300";
+    dialogConfig.width = "40%"
+    dialogConfig.minWidth = "360px";
+    dialogConfig.minHeight = "300px"
+    dialogConfig.data = {
+      file: this.file
+    }
+    this._matDialog.open(UpdateFileDialogComponent, dialogConfig);
   }
 
   shareFile() {
@@ -82,12 +93,20 @@ export class FileInformationComponent implements OnInit {
 
     dialogRef.afterClosed()
       .subscribe(result => {
-        
+        // Should update shared with property
       });
   }
 
   deleteFile() {
-    alert('Deleting file...')
+    console.log("deleteFile");
+    this._fileService.deleteFile(this.file._id).then(data => {
+      console.log('Archivos elminados:', data);
+      this.router.navigate(['/file-manager']);
+    }).catch(err => {
+      console.log("No se armó");
+      console.log(err);
+      this.router.navigate(['/file-manager']);
+    })
   }
 
   verifyFile() {

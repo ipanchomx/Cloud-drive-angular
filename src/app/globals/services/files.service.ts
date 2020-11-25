@@ -7,9 +7,9 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class FilesService {
-  constructor(private httpClient:HttpClient, private _authService: AuthService) { }
+  constructor(private httpClient: HttpClient, private _authService: AuthService) { }
 
-  upload(data: any){
+  upload(data: any) {
     const url = `${environment.apiUrl}files/`;
     const httpHeaders = new HttpHeaders({
       Authorization: this._authService.get()
@@ -18,6 +18,16 @@ export class FilesService {
       headers: httpHeaders,
       reportProgress: true,
       observe: 'events'
+    });
+  }
+
+  updateFile(data: any) {
+    const url = `${environment.apiUrl}files/`;
+    const httpHeaders = new HttpHeaders({
+      Authorization: this._authService.get()
+    });
+    return this.httpClient.put(url, data, {
+      headers: httpHeaders
     });
   }
 
@@ -93,5 +103,14 @@ export class FilesService {
     }).toPromise();
   }
 
-
+  deleteFile(id: string) {
+    const url = `${environment.apiUrl}files/deleteFile/${id}`;
+    console.log(url)
+    const httpHeaders = new HttpHeaders({
+      Authorization: this._authService.get()
+    });
+    return this.httpClient.delete(url, {
+      headers: httpHeaders
+    }).toPromise();
+  }
 }

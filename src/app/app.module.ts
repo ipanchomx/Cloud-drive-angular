@@ -31,6 +31,7 @@ import { SharedFilesComponent } from './pages/shared-files/shared-files.componen
 import { Page404Component } from './pages/page404/page404.component';
 import { ShareFileDialogComponent } from './dialogs/share-file-dialog/share-file-dialog.component';
 import { NotificationsComponent } from './dialogs/notifications/notifications.component';
+import { UpdateFileDialogComponent } from './dialogs/update-file-dialog/update-file-dialog.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { NotificationsComponent } from './dialogs/notifications/notifications.co
     SharedFilesComponent,
     Page404Component,
     ShareFileDialogComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    UpdateFileDialogComponent
   ],
   imports: [
     AppRoutingModule,
