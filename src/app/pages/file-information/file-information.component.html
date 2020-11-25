@@ -5,12 +5,11 @@
             <button class="controls" mat-raised-button type="file" (click)="updateFile()" [disabled]="!(permission=='owner' || permission=='write')">Update</button>
             <button class="controls" mat-raised-button color="primary" (click)="shareFile()" [disabled]="!(permission=='owner')">Share</button>
             <mat-form-field appearance="fill"  class="controls">
-                <mat-label  >Versions</mat-label >
-                <mat-select value="4" >
-                    <mat-option value="4">04/10/2020</mat-option>
-                    <mat-option value="3">03/10/2020</mat-option>
-                    <mat-option value="2">02/10/2020</mat-option>
-                    <mat-option value="1">01/10/2020</mat-option>
+                <mat-label>Versions</mat-label>
+                <mat-select [(ngModel)]="selectedValue" name="versions" (selectionChange)="selectVersion($event)">
+                    <mat-option *ngFor="let ver of versions" [value]="ver.id">
+                     {{ver.versionWithNumber}}
+                    </mat-option>
                 </mat-select>
             </mat-form-field>
             <button class="controls" mat-raised-button color="warn" (click)="deleteFile()">Delete</button>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { File } from 'src/app/globals/models/file.model';
+import { File, Version } from 'src/app/globals/models/file.model';
 import { FilesService } from 'src/app/globals/services/files.service';
 import { saveAs } from 'file-saver';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -19,6 +19,9 @@ export class FileInformationComponent implements OnInit {
   dateOfCreation: string = '';
   permission: string = 'owner';
 
+  selectedValue: string = "";
+  versions:Version[] = [];
+
   constructor(private _fileService: FilesService, private _activatedRoute: ActivatedRoute, private router: Router, private _matDialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -27,13 +30,18 @@ export class FileInformationComponent implements OnInit {
         .then((file: File) => {
           this.dateOfCreation = new Date(file.dateOfCreation).toLocaleDateString();
           this.file = file;
-          console.log(this.file);
 
           this.file.sharedWith.forEach(share => {
             if (share.userId == localStorage.userId) {
               this.permission = share.permission;
             }
           });
+
+          this.getVersions(); /////////////////////////////////////////////
+          this.versions.map( version => {
+            ({id : version.id, date : new Date(version.date).toLocaleDateString(), version : version.version, status: version.status, versionWithNumber : version.versionWithNumber})
+          })
+          
         })
         .catch(err => {
           console.log(err)
@@ -87,12 +95,10 @@ export class FileInformationComponent implements OnInit {
   }
 
   deleteFile() {
-    console.log("deleteFile");
     this._fileService.deleteFile(this.file._id).then(data => {
       console.log('Archivos elminados:', data);
       this.router.navigate(['/file-manager']);
     }).catch(err => {
-      console.log("No se armó");
       console.log(err);
       this.router.navigate(['/file-manager']);
     })
@@ -102,6 +108,21 @@ export class FileInformationComponent implements OnInit {
     alert('Verifying file...')
   }
 
+  getVersions() {
+    
+    this._fileService.getVersions(this.file._id).then( (data:Version[]) => {
+      data.sort((a, b) => {
+          return b.version - a.version
+      })
+      this.versions = data;
+      this.selectedValue = this.file._id;
+    }).catch(err => {
+      console.log(err);      
+    })
+  }
 
+  selectVersion(e) {
+    this.router.navigate(['/file-info', e.value]);
+  }
 }
 
