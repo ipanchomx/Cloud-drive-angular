@@ -113,4 +113,9 @@ export class FilesService {
       headers: httpHeaders
     }).toPromise();
   }
+
+  updateVerificationStatus(obj):Promise<any> {
+    const url = `${environment.apiUrl}files/updateVerificationStatus`;
+    return this.httpClient.post(url, obj).toPromise();
+  }
 }

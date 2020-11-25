@@ -5,7 +5,7 @@ import { FilesService } from 'src/app/globals/services/files.service';
 import { saveAs } from 'file-saver';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ShareFileDialogComponent } from 'src/app/dialogs/share-file-dialog/share-file-dialog.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar,MatSnackBarHorizontalPosition,MatSnackBarVerticalPosition, } from '@angular/material/snack-bar';
 
 import { UpdateFileDialogComponent } from 'src/app/dialogs/update-file-dialog/update-file-dialog.component';
 
@@ -20,7 +20,10 @@ export class FileInformationComponent implements OnInit {
   file: File = null;
   dateOfCreation: string = '';
   permission: string= 'owner';
-  statusType: number = 1;
+  statusString: string= 'not available';
+
+  horizontalPosition: MatSnackBarHorizontalPosition = "center";
+  verticalPosition: MatSnackBarVerticalPosition = "top";
 
   constructor(private _fileService: FilesService, private _activatedRoute: ActivatedRoute, private router: Router, private _matDialog: MatDialog, private _snackBar: MatSnackBar) { }
 
@@ -37,14 +40,9 @@ export class FileInformationComponent implements OnInit {
               this.permission = share.permission;
             }
           });
-          
-           switch(this.file.verificationStatus){
-             case "rejected": this.statusType = 1; break;
-             case "verified": this.statusType = 2; break;
-             case "pending": this.statusType = 3; break;
-             default: this.statusType = 4;
-           }
-           console.log(this.file.verificationStatus);
+
+          this.statusString = this.file.verificationStatus;       
+           console.log(this.statusString);
         })
         .catch(err => {
           console.log(err)
@@ -110,7 +108,28 @@ export class FileInformationComponent implements OnInit {
   }
 
   verifyFile() {
-    alert('Verifying file...')
+
+    console.log('Verifying file...')
+    console.log(this.statusString);
+    let obj = {
+      id: this.file._id,
+      status: this.statusString
+    };
+    console.log(obj);
+
+
+    this._fileService.updateVerificationStatus(obj)
+    .then(msg=>{
+        this._snackBar.open(msg, "Close", {
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+        })
+    }).catch(err =>{
+        this._snackBar.open(err, "Close", {
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+        })
+    })
   }
 
 
