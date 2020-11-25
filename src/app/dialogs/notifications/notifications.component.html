@@ -1,14 +1,13 @@
 <div class="nContainer">
   
-  <div class="bContainer">
+
+  <div class="bContainer"> 
     <button mat-mini-fab color="warn" (click)="onClose()">X</button>
   </div>
   
-  <h1 mat-dialog-title>Hi {{data.name}}</h1>
-  <p mat-dialog-title>These are your notifications</p>
+  <h1 mat-dialog-title matInput>Hi {{data.name}}</h1>
+  <p mat-dialog-title matInput>These are your notifications</p>
   <div mat-dialog-content>
-    <mat-form-field>
-  
       <div *ngFor="let notification of data.notifications">
         <mat-card>
           <p><strong>{{notification.emiterEmail}}</strong></p>
@@ -18,7 +17,6 @@
         </mat-card>
         <mat-divider></mat-divider>
       </div>
-    </mat-form-field>
   </div>
 </div>
 
