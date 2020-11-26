@@ -87,8 +87,6 @@ export class NavBarComponent implements OnInit {
 
       this.socketsService.on('notification', (data) => {
         this.noSize += 1;
-        console.log(data);
-        console.log("Hola desde el navBar")
       })
     }
 
