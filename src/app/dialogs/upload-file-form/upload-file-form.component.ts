@@ -6,6 +6,7 @@ import { FilesService } from 'src/app/globals/services/files.service';
 import { UserService } from 'src/app/globals/services/user.service';
 import { HttpEventType } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SocketsService } from 'src/app/globals/services/sockets.service';
 
 @Component({
   selector: 'app-upload-file-form',
@@ -19,7 +20,8 @@ export class UploadFileFormComponent implements OnInit {
     private _dialogRef: MatDialogRef<UploadFileFormComponent>,
     private _user: UserService,
     private _files: FilesService,
-    private _snackBar: MatSnackBar) { }
+    private _snackBar: MatSnackBar,
+    private _sockets: SocketsService) { }
 
   file: File;
   fileName: string = '';
@@ -108,9 +110,11 @@ export class UploadFileFormComponent implements OnInit {
           horizontalPosition: 'center',
           verticalPosition: 'top'
         })
-
         snackbarRef._dismissAfter(3000);
-
+        console.log(event);
+        const file: any = event.body;
+        this._sockets.emit('shareFile', {file: file, sharedWith: file.sharedWith});
+        
       }
     }, error => {
       console.log(error);
