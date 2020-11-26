@@ -32,4 +32,16 @@ export class UserService {
       headers: httpHeaders
     });
   }
+
+  getNotifications() {
+    const httpHeaders = new HttpHeaders({
+      Authorization: this._authService.get()
+    });
+
+    const url = `${environment.apiUrl}users/notifications`;
+
+    return this.httpClient.get(url, {
+      headers: httpHeaders
+    });
+  }
 }
