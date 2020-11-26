@@ -109,8 +109,10 @@ export class NavBarComponent implements OnInit {
 
   openNotifications() {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.minWidth = "40px";
-    dialogConfig.minHeight = "10px";
+    dialogConfig.minWidth = "300px";
+    dialogConfig.minHeight = "50px";
+    dialogConfig.maxHeight = "75%";
+    dialogConfig.width = "30%";
     dialogConfig.position = { top: '50px', right: '50px' };
     dialogConfig.data = { name: this.name };
 

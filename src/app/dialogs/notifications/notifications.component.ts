@@ -33,7 +33,7 @@ export class NotificationsComponent implements OnInit {
   ngOnInit(): void {  
     console.log(this.data)
     this.userService.getNotifications().subscribe( (notifications: notification[])=> {
-      this.notifications = notifications;
+      this.notifications = notifications.reverse();
     })
 
   }

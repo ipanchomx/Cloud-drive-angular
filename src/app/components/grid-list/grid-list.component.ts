@@ -2,6 +2,11 @@ import { Component, Input, OnInit, ViewChild, Output, EventEmitter } from '@angu
 import { MatMenuTrigger } from '@angular/material/menu';
 import { Router } from '@angular/router';
 import { File } from 'src/app/globals/models/file.model';
+import { saveAs } from 'file-saver';
+import { FilesService } from 'src/app/globals/services/files.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ShareFileDialogComponent } from 'src/app/dialogs/share-file-dialog/share-file-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-grid-list',
@@ -26,7 +31,12 @@ export class GridListComponent implements OnInit {
   @Output('onFolderClick') onFolderClick = new EventEmitter<File>();
 
 
-  constructor(private _router: Router) { }
+  constructor(
+    private _router: Router, 
+    private _fileService: FilesService, 
+    private _matDialog: MatDialog,
+    private _snackBar: MatSnackBar
+    ) { }
 
   ngOnInit(): void {
 
@@ -41,12 +51,20 @@ export class GridListComponent implements OnInit {
     this.contextMenu.openMenu();
   }
 
-  onContextMenuAction1(item: File) {
-    alert(`Click on Action 1 for ${item.fileName}`);
+
+
+  downloadFile(file) {
+    this._fileService.downloadFile(file._id)
+      .then(fileObj => {
+        saveAs(fileObj, file.fileName);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
-  onContextMenuAction2(item: File) {
-    alert(`Click on Action 2 for ${item.fileName}`);
+  goToFileInfo(item: string) {
+    this._router.navigate(['/file-info', item])
   }
 
   onContextMenuAction3(item: File) {
@@ -61,4 +79,19 @@ export class GridListComponent implements OnInit {
   clickOnFile(file) {
     this._router.navigate(['/file-info',file._id])
  }
+
+ shareFile(file: File) {
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.disableClose = true;
+  dialogConfig.autoFocus = true;
+  dialogConfig.height = "40%";
+  dialogConfig.width = "60%"
+  dialogConfig.minWidth = "360px";
+  dialogConfig.minHeight = "500px"
+  dialogConfig.data = {
+    file: file
+  }
+  const dialogRef = this._matDialog.open(ShareFileDialogComponent, dialogConfig);
+
+}
 }
