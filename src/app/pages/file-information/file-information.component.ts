@@ -23,6 +23,7 @@ export class FileInformationComponent implements OnInit {
   statusString: string= 'not available';
   selectedValue: string = "";
   versions:Version[] = [];
+  idParam: string;
 
   horizontalPosition: MatSnackBarHorizontalPosition = "center";
   verticalPosition: MatSnackBarVerticalPosition = "top";
@@ -31,30 +32,9 @@ export class FileInformationComponent implements OnInit {
   
   ngOnInit(): void {
     this._activatedRoute.params.subscribe(params => {
-      this._fileService.getFile(params.id)
-        .then((file: File) => {
-          this.dateOfCreation = new Date(file.dateOfCreation).toLocaleDateString();
-          this.file = file;
-
-          this.file.sharedWith.forEach(share => {
-            if (share.userId == localStorage.userId) {
-              this.permission = share.permission;
-            }
-          });
-
-          this.statusString = this.file.verificationStatus;       
-          console.log(this.statusString);
-          
-          this.getVersions(); /////////////////////////////////////////////
-          this.versions.map( version => {
-            ({id : version.id, date : new Date(version.date).toLocaleDateString(), version : version.version, status: version.status, versionWithNumber : version.versionWithNumber})
-          })
-          
-        })
-        .catch(err => {
-          console.log(err)
-          this.router.navigate(['/404'])
-        });
+      this.idParam = params.id;
+      
+      this.getFile(params.id);
 
     })
   }
@@ -98,7 +78,7 @@ export class FileInformationComponent implements OnInit {
 
     dialogRef.afterClosed()
       .subscribe(result => {
-        // Should update shared with property
+        this.getFile(this.idParam);
       });
   }
 
@@ -150,6 +130,32 @@ export class FileInformationComponent implements OnInit {
     })
   }
 
+  getFile(id) {
+    this._fileService.getFile(id)
+        .then((file: File) => {
+          this.dateOfCreation = new Date(file.dateOfCreation).toLocaleDateString();
+          this.file = file;
+
+          this.file.sharedWith.forEach(share => {
+            if (share.userId == localStorage.userId) {
+              this.permission = share.permission;
+            }
+          });
+
+          this.statusString = this.file.verificationStatus;       
+          console.log(this.statusString);
+          
+          this.getVersions(); /////////////////////////////////////////////
+          this.versions.map( version => {
+            ({id : version.id, date : new Date(version.date).toLocaleDateString(), version : version.version, status: version.status, versionWithNumber : version.versionWithNumber})
+          })
+          
+        })
+        .catch(err => {
+          console.log(err)
+          this.router.navigate(['/404'])
+        });
+  }
   selectVersion(e) {
     this.router.navigate(['/file-info', e.value]);
   }

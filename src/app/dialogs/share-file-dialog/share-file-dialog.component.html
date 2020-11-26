@@ -43,14 +43,14 @@
                 [disabled]="!this.currentUser || !this.permission" (click)="addUserToSharedList()">
                 <mat-icon>add</mat-icon>
             </button>
-            <div style="width: 100; height: 60%;">
-                <mat-chip-list aria-label="Added users list" selectable="false">
-                    <mat-chip removable="true" (removed)="remove(i)" *ngFor="let user of sharedWith; let i=index;">
-                        {{user.email}}
-                        <mat-icon matChipRemove>cancel</mat-icon>
-                    </mat-chip>
-                </mat-chip-list>
-            </div>
+        </div>
+        <div style="width: 100; height: 60%;">
+            <mat-chip-list aria-label="Added users list" selectable="false">
+                <mat-chip removable="true" (removed)="remove(i)" *ngFor="let user of sharedWith; let i=index;">
+                    {{user.email}}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+            </mat-chip-list>
         </div>
 
 

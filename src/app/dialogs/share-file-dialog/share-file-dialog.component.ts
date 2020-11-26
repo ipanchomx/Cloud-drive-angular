@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators'
+import { SocketsService } from 'src/app/globals/services/sockets.service';
 import { UserService } from 'src/app/globals/services/user.service';
 
 @Component({
@@ -23,12 +24,16 @@ export class ShareFileDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private _dialogRef: MatDialogRef<ShareFileDialogComponent>,
     private _snackBar: MatSnackBar,
-    private _user: UserService
+    private _user: UserService,
+    private _sockets: SocketsService
   ) { }
 
   ngOnInit(): void {
-    this.sharedWith =  this.data.file.sharedWith.map(user=>({email:user.email, permission:user.permission, id:user.userId}));
+    this.sharedWith =  this.data.file.sharedWith.map(user=>({email:user.email, permission:user.permission, userId: user.userId}));
 
+    this._sockets.on("OK", (data)=>{
+      console.log("OK sharing was successfull")
+    })
     this.subject.pipe(
       debounceTime(100)
     ).subscribe((searchInput) => {
@@ -49,7 +54,7 @@ export class ShareFileDialogComponent implements OnInit {
     if (!this.permission || !this.currentUser) {
       return
     }
-    this.sharedWith.push({ email:this.currentUser.email, permission: this.permission, id:this.currentUser.id});
+    this.sharedWith.push({ email:this.currentUser.email, userId: this.currentUser.id, permission: this.permission});
     this.currentUser = null;
     this.permission = '';
     this.shareWithInp = '';
@@ -69,8 +74,9 @@ export class ShareFileDialogComponent implements OnInit {
   }
 
   shareFile() {
-    console.log(this.sharedWith);
-    console.log("Sendig socket message.")
+    this._sockets.emit('shareFile', {file: this.data.file, sharedWith:this.sharedWith});
+    this._snackBar.open("File successfully shared", "Close")
+    this.onClose();
   }
 
   onClose() {

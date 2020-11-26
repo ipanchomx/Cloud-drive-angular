@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/globals/services/auth.service';
 import { Router } from '@angular/router';
 import { SocialAuthService } from 'angularx-social-login';
 import { GoogleLoginProvider } from "angularx-social-login";
+import { SocketsService } from 'src/app/globals/services/sockets.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -20,7 +21,7 @@ export class SignUpComponent implements OnInit {
 
   signupForm: FormGroup;
   loginForm: FormGroup;
-  constructor(private formBuilder: FormBuilder, private sessionService: SessionService, private _snackBar: MatSnackBar, private authService: AuthService, private router: Router, private googleAuth: SocialAuthService) { }
+  constructor(private formBuilder: FormBuilder, private sessionService: SessionService, private _snackBar: MatSnackBar, private authService: AuthService, private router: Router, private googleAuth: SocialAuthService, private _socket: SocketsService) { }
 
   horizontalPosition: MatSnackBarHorizontalPosition = "center";
   verticalPosition: MatSnackBarVerticalPosition = "top";
@@ -48,6 +49,7 @@ export class SignUpComponent implements OnInit {
       this.sessionService.googleLogin(user.idToken).then(data => {
         this.authService.saveUserId(data.userId);
         this.authService.save(data.token)
+        this._socket.connect(this.authService.get(), this.authService.getUserId());
         this.router.navigate(["/file-manager"])
       }).catch(err => {
         this._snackBar.open(`Unable to login - ${err.error.message}`, "Close", {
@@ -92,6 +94,7 @@ export class SignUpComponent implements OnInit {
     if (this.loginForm.valid) {
       this.sessionService.login(this.loginForm.getRawValue()).then(data => {
         this.authService.saveUserId(data.userId);
+        this._socket.connect(this.authService.get(), this.authService.getUserId());
         this.authService.save(data.token)
         this.router.navigate(["/file-manager"])
       }).catch(err => {
