@@ -8,9 +8,9 @@
   <h1 mat-dialog-title matInput>Hi {{data.name}}</h1>
   <p mat-dialog-title matInput>These are your notifications</p>
   <div mat-dialog-content>
-      <div *ngFor="let notification of data.notifications">
-        <mat-card>
-          <p><strong>{{notification.emiterEmail}}</strong></p>
+      <div *ngFor="let notification of notifications">
+        <mat-card (click)="deleteThisNotification(notification)">
+          <p><strong>{{notification.emitterEmail}}</strong></p>
           <mat-card-subtitle>{{notification.message}}</mat-card-subtitle>
           <mat-card-content>{{notification.fileName}}</mat-card-content>
           <mat-card-subtitle>{{notification.date.toLocaleString()}}</mat-card-subtitle>

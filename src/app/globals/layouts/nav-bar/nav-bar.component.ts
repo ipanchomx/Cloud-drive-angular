@@ -22,7 +22,7 @@ import { SocketsService } from '../../services/sockets.service';
 export class NavBarComponent implements OnInit {
   isLoggedIn: boolean = false;
 
-  name = "anai";
+  name: string= "";
   // notifications: notification[] = [
   //   {
   //     message: 'shared a file with you',
@@ -67,6 +67,13 @@ export class NavBarComponent implements OnInit {
     private socketsService: SocketsService
   ) {
 
+  
+
+    this.sessionService.getUserInfo(this.authService.getUserId())
+    .then(user =>{
+      this.name = user.user.name;
+    })
+
     this.authService.loginStatus.subscribe(status => {
       this.isLoggedIn = status;
     });
@@ -77,9 +84,11 @@ export class NavBarComponent implements OnInit {
     // this.noSize = this.notifications.length;
     if (this.authService.isLoggedIn()) {
       console.log("Logged")
+
       this.socketsService.on('notification', (data) => {
         this.noSize += 1;
         console.log(data);
+        console.log("Hola desde el navBar")
       })
     }
 
@@ -105,7 +114,7 @@ export class NavBarComponent implements OnInit {
     dialogConfig.minWidth = "40px";
     dialogConfig.minHeight = "10px";
     dialogConfig.position = { top: '50px', right: '50px' };
-    dialogConfig.data = { notifications: this.notifications, name: this.name };
+    dialogConfig.data = { name: this.name };
 
     const dialogRef = this._matDialog.open(NotificationsComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
