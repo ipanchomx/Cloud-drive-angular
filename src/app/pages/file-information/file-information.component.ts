@@ -8,6 +8,7 @@ import { ShareFileDialogComponent } from 'src/app/dialogs/share-file-dialog/shar
 import { MatSnackBar,MatSnackBarHorizontalPosition,MatSnackBarVerticalPosition, } from '@angular/material/snack-bar';
 
 import { UpdateFileDialogComponent } from 'src/app/dialogs/update-file-dialog/update-file-dialog.component';
+import { DeleteDialogComponent } from 'src/app/dialogs/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-file-information',
@@ -82,11 +83,32 @@ export class FileInformationComponent implements OnInit {
       });
   }
 
+  openDeleteDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = "250px";
+    dialogConfig.width = "500px"
+    dialogConfig.data = {
+      name: this.file.fileName,
+      deleteFunction: ()=>{this.deleteFile()}
+    }
+
+    const dialogRef = this._matDialog.open(DeleteDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed()
+      .subscribe(result => {
+        const snack = this._snackBar.open("File successfully deleted.", "Close");
+        snack._dismissAfter(3000);
+      });
+  }
+
+
   deleteFile() {
-    this._fileService.deleteFile(this.file._id).then(data => {
+    this._fileService.deleteFile(this.file._id).subscribe(data => {
       console.log('Archivos elminados:', data);
       this.router.navigate(['/file-manager']);
-    }).catch(err => {
+    }, err => {
       console.log(err);
       this.router.navigate(['/file-manager']);
     })
@@ -105,15 +127,17 @@ export class FileInformationComponent implements OnInit {
 
     this._fileService.updateVerificationStatus(obj)
     .then(msg=>{
-        this._snackBar.open(msg, "Close", {
+        const snack = this._snackBar.open(msg, "Close", {
         horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,
         })
+        snack._dismissAfter(3000);
     }).catch(err =>{
-        this._snackBar.open(err, "Close", {
+        const snack = this._snackBar.open(err, "Close", {
         horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,
-        })
+        });
+        snack._dismissAfter(3000);
     })
   }
 
