@@ -3,7 +3,7 @@
 
     <div *ngFor="let folder of folders" class="border xs-100 md-50 lg-33 item-grid">
       <!-- (contextmenu)="onContextMenu($event, folder)" -->
-      <mat-list-item class="border container-info" (click)="clickOnFolder(folder)">
+      <mat-list-item style="cursor: pointer;" class="border container-info" (click)="clickOnFolder(folder)">
         <mat-icon matListIcon class="border">folder</mat-icon>
         <div class="info-section">
           <h4 matLine class="border">{{folder.fileName}}</h4>
@@ -14,7 +14,7 @@
     </div>
 
     <div *ngFor="let file of files" class="border xs-100 md-50 lg-33 item-grid">
-      <mat-list-item (contextmenu)="onContextMenu($event, file)" class="border container-info" (click)="clickOnFile(file)">
+      <mat-list-item style="cursor: pointer;" (contextmenu)="onContextMenu($event, file)" class="border container-info" (click)="clickOnFile(file)">
         <mat-icon matListIcon class="border">insert_drive_file</mat-icon>
         <div class="info-section">
           <h4 matLine class="border">{{file.fileName}}</h4>
