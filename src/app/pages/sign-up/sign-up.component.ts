@@ -52,10 +52,11 @@ export class SignUpComponent implements OnInit {
         this._socket.connect(this.authService.get(), this.authService.getUserId());
         this.router.navigate(["/file-manager"])
       }).catch(err => {
-        this._snackBar.open(`Unable to login - ${err.error.message}`, "Close", {
+        const snack = this._snackBar.open(`Unable to login - ${err.error.message}`, "Close", {
           horizontalPosition: this.horizontalPosition,
           verticalPosition: this.verticalPosition,
         })
+        snack._dismissAfter(3000);
         console.log(err);
 
       })
@@ -68,10 +69,11 @@ export class SignUpComponent implements OnInit {
       console.log('Crear usuario...');
       this.sessionService.signup(this.signupForm.getRawValue()).then(data => {
         console.log(data);
-        this._snackBar.open("User successfully created", "Close", {
+        const snack = this._snackBar.open("User successfully created", "Close", {
           horizontalPosition: this.horizontalPosition,
           verticalPosition: this.verticalPosition,
         })
+        snack._dismissAfter(3000);
       }).catch(err => {
         console.error('Failed to signup user', err);
       });
@@ -99,10 +101,11 @@ export class SignUpComponent implements OnInit {
         this.router.navigate(["/file-manager"])
       }).catch(err => {
 
-        this._snackBar.open(`Unable to login - ${err.error.message}`, "Close", {
+        const snack = this._snackBar.open(`Unable to login - ${err.error.message}`, "Close", {
           horizontalPosition: this.horizontalPosition,
           verticalPosition: this.verticalPosition,
         })
+        snack._dismissAfter(3000);
         console.log(err);
 
       })

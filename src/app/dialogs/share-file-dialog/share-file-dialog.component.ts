@@ -75,7 +75,8 @@ export class ShareFileDialogComponent implements OnInit {
 
   shareFile() {
     this._sockets.emit('shareFile', {file: this.data.file, sharedWith:this.sharedWith});
-    this._snackBar.open("File successfully shared", "Close ")
+    const snack = this._snackBar.open("File successfully shared", "Close ");
+    snack._dismissAfter(3000);
     this.onClose();
   }
 

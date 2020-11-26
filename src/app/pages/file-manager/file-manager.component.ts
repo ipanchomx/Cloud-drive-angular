@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CreateFolderFormComponent } from 'src/app/dialogs/create-folder-form/create-folder-form.component';
+import { DeleteDialogComponent } from 'src/app/dialogs/delete-dialog/delete-dialog.component';
 import { UploadFileFormComponent } from 'src/app/dialogs/upload-file-form/upload-file-form.component';
 import { FilesService } from 'src/app/globals/services/files.service';
 
@@ -63,6 +64,27 @@ export class FileManagerComponent implements OnInit {
         this.getPathContent();
       });
   }
+
+
+  // openDeleteDialog() {
+  //   const dialogConfig = new MatDialogConfig();
+  //   dialogConfig.disableClose = true;
+  //   dialogConfig.autoFocus = true;
+  //   dialogConfig.height = "250px";
+  //   dialogConfig.width = "500px"
+  //   dialogConfig.data = {
+  //     name: "file.txt",
+  //     deleteFunction: ()=>{alert("Deleting")}
+  //   }
+
+  //   const dialogRef = this._matDialog.open(DeleteDialogComponent, dialogConfig);
+
+  //   dialogRef.afterClosed()
+  //     .subscribe(result => {
+  //       this.getPathContent();
+  //     });
+  // }
+
 
   goToFolderPath($event) {
     if (this.path != '/') this.path += '/';

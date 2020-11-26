@@ -50,18 +50,21 @@ export class UpdateFileDialogComponent implements OnInit {
     const originalExtension = this.fileInfo.fileName.substring(originalExtensionIdx);
 
     if(this.extension != originalExtension) {
-      this._snackBar.open(`Unable to Update File - File extension has to be the same as current version`, "Close", {
+      const snack = this._snackBar.open(`Unable to Update File - File extension has to be the same as current version`, "Close", {
         horizontalPosition: 'center',
         verticalPosition: 'top'
-      }) 
+      });
+      snack._dismissAfter(3000);
       return;
     }
 
     if(!this.file) {
-      this._snackBar.open(`Unable to Update File - No file added`, "Close", {
+      const snack = this._snackBar.open(`Unable to Update File - No file added`, "Close", {
         horizontalPosition: 'center',
         verticalPosition: 'top'
       })
+
+      snack._dismissAfter(3000);
     }
  
     form.append('fileInfo', JSON.stringify(this.fileInfo));
@@ -73,19 +76,22 @@ export class UpdateFileDialogComponent implements OnInit {
     this._files.updateFile(form).subscribe((response: any) => {
       this.inProgress = false;
       this.router.navigate(['/file-info', response._id]);
-      this._snackBar.open("File updated successfully", "Close", {
+      const snack = this._snackBar.open("File updated successfully", "Close", {
         horizontalPosition: 'center',
         verticalPosition: 'top'
       })
+      snack._dismissAfter(3000);
       this.onClose()
 
     }, error => {
       console.log(error);
       this.inProgress = false;
-      this._snackBar.open(`Unable to Update File - ${error.error.message}`, "Close", {
+      const snack = this._snackBar.open(`Unable to Update File - ${error.error.message}`, "Close", {
         horizontalPosition: 'center',
         verticalPosition: 'top'
       })
+
+      snack._dismissAfter(3000);
     })
   }
 

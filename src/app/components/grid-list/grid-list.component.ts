@@ -34,8 +34,7 @@ export class GridListComponent implements OnInit {
   constructor(
     private _router: Router, 
     private _fileService: FilesService, 
-    private _matDialog: MatDialog,
-    private _snackBar: MatSnackBar
+    private _matDialog: MatDialog
     ) { }
 
   ngOnInit(): void {
