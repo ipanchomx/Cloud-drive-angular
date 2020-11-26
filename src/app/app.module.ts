@@ -32,6 +32,7 @@ import { Page404Component } from './pages/page404/page404.component';
 import { ShareFileDialogComponent } from './dialogs/share-file-dialog/share-file-dialog.component';
 import { NotificationsComponent } from './dialogs/notifications/notifications.component';
 import { UpdateFileDialogComponent } from './dialogs/update-file-dialog/update-file-dialog.component';
+import { ChangePhotoFormComponent } from './dialogs/change-photo-form/change-photo-form.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { UpdateFileDialogComponent } from './dialogs/update-file-dialog/update-f
     Page404Component,
     ShareFileDialogComponent,
     NotificationsComponent,
-    UpdateFileDialogComponent
+    UpdateFileDialogComponent,
+    ChangePhotoFormComponent
   ],
   imports: [
     AppRoutingModule,

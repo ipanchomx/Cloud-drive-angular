@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { AuthService } from 'src/app/globals/services/auth.service';
 import { SessionService } from 'src/app/globals/services/session.service';
 import {
@@ -7,7 +8,11 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
+import { File, Version } from 'src/app/globals/models/file.model';
+import { FilesService } from 'src/app/globals/services/files.service';
+import { ChangePhotoFormComponent } from 'src/app/dialogs/change-photo-form/change-photo-form.component'
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -29,7 +34,7 @@ export class SettingsComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = "center";
   verticalPosition: MatSnackBarVerticalPosition = "top";
 
-  constructor(private formBuilder: FormBuilder, private sessionService: SessionService, private authService: AuthService, private _snackBar: MatSnackBar) { }
+  constructor(private formBuilder: FormBuilder, private sessionService: SessionService, private authService: AuthService, private _snackBar: MatSnackBar,  private _activatedRoute: ActivatedRoute, private router: Router, private _matDialog: MatDialog) { }
 
 
   ngOnInit(): void {
@@ -42,12 +47,7 @@ export class SettingsComponent implements OnInit {
     })
     this.usrId = this.authService.getUserId();
 
-    this.sessionService.getUserInfo(this.usrId).then(data => {
-      this.name = data.user.name;
-      this.email = data.user.email;
-      this.joined = new Date(data.user.joined).toLocaleDateString();
-      this.image = data.user.img + ".jpg";
-    })
+    this.getUserInfo();
 
   }
 
@@ -115,4 +115,35 @@ export class SettingsComponent implements OnInit {
       return { mismatch: true }
     }
   }
+
+  changePhoto() {
+    // alert('Change photo');
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = "300";
+    dialogConfig.width = "40%"
+    dialogConfig.minWidth = "360px";
+    dialogConfig.minHeight = "300px"
+    dialogConfig.data = {
+    }
+    
+    const dialogRef = this._matDialog.open(ChangePhotoFormComponent, dialogConfig);
+
+    dialogRef.afterClosed()
+    .subscribe(result => {
+      this.getUserInfo();
+    });
+  }
+
+  getUserInfo() {
+    this.sessionService.getUserInfo(this.usrId).then(data => {
+      this.name = data.user.name;
+      this.email = data.user.email;
+      this.joined = new Date(data.user.joined).toLocaleDateString();
+      this.image = data.user.img;
+    })
+  }
+
+
 }

@@ -24,6 +24,7 @@
     "angularx-social-login": "^3.4.1",
     "file-saver": "^2.0.5",
     "rxjs": "~6.6.0",
+    "socket.io-client": "^3.0.3",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },
