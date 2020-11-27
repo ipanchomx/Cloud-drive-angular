@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { File, filesResponse } from 'src/app/globals/models/file.model';
 import { FilesService } from 'src/app/globals/services/files.service';
+import { SocketsService } from 'src/app/globals/services/sockets.service';
 
 @Component({
   selector: 'app-shared-files',
@@ -14,10 +15,17 @@ export class SharedFilesComponent implements OnInit {
   inProgress: boolean = false;
   path: string = '/';
 
-  constructor(private _filesService: FilesService) { }
+  constructor(
+    private _filesService: FilesService,
+    private _sockets: SocketsService) { }
 
   ngOnInit(): void {
     this.getSharedContent();
+    this._sockets.on('notification', data => {
+      if(data.type == 'share' || data.type == 'delete') {
+        this.getSharedContent();
+      }
+    })
   }
 
   goToFolderPath($event) {
