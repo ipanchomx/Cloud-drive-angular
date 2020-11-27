@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { File as FileInt } from 'src/app/globals/models/file.model';
 import { FilesService } from 'src/app/globals/services/files.service';
+import { SocketsService } from 'src/app/globals/services/sockets.service';
 
 @Component({
   selector: 'app-update-file-dialog',
@@ -24,7 +25,8 @@ export class UpdateFileDialogComponent implements OnInit {
     private _dialogRef: MatDialogRef<UpdateFileDialogComponent>,
     private _files: FilesService,
     private _snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private _sockets: SocketsService
   ) { }
 
 
@@ -77,6 +79,8 @@ export class UpdateFileDialogComponent implements OnInit {
         horizontalPosition: 'center',
         verticalPosition: 'top'
       })
+      this._sockets.emit('newVersion', {file: this.data.file});
+      this._snackBar.open("File updated!", "Close ")
       this.onClose()
 
     }, error => {
