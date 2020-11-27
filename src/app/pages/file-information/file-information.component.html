@@ -41,14 +41,14 @@
 
             <mat-form-field class="select-verification">
                 <mat-label>Verification Status</mat-label>
-                <mat-select   [(value)]="statusString" [disabled]="!(permission=='write')">
+                <mat-select   [(value)]="statusString" [disabled]="!(permission=='write' && file.requiresVerification)">
                     <mat-option value="not available">Does not apply</mat-option>
                     <mat-option value="pending">Pending Verification</mat-option>
                     <mat-option value="verified">Verified</mat-option>
                     <mat-option value="rejected">Rejected</mat-option>
                 </mat-select>
             </mat-form-field>
-            <button mat-raised-button color="primary" (click)="verifyFile()" [disabled]="!(permission=='write')">Verify</button>
+            <button mat-raised-button color="primary" (click)="verifyFile()" [disabled]="!(permission=='write' && file.requiresVerification)">Verify</button>
 
             <h1>Comments</h1>
 

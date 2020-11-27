@@ -9,6 +9,7 @@ import { MatSnackBar,MatSnackBarHorizontalPosition,MatSnackBarVerticalPosition, 
 
 import { UpdateFileDialogComponent } from 'src/app/dialogs/update-file-dialog/update-file-dialog.component';
 import { DeleteDialogComponent } from 'src/app/dialogs/delete-dialog/delete-dialog.component';
+import { SocketsService } from 'src/app/globals/services/sockets.service';
 
 @Component({
   selector: 'app-file-information',
@@ -29,7 +30,13 @@ export class FileInformationComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = "center";
   verticalPosition: MatSnackBarVerticalPosition = "top";
 
-  constructor(private _fileService: FilesService, private _activatedRoute: ActivatedRoute, private router: Router, private _matDialog: MatDialog, private _snackBar: MatSnackBar) { }
+  constructor(
+    private _fileService: FilesService, 
+    private _activatedRoute: ActivatedRoute, 
+    private router: Router, 
+    private _matDialog: MatDialog, 
+    private _snackBar: MatSnackBar,
+    private _sockets: SocketsService) { }
   
   ngOnInit(): void {
     this._activatedRoute.params.subscribe(params => {
@@ -107,6 +114,8 @@ export class FileInformationComponent implements OnInit {
   deleteFile() {
     this._fileService.deleteFile(this.file._id).subscribe(data => {
       console.log('Archivos elminados:', data);
+      this._sockets.emit('notification', {file: this.file, sharedWith: this.file.sharedWith, type: "delete"});
+
       this.router.navigate(['/file-manager']);
     }, err => {
       console.log(err);
@@ -131,6 +140,8 @@ export class FileInformationComponent implements OnInit {
         horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,
         })
+        
+        this._sockets.emit('notification', {file: this.file, sharedWith: this.file.sharedWith, type: "verify"});
         snack._dismissAfter(3000);
     }).catch(err =>{
         const snack = this._snackBar.open(err, "Close", {
