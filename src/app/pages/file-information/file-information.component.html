@@ -68,7 +68,7 @@
                         <p class="comment-author">{{comment.author}}</p>
                         <p>{{comment.comment}}</p>
                     </mat-card>
-                    <p class="comment-date">{{comment.date}}</p>
+                    <p class="comment-date">{{comment.date |date:'dd/MM/yyyy hh:mm' }}</p>
                 </div>
             </div>
 
