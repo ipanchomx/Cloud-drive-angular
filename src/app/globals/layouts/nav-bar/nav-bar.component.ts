@@ -23,41 +23,8 @@ export class NavBarComponent implements OnInit {
   isLoggedIn: boolean = false;
 
   name: string= "";
-  // notifications: notification[] = [
-  //   {
-  //     message: 'shared a file with you',
-  //     date: new Date(),
-  //     emiterEmail: 'ejemplo@gmail.com',
-  //     fileName: 'presupuesto.xxl'
-  //   },
-  //   {
-  //     message: 'shared a file with you',
-  //     date: new Date(),
-  //     emiterEmail: 'ej2@gmail.com',
-  //     fileName: 'img.png'
-  //   },
-  //   {
-  //     message: 'updated a file',
-  //     date: new Date(),
-  //     emiterEmail: 'amoLosGatos@gmail.com',
-  //     fileName: 'ensayoGatos.docx'
-  //   },
-  //   {
-  //     message: 'shared a file with you',
-  //     date: new Date(),
-  //     emiterEmail: 'amoLosGatos@gmail.com',
-  //     fileName: 'ensayoGatos.docx'
-  //   },
-  //   {
-  //     message: 'commented on a file',
-  //     date: new Date('11/23/20'),
-  //     emiterEmail: 'panchito@gmail.com',
-  //     fileName: 'precios.xxl'
-  //   }
-  // ];
+  
   noSize = 0;
-
-
 
   constructor(private authService: AuthService,
     private router: Router,
