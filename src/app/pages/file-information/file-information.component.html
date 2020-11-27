@@ -56,17 +56,17 @@
 
                 <div class="create-comment-div">
                     <mat-form-field class="comment-input">
-                        <textarea matInput placeholder="Leave a comment here"></textarea>
+                        <textarea matInput placeholder="Leave a comment here" [(ngModel)]="commentInput"></textarea>
                     </mat-form-field>
-                    <button mat-mini-fab color="primary" aria-label="Example icon button with a home icon">
+                    <button mat-mini-fab color="primary" aria-label="Example icon button with a home icon" [disabled]= '!commentInput' (click)="writeComment()">
                         <mat-icon>send</mat-icon>
                     </button>
                 </div>
 
-                <div *ngFor="let comment of file.comments" class="messageBox">
+                <div *ngFor="let comment of comments" class="messageBox">
                     <mat-card class="messageBox-card">
-                        <p class="comment-author">{{comment.author}}</p>
-                        <p>{{comment.comment}}</p>
+                        <p class="comment-author">{{comment.senderEmail}}</p>
+                        <p>{{comment.body}}</p>
                     </mat-card>
                     <p class="comment-date">{{comment.date |date:'dd/MM/yyyy hh:mm' }}</p>
                 </div>

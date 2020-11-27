@@ -11,6 +11,7 @@ import { UpdateFileDialogComponent } from 'src/app/dialogs/update-file-dialog/up
 import { DeleteDialogComponent } from 'src/app/dialogs/delete-dialog/delete-dialog.component';
 import { SocketsService } from 'src/app/globals/services/sockets.service';
 
+
 @Component({
   selector: 'app-file-information',
   templateUrl: './file-information.component.html',
@@ -27,6 +28,8 @@ export class FileInformationComponent implements OnInit {
   versions:Version[] = [];
   idParam: string;
 
+  commentInput:string = '';
+  comments:any[] = [];
   horizontalPosition: MatSnackBarHorizontalPosition = "center";
   verticalPosition: MatSnackBarVerticalPosition = "top";
 
@@ -44,6 +47,12 @@ export class FileInformationComponent implements OnInit {
       
       this.getFile(params.id);
 
+    })
+    this._sockets.on('comment', data => {
+      console.log(data);
+      if(this.file._id == data.fileId) {
+        this.file.comments.unshift(data);
+      }
     })
   }
 
@@ -170,7 +179,7 @@ export class FileInformationComponent implements OnInit {
         .then((file: File) => {
           this.dateOfCreation = new Date(file.dateOfCreation).toLocaleDateString();
           this.file = file;
-
+          this.comments = this.file.comments.reverse();
           this.file.sharedWith.forEach(share => {
             if (share.userId == localStorage.userId) {
               this.permission = share.permission;
@@ -191,8 +200,23 @@ export class FileInformationComponent implements OnInit {
           this.router.navigate(['/404'])
         });
   }
+
   selectVersion(e) {
     this.router.navigate(['/file-info', e.value]);
   }
+
+
+
+  writeComment() {
+    console.log(this.commentInput);
+    let comment = {
+      body : this.commentInput,
+      file : this.file
+    }
+
+    this._sockets.emit('comment', comment);
+
+  }
+
 }
 
