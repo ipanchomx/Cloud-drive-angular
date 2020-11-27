@@ -56,4 +56,16 @@ export class UserService {
       headers: httpHeaders
     });
   }
+
+  deleteAllNotifications() {
+    const httpHeaders = new HttpHeaders({
+      Authorization: this._authService.get()
+    });
+
+    const url = `${environment.apiUrl}users/notifications`;
+
+    return this.httpClient.delete(url, {
+      headers: httpHeaders
+    });
+  }
 }

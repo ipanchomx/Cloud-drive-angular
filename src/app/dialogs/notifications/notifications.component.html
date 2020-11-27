@@ -6,6 +6,7 @@
   </div>
   
   <h1 mat-dialog-title matInput>Hi {{data.name}}</h1>
+  <span (click)="deleteAllNotifications()" style="cursor: pointer;">clear</span>
   <p mat-dialog-title matInput>These are your notifications</p>
   <div mat-dialog-content>
       <div *ngFor="let notification of notifications">

@@ -20,19 +20,19 @@ export interface notification {
   styleUrls: ['./notifications.component.scss']
 })
 export class NotificationsComponent implements OnInit {
-  
+
   notifications: notification[] = [];
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any, 
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<NotificationsComponent>,
     private userService: UserService,
     private router: Router
-    ) { }
+  ) { }
 
 
-  ngOnInit(): void {  
+  ngOnInit(): void {
     console.log(this.data)
-    this.userService.getNotifications().subscribe( (notifications: notification[])=> {
+    this.userService.getNotifications().subscribe((notifications: notification[]) => {
       this.notifications = notifications.reverse();
     })
 
@@ -42,12 +42,19 @@ export class NotificationsComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  deleteThisNotification(notification){
+  deleteAllNotifications() {
+    this.userService.deleteAllNotifications()
+      .subscribe((res)=>{
+        this.notifications = [];
+      })
+  }
+
+  deleteThisNotification(notification) {
     console.log("Borrando...");
-    this.userService.deleteNotification(notification._id).subscribe( (res)=>{
-      this.router.navigate(['/file-info',notification.fileId])
+    this.userService.deleteNotification(notification._id).subscribe((res) => {
+      this.router.navigate(['/file-info', notification.fileId])
       this.onClose();
-    },(err)=>{
+    }, (err) => {
       console.log("Error deleting file");
     })
   }

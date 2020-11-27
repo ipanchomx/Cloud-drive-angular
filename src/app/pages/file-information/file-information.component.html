@@ -48,7 +48,7 @@
                     <mat-option value="rejected">Rejected</mat-option>
                 </mat-select>
             </mat-form-field>
-            <button mat-raised-button color="primary" (click)="verifyFile()" [disabled]="!(permission=='write' && file.requiresVerification)">Verify</button>
+            <button mat-raised-button color="primary" style="width: 90%;" (click)="verifyFile()" [disabled]="!(permission=='write' && file.requiresVerification)">Verify</button>
 
             <h1>Comments</h1>
 
