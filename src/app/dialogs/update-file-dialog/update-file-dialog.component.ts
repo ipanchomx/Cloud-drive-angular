@@ -77,13 +77,12 @@ export class UpdateFileDialogComponent implements OnInit {
 
     this._files.updateFile(form).subscribe((response: any) => {
       this.inProgress = false;
+      this._sockets.emit('newVersion', {file: response});
       this.router.navigate(['/file-info', response._id]);
       const snack = this._snackBar.open("File updated successfully", "Close", {
         horizontalPosition: 'center',
         verticalPosition: 'top'
       })
-      this._sockets.emit('newVersion', {file: this.data.file});
-      this._snackBar.open("File updated!", "Close ")
       snack._dismissAfter(3000);
       this.onClose()
 
