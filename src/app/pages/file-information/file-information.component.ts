@@ -10,6 +10,7 @@ import { MatSnackBar,MatSnackBarHorizontalPosition,MatSnackBarVerticalPosition, 
 import { UpdateFileDialogComponent } from 'src/app/dialogs/update-file-dialog/update-file-dialog.component';
 import { DeleteDialogComponent } from 'src/app/dialogs/delete-dialog/delete-dialog.component';
 import { SocketsService } from 'src/app/globals/services/sockets.service';
+import { AuthService } from 'src/app/globals/services/auth.service';
 
 
 @Component({
@@ -27,7 +28,7 @@ export class FileInformationComponent implements OnInit {
   selectedValue: string = "";
   versions:Version[] = [];
   idParam: string;
-
+  userId: string = '';
   commentInput:string = '';
   comments:any[] = [];
   horizontalPosition: MatSnackBarHorizontalPosition = "center";
@@ -39,9 +40,11 @@ export class FileInformationComponent implements OnInit {
     private router: Router, 
     private _matDialog: MatDialog, 
     private _snackBar: MatSnackBar,
-    private _sockets: SocketsService) { }
+    private _sockets: SocketsService,
+    private _auth: AuthService) { }
   
   ngOnInit(): void {
+    this.userId = this._auth.getUserId()
     this._activatedRoute.params.subscribe(params => {
       this.idParam = params.id;
       
@@ -122,7 +125,7 @@ export class FileInformationComponent implements OnInit {
 
   deleteFile() {
     this._fileService.deleteFile(this.file._id).subscribe(data => {
-      console.log('Archivos elminados:', data);
+
       this._sockets.emit('notification', {file: this.file, sharedWith: this.file.sharedWith, type: "delete"});
 
       this.router.navigate(['/file-manager']);
@@ -179,7 +182,11 @@ export class FileInformationComponent implements OnInit {
         .then((file: File) => {
           this.dateOfCreation = new Date(file.dateOfCreation).toLocaleDateString();
           this.file = file;
-          this.comments = this.file.comments.reverse();
+          this.file.comments.sort((b:any, a:any)=>new Date(a.date).getTime() - new Date(b.date).getTime());
+          this.comments = this.file.comments;
+         
+          console.log(this.comments)
+
           this.file.sharedWith.forEach(share => {
             if (share.userId == localStorage.userId) {
               this.permission = share.permission;
@@ -187,9 +194,8 @@ export class FileInformationComponent implements OnInit {
           });
 
           this.statusString = this.file.verificationStatus;       
-          console.log(this.statusString);
           
-          this.getVersions(); /////////////////////////////////////////////
+          this.getVersions(); 
           this.versions.map( version => {
             ({id : version.id, date : new Date(version.date).toLocaleDateString(), version : version.version, status: version.status, versionWithNumber : version.versionWithNumber})
           })
@@ -208,13 +214,13 @@ export class FileInformationComponent implements OnInit {
 
 
   writeComment() {
-    console.log(this.commentInput);
     let comment = {
       body : this.commentInput,
       file : this.file
     }
 
     this._sockets.emit('comment', comment);
+    this.commentInput = '';
 
   }
 

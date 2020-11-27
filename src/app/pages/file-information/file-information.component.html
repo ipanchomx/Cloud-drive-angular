@@ -64,12 +64,17 @@
                 </div>
 
                 <div *ngFor="let comment of comments" class="messageBox">
-                    <mat-card class="messageBox-card">
+                    <span *ngIf="comment.type!='comment'" class="versionMessage">Version Change: {{comment.body}}</span>
+                    
+                    <mat-card class="messageBox-card" *ngIf="comment.type=='comment'" [class.ownMessage]="comment.senderId==userId">
                         <p class="comment-author">{{comment.senderEmail}}</p>
                         <p>{{comment.body}}</p>
                     </mat-card>
-                    <p class="comment-date">{{comment.date |date:'dd/MM/yyyy hh:mm' }}</p>
+                    <p class="comment-date" *ngIf="comment.type=='comment'">{{comment.date | date:'dd/MM/yyyy hh:mm' }}</p>
+
                 </div>
+
+
             </div>
 
         </div>
