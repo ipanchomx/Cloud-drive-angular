@@ -57,6 +57,12 @@ export class FileInformationComponent implements OnInit {
         this.file.comments.unshift(data);
       }
     })
+
+    this._sockets.on('deleteComment', socketComment => {
+      this.comments.forEach(comment => {
+        if(comment._id == socketComment._id) comment.body = socketComment.body;
+      })
+    })
   }
 
   downloadFile() {
@@ -224,5 +230,16 @@ export class FileInformationComponent implements OnInit {
 
   }
 
+  deleteComment(comment) {
+    console.log("Borrar comentario!");
+    console.log(comment);
+    let data = {
+      file : this.file,
+      comment : comment,
+      userId : this.userId,
+      type : 'delete comment',
+    };
+    this._sockets.emit('deleteComment', data);
+  }
 }
 
