@@ -58,7 +58,7 @@ export class SessionService {
     const httpHeaders = new HttpHeaders({
       Authorization: this.authService.get()
     });
-    // return this.httpClient.post(url, {id}).toPromise();
+
     return this.httpClient.get(url, {
       headers: httpHeaders
     }).toPromise();

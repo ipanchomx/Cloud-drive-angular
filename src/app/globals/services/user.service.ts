@@ -68,4 +68,17 @@ export class UserService {
       headers: httpHeaders
     });
   }
+
+  deleteUser() {
+    const httpHeaders = new HttpHeaders({
+      Authorization: this._authService.get()
+    });
+
+    const url = `${environment.apiUrl}users/`;
+
+    return this.httpClient.delete(url, {
+      headers: httpHeaders
+    });
+  }
+
 }

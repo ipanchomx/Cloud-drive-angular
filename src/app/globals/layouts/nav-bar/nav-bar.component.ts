@@ -34,13 +34,6 @@ export class NavBarComponent implements OnInit {
     private socketsService: SocketsService
   ) {
 
-  
-
-    this.sessionService.getUserInfo(this.authService.getUserId())
-    .then(user =>{
-      this.name = user.user.name;
-    })
-
     this.authService.loginStatus.subscribe(status => {
       this.isLoggedIn = status;
     });
@@ -48,10 +41,13 @@ export class NavBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.noSize = this.notifications.length;
     if (this.authService.isLoggedIn()) {
-      console.log("Logged")
-
+      this.sessionService.getUserInfo(this.authService.getUserId())
+      .then(user =>{
+        if(user){}
+        this.name = user.user.name;
+      })
+      
       this.socketsService.on('notification', (data) => {
         this.noSize += 1;
       })
