@@ -113,7 +113,7 @@ export class UploadFileFormComponent implements OnInit {
         snackbarRef._dismissAfter(3000);
         console.log(event);
         const file: any = event.body;
-        this._sockets.emit('shareFile', {file: file, sharedWith: file.sharedWith});
+        this._sockets.emit('notification', {file: file, sharedWith: file.sharedWith, type: "share"});
         
       }
     }, error => {
