@@ -33,6 +33,7 @@ import { ShareFileDialogComponent } from './dialogs/share-file-dialog/share-file
 import { NotificationsComponent } from './dialogs/notifications/notifications.component';
 import { UpdateFileDialogComponent } from './dialogs/update-file-dialog/update-file-dialog.component';
 import { ChangePhotoFormComponent } from './dialogs/change-photo-form/change-photo-form.component';
+import { DeleteDialogComponent } from './dialogs/delete-dialog/delete-dialog.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { ChangePhotoFormComponent } from './dialogs/change-photo-form/change-pho
     ShareFileDialogComponent,
     NotificationsComponent,
     UpdateFileDialogComponent,
-    ChangePhotoFormComponent
+    ChangePhotoFormComponent,
+    DeleteDialogComponent
   ],
   imports: [
     AppRoutingModule,

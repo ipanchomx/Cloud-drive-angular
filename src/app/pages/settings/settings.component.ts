@@ -34,7 +34,7 @@ export class SettingsComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = "center";
   verticalPosition: MatSnackBarVerticalPosition = "top";
 
-  constructor(private formBuilder: FormBuilder, private sessionService: SessionService, private authService: AuthService, private _snackBar: MatSnackBar,  private _activatedRoute: ActivatedRoute, private router: Router, private _matDialog: MatDialog) { }
+  constructor(private formBuilder: FormBuilder, private sessionService: SessionService, private authService: AuthService, private _snackBar: MatSnackBar, private _activatedRoute: ActivatedRoute, private router: Router, private _matDialog: MatDialog) { }
 
 
   ngOnInit(): void {
@@ -62,21 +62,24 @@ export class SettingsComponent implements OnInit {
         newPassword: values.new
       };
 
-      this.sessionService.changePassword(obj).then(msg => {   
+      this.sessionService.changePassword(obj).then(msg => {
         //console.log(msg)
-        this._snackBar.open(msg.message, "Close", {
+        const snack = this._snackBar.open(msg.message, "Close", {
           horizontalPosition: this.horizontalPosition,
           verticalPosition: this.verticalPosition,
         })
+        snack._dismissAfter(3000);
         this.passwordForm.reset();
         this.showForm = false;
         setTimeout(() => this.showForm = true, 250);
       })
+
     } else {
-      this._snackBar.open("Invalid form", "Close", {
+      const snack = this._snackBar.open("Invalid form", "Close", {
         horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,
       })
+      snack._dismissAfter(3000);
     }
   }
 
@@ -88,18 +91,20 @@ export class SettingsComponent implements OnInit {
       } else {
         this.nameError = false;
         this.sessionService.changeName(this.name)
-        .then(msg =>{
-          this._snackBar.open(msg.message, "Close", {
-            horizontalPosition: this.horizontalPosition,
-            verticalPosition: this.verticalPosition,
-          }) 
-        })
-        .catch(err =>{
-          this._snackBar.open(err, "Close", {
-            horizontalPosition: this.horizontalPosition,
-            verticalPosition: this.verticalPosition,
+          .then(msg => {
+            const snack = this._snackBar.open(msg.message, "Close", {
+              horizontalPosition: this.horizontalPosition,
+              verticalPosition: this.verticalPosition,
+            })
+            snack._dismissAfter(3000);
           })
-        })
+          .catch(err => {
+            const snack = this._snackBar.open(err, "Close", {
+              horizontalPosition: this.horizontalPosition,
+              verticalPosition: this.verticalPosition,
+            })
+            snack._dismissAfter(3000);
+          })
       }
     }
     this.editableName = !this.editableName;
@@ -127,13 +132,13 @@ export class SettingsComponent implements OnInit {
     dialogConfig.minHeight = "300px"
     dialogConfig.data = {
     }
-    
+
     const dialogRef = this._matDialog.open(ChangePhotoFormComponent, dialogConfig);
 
     dialogRef.afterClosed()
-    .subscribe(result => {
-      this.getUserInfo();
-    });
+      .subscribe(result => {
+        this.getUserInfo();
+      });
   }
 
   getUserInfo() {

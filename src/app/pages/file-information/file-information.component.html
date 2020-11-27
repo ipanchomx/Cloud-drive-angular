@@ -12,7 +12,7 @@
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-            <button class="controls" mat-raised-button color="warn" (click)="deleteFile()"  [disabled]="!(permission=='owner')">Delete</button>
+            <button class="controls" mat-raised-button color="warn" (click)="openDeleteDialog()"  [disabled]="!(permission=='owner')">Delete</button>
         </div>
         <h1>File: {{file.fileName}}</h1>
         <h2>Path: {{file.path}}</h2>

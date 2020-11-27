@@ -39,10 +39,12 @@ export class ChangePhotoFormComponent implements OnInit {
     this.file = <File>event.target.files[0];
     console.log(this.file);
     if(!this.file.type.startsWith('image')){
-      this._snackBar.open(`Invalid file type`, "Close", {
+      const snack = this._snackBar.open(`Invalid file type`, "Close", {
         horizontalPosition: 'center',
         verticalPosition: 'top'
       })
+
+      snack._dismissAfter(3000);
       return;
     }
     if (this.file) {
@@ -62,19 +64,23 @@ export class ChangePhotoFormComponent implements OnInit {
 
     this._user.changePhoto(form).subscribe((response: any) => {
       this.inProgress = false;
-      this._snackBar.open("Profile pic updated successfully", "Close", {
+      const snack = this._snackBar.open("Profile pic updated successfully", "Close", {
         horizontalPosition: 'center',
         verticalPosition: 'top'
       })
+
+      snack._dismissAfter(3000);
       this.onClose()
 
     }, error => {
       console.log(error);
       this.inProgress = false;
-      this._snackBar.open(`Unable to Update Profile pic - ${error.error.message}`, "Close", {
+      const snack = this._snackBar.open(`Unable to Update Profile pic - ${error.error.message}`, "Close", {
         horizontalPosition: 'center',
         verticalPosition: 'top'
       })
+
+      snack._dismissAfter(3000);
     })
 
   }
