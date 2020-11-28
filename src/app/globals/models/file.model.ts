@@ -4,9 +4,14 @@ export interface filesResponse {
 }
 
 export interface FileComment {
+    body: string,
     date: string,
-    comment: string,
-    author: string
+    fileId: string,
+    fileName: string,
+    senderEmail: string,
+    senderId: string,
+    type: string,
+    _id: string
 }
 
 export interface File {
