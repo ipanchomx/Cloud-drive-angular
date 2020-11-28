@@ -53,13 +53,11 @@ export class FileInformationComponent implements OnInit {
     })
     this._sockets.on('comment', data => {
       console.log(data);
-      if(this.file._id == data.fileId) {
-        this.file.comments.unshift(data);
-      }
+      if(this.file._id == data.fileId) this.file.comments.unshift(data);
     })
 
     this._sockets.on('deleteComment', socketComment => {
-      this.comments.forEach(comment => {
+      this.file.comments.forEach(comment => {
         if(comment._id == socketComment._id) comment.body = socketComment.body;
       })
     })
