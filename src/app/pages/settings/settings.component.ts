@@ -66,16 +66,15 @@ export class SettingsComponent implements OnInit {
 
   changePassword(): void {
 
-    console.log('changePassword:', this.passwordForm.getRawValue())
     if (this.passwordForm.valid) {
       const values = this.passwordForm.getRawValue();
       let obj = {
-        email: this.email,
         oldPassword: values.current,
         newPassword: values.new
       };
 
-      this.sessionService.changePassword(obj).then(msg => {
+      this.sessionService.changePassword(obj)
+      .then(msg => {
         //console.log(msg)
         const snack = this._snackBar.open(msg.message, "Close", {
           horizontalPosition: this.horizontalPosition,
@@ -85,6 +84,13 @@ export class SettingsComponent implements OnInit {
         this.passwordForm.reset();
         this.showForm = false;
         setTimeout(() => this.showForm = true, 250);
+      })
+      .catch(err => {
+        const snack = this._snackBar.open(err.error.message, "Close", {
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+        })
+        snack._dismissAfter(3000);
       })
 
     } else {
