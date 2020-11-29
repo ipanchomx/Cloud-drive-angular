@@ -109,7 +109,7 @@ export class SettingsComponent implements OnInit {
         return
       } else {
         this.nameError = false;
-        this.sessionService.changeName(this.name)
+        this._user.changeName(this.name)
           .then(msg => {
             const snack = this._snackBar.open(msg.message, "Close", {
               horizontalPosition: this.horizontalPosition,
