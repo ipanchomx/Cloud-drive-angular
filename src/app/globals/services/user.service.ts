@@ -45,7 +45,7 @@ export class UserService {
   }
 
   changePhoto(data: any) {
-    const url = `${environment.apiUrl}users/updateImage`;
+    const url = `${environment.apiUrl}users/profile-pic`;
     const httpHeaders = new HttpHeaders({
       Authorization: this._authService.get()
     });
