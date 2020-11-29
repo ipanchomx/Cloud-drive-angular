@@ -31,9 +31,6 @@ export class ShareFileDialogComponent implements OnInit {
   ngOnInit(): void {
     this.sharedWith =  this.data.file.sharedWith.map(user=>({email:user.email, permission:user.permission, userId: user.userId}));
 
-    this._sockets.on("OK", (data)=>{
-      console.log("OK sharing was successfull")
-    })
     this.subject.pipe(
       debounceTime(100)
     ).subscribe((searchInput) => {
