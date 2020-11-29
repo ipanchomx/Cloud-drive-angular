@@ -43,20 +43,10 @@ export class SessionService {
     const httpHeaders = new HttpHeaders({
       Authorization: this.authService.get()
     });
-    return this.httpClient.post(url, {newName: newName}, {
+    return this.httpClient.put(url, {newName: newName}, {
       headers: httpHeaders,
       reportProgress: true
     }).toPromise();
   }
 
-  getUserInfo(id:string):Promise<any> {
-    const url = `${environment.apiUrl}users/getProfileInfo`;
-    const httpHeaders = new HttpHeaders({
-      Authorization: this.authService.get()
-    });
-
-    return this.httpClient.get(url, {
-      headers: httpHeaders
-    }).toPromise();
-  }
 }

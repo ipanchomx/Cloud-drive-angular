@@ -161,7 +161,7 @@ export class SettingsComponent implements OnInit {
   }
 
   getUserInfo() {
-    this.sessionService.getUserInfo(this.usrId).then(data => {
+    this._user.getUserInfo(this.usrId).then(data => {
       this.name = data.user.name;
       this.email = data.user.email;
       this.joined = new Date(data.user.joined).toLocaleDateString();

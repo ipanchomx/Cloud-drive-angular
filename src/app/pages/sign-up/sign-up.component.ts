@@ -46,6 +46,7 @@ export class SignUpComponent implements OnInit {
       if (!user) {
         return;
       }
+      console.log(user.idToken);
       this.sessionService.googleLogin(user.idToken).then(data => {
         this.authService.saveUserId(data.userId);
         this.authService.save(data.token)

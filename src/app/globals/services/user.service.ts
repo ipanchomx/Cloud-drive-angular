@@ -23,6 +23,17 @@ export class UserService {
     });
   }
 
+  getUserInfo(id:string):Promise<any> {
+    const url = `${environment.apiUrl}users/getProfileInfo`;
+    const httpHeaders = new HttpHeaders({
+      Authorization: this._authService.get()
+    });
+
+    return this.httpClient.get(url, {
+      headers: httpHeaders
+    }).toPromise();
+  }
+
   changePassword(obj):Promise<any> {
     const httpHeaders = new HttpHeaders({
       Authorization: this._authService.get()
