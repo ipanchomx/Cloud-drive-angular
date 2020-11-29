@@ -218,6 +218,7 @@ export class FileInformationComponent implements OnInit {
 
 
   writeComment() {
+    if(!this.commentInput) return;
     let comment = {
       body : this.commentInput,
       file : this.file

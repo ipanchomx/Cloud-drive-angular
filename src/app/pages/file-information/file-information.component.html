@@ -56,7 +56,7 @@
 
                 <div class="create-comment-div">
                     <mat-form-field class="comment-input">
-                        <textarea matInput placeholder="Leave a comment here" [(ngModel)]="commentInput"></textarea>
+                        <textarea matInput placeholder="Leave a comment here" [(ngModel)]="commentInput" (keyup.enter)="writeComment()"></textarea>
                     </mat-form-field>
                     <button mat-mini-fab color="primary" aria-label="Example icon button with a home icon" [disabled]= '!commentInput' (click)="writeComment()">
                         <mat-icon>send</mat-icon>
