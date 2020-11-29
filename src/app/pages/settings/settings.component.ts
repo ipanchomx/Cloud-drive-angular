@@ -73,7 +73,7 @@ export class SettingsComponent implements OnInit {
         newPassword: values.new
       };
 
-      this.sessionService.changePassword(obj)
+      this._user.changePassword(obj)
       .then(msg => {
         //console.log(msg)
         const snack = this._snackBar.open(msg.message, "Close", {

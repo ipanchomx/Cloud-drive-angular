@@ -23,6 +23,16 @@ export class UserService {
     });
   }
 
+  changePassword(obj):Promise<any> {
+    const httpHeaders = new HttpHeaders({
+      Authorization: this._authService.get()
+    });
+    const url = `${environment.apiUrl}users/changePassword`;
+    return this.httpClient.post(url, obj, {
+      headers: httpHeaders
+    }).toPromise();
+  }
+
   changePhoto(data: any) {
     const url = `${environment.apiUrl}users/updateImage`;
     const httpHeaders = new HttpHeaders({

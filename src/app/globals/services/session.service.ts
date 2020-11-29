@@ -37,15 +37,6 @@ export class SessionService {
     return this.httpClient.post(url, {id}).toPromise(); 
   }
 
-  changePassword(obj):Promise<any> {
-    const httpHeaders = new HttpHeaders({
-      Authorization: this.authService.get()
-    });
-    const url = `${environment.apiUrl}users/changePassword`;
-    return this.httpClient.post(url, obj, {
-      headers: httpHeaders
-    }).toPromise();
-  }
 
   changeName(newName):Promise<any>{
     const url = `${environment.apiUrl}users/changeName`
