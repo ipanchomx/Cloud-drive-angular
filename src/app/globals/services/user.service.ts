@@ -66,42 +66,6 @@ export class UserService {
     }).toPromise();
   }
 
-  getNotifications() {
-    const httpHeaders = new HttpHeaders({
-      Authorization: this._authService.get()
-    });
-
-    const url = `${environment.apiUrl}users/notifications`;
-
-    return this.httpClient.get(url, {
-      headers: httpHeaders
-    });
-  }
-
-  deleteNotification(id: string) {
-    const httpHeaders = new HttpHeaders({
-      Authorization: this._authService.get()
-    });
-
-    const url = `${environment.apiUrl}users/notifications/${id}`;
-
-    return this.httpClient.delete(url, {
-      headers: httpHeaders
-    });
-  }
-
-  deleteAllNotifications() {
-    const httpHeaders = new HttpHeaders({
-      Authorization: this._authService.get()
-    });
-
-    const url = `${environment.apiUrl}users/notifications`;
-
-    return this.httpClient.delete(url, {
-      headers: httpHeaders
-    });
-  }
-
   deleteUser() {
     const httpHeaders = new HttpHeaders({
       Authorization: this._authService.get()
