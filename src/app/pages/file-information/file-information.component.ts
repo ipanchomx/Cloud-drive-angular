@@ -52,9 +52,14 @@ export class FileInformationComponent implements OnInit {
 
     })
     this._sockets.on('comment', data => {
-      if(this.file._id == data.fileId) {
-        this.file.comments.unshift(data);
-      }
+      console.log(data);
+      if(this.file._id == data.fileId) this.file.comments.unshift(data);
+    })
+
+    this._sockets.on('deleteComment', socketComment => {
+      this.file.comments.forEach(comment => {
+        if(comment._id == socketComment._id) comment.body = socketComment.body;
+      })
     })
   }
 
@@ -223,5 +228,16 @@ export class FileInformationComponent implements OnInit {
 
   }
 
+  deleteComment(comment) {
+    console.log("Borrar comentario!");
+    console.log(comment);
+    let data = {
+      file : this.file,
+      comment : comment,
+      userId : this.userId,
+      type : 'delete comment',
+    };
+    this._sockets.emit('deleteComment', data);
+  }
 }
 
