@@ -53,7 +53,7 @@ export class ShareFileDialogComponent implements OnInit {
     }
     this.sharedWith.push({ email:this.currentUser.email, userId: this.currentUser.id, permission: this.permission});
     this.currentUser = null;
-    this.permission = '';
+    this.permission = 'read';
     this.shareWithInp = '';
     this.users = [];
   }

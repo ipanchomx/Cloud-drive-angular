@@ -60,7 +60,7 @@ export class UploadFileFormComponent implements OnInit {
     }
     this.fileSharedWith.push({ ...this.currentUser, permission: this.permission });
     this.currentUser = null;
-    this.permission = '';
+    this.permission = 'read';
     this.shareWithInp = '';
     this.users = [];
   }
