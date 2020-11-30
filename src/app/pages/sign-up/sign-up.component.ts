@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { SocialAuthService } from 'angularx-social-login';
 import { GoogleLoginProvider } from "angularx-social-login";
 import { SocketsService } from 'src/app/globals/services/sockets.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-sign-up',
@@ -114,6 +115,8 @@ export class SignUpComponent implements OnInit {
   }
 
   signInWithGoogle(): void {
+    console.log("What?")
+    environment.clientId;
     this.googleAuth.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
 
