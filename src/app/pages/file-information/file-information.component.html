@@ -68,7 +68,7 @@
                     <span *ngIf="comment.type!='comment'" class="versionMessage">Version Change: {{comment.body}}</span>
 
                     <mat-card class="messageBox-card" *ngIf="comment.type=='comment'" [class.ownMessage]="comment.senderId==userId">
-                        <mat-icon style="float: right; font-weight: 900; font-size: large;" *ngIf="userId==comment.senderId" (click)="deleteComment(comment)">clear</mat-icon>
+                        <mat-icon style="float: right; font-weight: 900; font-size: large; cursor: pointer;" *ngIf="userId==comment.senderId && comment.body!='comment deleted'" (click)="deleteComment(comment)">clear</mat-icon>
                         <p class="comment-author">{{comment.senderEmail}}</p>
                         <p>{{comment.body}}</p>
                     </mat-card>
