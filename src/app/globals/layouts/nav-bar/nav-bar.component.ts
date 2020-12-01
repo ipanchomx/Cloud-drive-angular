@@ -39,6 +39,8 @@ export class NavBarComponent implements OnInit {
     this.authService.loginStatus.subscribe(status => {
       this.isLoggedIn = status;
       if(status) {
+        console.log("Inicio de Sesión!!!")
+        console.log(status);
         this.socketsService.on('notification', (data) => {
           this.noSize += 1;
         })
