@@ -72,7 +72,6 @@ export class GridListComponent implements OnInit {
 
   clickOnFolder(folder) {
     this.onFolderClick.emit(folder);
-     console.log(folder);
   }
 
   clickOnFile(file) {

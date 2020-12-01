@@ -47,7 +47,6 @@ export class SignUpComponent implements OnInit {
       if (!user) {
         return;
       }
-      console.log(user.idToken);
       this.sessionService.googleLogin(user.idToken).then(data => {
         this.authService.saveUserId(data.userId);
         this.authService.save(data.token)
@@ -68,9 +67,7 @@ export class SignUpComponent implements OnInit {
 
   crearUsuario() {
     if (this.signupForm.valid) {
-      console.log('Crear usuario...');
       this.sessionService.signup(this.signupForm.getRawValue()).then(data => {
-        console.log(data);
         const snack = this._snackBar.open("User successfully created", "Close", {
           horizontalPosition: this.horizontalPosition,
           verticalPosition: this.verticalPosition,

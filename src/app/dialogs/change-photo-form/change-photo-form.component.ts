@@ -37,7 +37,6 @@ export class ChangePhotoFormComponent implements OnInit {
 
   onFileChange(event) {
     this.file = <File>event.target.files[0];
-    console.log(this.file);
     if(!this.file.type.startsWith('image')){
       const snack = this._snackBar.open(`Invalid file type`, "Close", {
         horizontalPosition: 'center',

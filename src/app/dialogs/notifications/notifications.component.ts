@@ -33,7 +33,6 @@ export class NotificationsComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log(this.data)
     this.notificationsService.getNotifications().subscribe((notifications: notification[]) => {
       this.notifications = notifications.reverse();
     })
@@ -52,7 +51,6 @@ export class NotificationsComponent implements OnInit {
   }
 
   deleteThisNotification(notification) {
-    console.log("Borrando...");
     this.notificationsService.deleteNotification(notification._id).subscribe((res) => {
       this.router.navigate(['/file-info', notification.fileId])
       this.onClose();

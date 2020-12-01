@@ -28,7 +28,6 @@ export class PendingFilesSharedComponent implements OnInit {
   }
 
   goToFolderPath($event) {
-    console.log($event);
     if (this.path != '/') this.path += '/';
     this.path += $event.fileName;
     this.getPendingContent();
@@ -41,7 +40,6 @@ export class PendingFilesSharedComponent implements OnInit {
         if (res) {
           this.files = res;
           this.files.sort((file1, file2) => (file2.fileName <= file1.fileName) ? 1 : -1);
-          console.log(res)
           this.inProgress = false;
 
         }

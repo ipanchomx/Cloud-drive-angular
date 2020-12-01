@@ -75,7 +75,6 @@ export class SettingsComponent implements OnInit {
 
       this._user.changePassword(obj)
       .then(msg => {
-        //console.log(msg)
         const snack = this._snackBar.open(msg.message, "Close", {
           horizontalPosition: this.horizontalPosition,
           verticalPosition: this.verticalPosition,

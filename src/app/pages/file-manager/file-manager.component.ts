@@ -114,13 +114,9 @@ export class FileManagerComponent implements OnInit {
   backFolder() {
     let splitIndex = this.path.lastIndexOf("/");
     let prevPath = this.path.substring(0, splitIndex);
-    // let currentDirName = this.path.substring(splitIndex+1);
 
     if (prevPath.length == 0) this.path = '/';
     else this.path = prevPath;
-    // this.prevPath = prevPath;
-    // if(this.prevPath == '') this.prevPath = '/';
-    // console.log(this.prevPath)
     this.getPathContent();
     this.pathMove = this.path;
   }
@@ -138,7 +134,6 @@ export class FileManagerComponent implements OnInit {
       }
       else {
         this._filesService.existDirectory(url).then(response => {
-          console.log(response);
           this.path = url;
           this.getPathContent();
           this.pathMove = this.path;

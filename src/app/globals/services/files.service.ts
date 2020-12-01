@@ -106,7 +106,6 @@ export class FilesService {
 
   deleteFile(id: string): Observable<any> {
     const url = `${environment.apiUrl}files/deleteFile/${id}`;
-    console.log(url)
     const httpHeaders = new HttpHeaders({
       Authorization: this._authService.get()
     });
@@ -122,7 +121,6 @@ export class FilesService {
 
   getVersions(id: string) {
     const url = `${environment.apiUrl}files/getVersions/${id}`;
-    console.log(url)
     const httpHeaders = new HttpHeaders({
       Authorization: this._authService.get()
     });

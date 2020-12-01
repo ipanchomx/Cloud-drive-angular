@@ -141,14 +141,10 @@ export class FileInformationComponent implements OnInit {
 
   verifyFile() {
 
-    console.log('Verifying file...')
-    console.log(this.statusString);
     let obj = {
       id: this.file._id,
       status: this.statusString
     };
-    console.log(obj);
-
 
     this._fileService.updateVerificationStatus(obj)
     .then(msg=>{
@@ -188,8 +184,6 @@ export class FileInformationComponent implements OnInit {
           this.file = file;
           this.file.comments.sort((b:any, a:any)=>new Date(a.date).getTime() - new Date(b.date).getTime());
           this.comments = this.file.comments;
-         
-          console.log(this.comments)
 
           this.file.sharedWith.forEach(share => {
             if (share.userId == localStorage.userId) {

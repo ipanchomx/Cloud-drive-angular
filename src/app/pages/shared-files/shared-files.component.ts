@@ -29,7 +29,6 @@ export class SharedFilesComponent implements OnInit {
   }
 
   goToFolderPath($event) {
-    console.log($event);
     if (this.path != '/') this.path += '/';
     this.path += $event.fileName;
     this.getSharedContent();
@@ -44,7 +43,6 @@ export class SharedFilesComponent implements OnInit {
           this.files.sort((file1, file2) => (file2.fileName <= file1.fileName) ? 1 : -1);
           this.folders = res.folders;
           this.folders.sort((folder1, folder2) => (folder2.fileName <= folder1.fileName) ? 1 : -1);
-          console.log(res)
           this.inProgress = false;
 
         }
