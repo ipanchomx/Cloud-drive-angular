@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { environment } from "./../../../environments/environment"
 import { AuthService } from './auth.service';
+import { SocketsService } from './sockets.service';
 
 @Injectable({
   providedIn: 'root'
