@@ -94,9 +94,9 @@ export class SignUpComponent implements OnInit {
   iniciarSesion() {
     if (this.loginForm.valid) {
       this.sessionService.login(this.loginForm.getRawValue()).then(data => {
-        this._socket.connect(this.authService.get(), this.authService.getUserId());
         this.authService.saveUserId(data.userId);
         this.authService.save(data.token)
+        this._socket.connect(this.authService.get(), this.authService.getUserId());
         this.router.navigate(["/file-manager"])
       }).catch(err => {
 
