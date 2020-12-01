@@ -38,6 +38,11 @@ export class NavBarComponent implements OnInit {
 
     this.authService.loginStatus.subscribe(status => {
       this.isLoggedIn = status;
+      if(status) {
+        this.socketsService.on('notification', (data) => {
+          this.noSize += 1;
+        })
+      }
     });
 
   }
@@ -50,9 +55,6 @@ export class NavBarComponent implements OnInit {
         this.name = user.user.name;
       })
       
-      this.socketsService.on('notification', (data) => {
-        this.noSize += 1;
-      })
     }
 
   }
