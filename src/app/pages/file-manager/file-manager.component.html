@@ -5,7 +5,7 @@
     <app-sidebar></app-sidebar>
   </mat-drawer>
   <mat-drawer-content class="file-manager-main-container">
-    <h1>
+    <h1 id="manager-title">
       File Manager
     </h1>
 
@@ -18,7 +18,7 @@
         </div>
 
         <div class="path-control">
-          <label for="path"> Path: </label>
+          <label id="path-label" for="path"> Path: </label>
           <input type="text" name="path" id="path" [(ngModel)]="path" placeholder="Type path..." (keyup)="jumpTo($event)">
         </div>
       </div>
@@ -26,7 +26,7 @@
         <button (click)="jumpTo($event)">Jump!</button>
       </div>
       <div class="path-actions">
-        <button id="idCreate" mat-raised-button color="primary" (click)="openCreateFolderDialog()">Create
+        <button id="createFolder" mat-raised-button color="primary" (click)="openCreateFolderDialog()">Create
           folder</button>
         <button id="idAdd" mat-raised-button color="accent" (click)="openUploadFileDialog()">Add file</button>
       </div>

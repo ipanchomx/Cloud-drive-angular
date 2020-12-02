@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 import { SocialAuthService } from 'angularx-social-login';
 import { GoogleLoginProvider } from "angularx-social-login";
 import { SocketsService } from 'src/app/globals/services/sockets.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-sign-up',
@@ -19,7 +18,6 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent implements OnInit {
-
   signupForm: FormGroup;
   loginForm: FormGroup;
   constructor(private formBuilder: FormBuilder, private sessionService: SessionService, private _snackBar: MatSnackBar, private authService: AuthService, private router: Router, private googleAuth: SocialAuthService, private _socket: SocketsService) { }
@@ -106,13 +104,19 @@ export class SignUpComponent implements OnInit {
         })
         snack._dismissAfter(3000);
         console.log(err);
-
       })
     }
   }
 
   signInWithGoogle(): void {
-    this.googleAuth.signIn(GoogleLoginProvider.PROVIDER_ID);
+    this.googleAuth.signIn(GoogleLoginProvider.PROVIDER_ID)
+    .catch(err => {
+      const snack = this._snackBar.open(`Unable to login to Google`, "Close", {
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+      })
+      snack._dismissAfter(3000);
+    })
   }
 
 }

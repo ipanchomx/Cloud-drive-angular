@@ -27,6 +27,11 @@ export class CreateFolderFormComponent implements OnInit {
   createFolder() {
     this._files.createFolder({ path: this.data.path, dirName: this.dirName })
       .then(res => {
+        const snack = this._snackBar.open(`Folder Created`, "Close", {
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+        })
+        snack._dismissAfter(3000);
         this._dialogRef.close();
       })
       .catch(error => {

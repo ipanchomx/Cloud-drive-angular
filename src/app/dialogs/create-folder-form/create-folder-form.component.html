@@ -5,9 +5,9 @@
 <h2>Path: {{data.path}}</h2>
 <mat-form-field class="dirnameInput full-width">
     <mat-label>File Name </mat-label>
-    <input matInput name="filename" [(ngModel)]="dirName">
+    <input matInput id="dirnameInput" name="filename" [(ngModel)]="dirName">
 </mat-form-field>
 
-<button mat-raised-button color="primary" class="full-width" (click)="createFolder()" [disabled]="!dirName">
+<button mat-raised-button color="primary" id="create-folder-btn" class="full-width" (click)="createFolder()" [disabled]="!dirName">
     Create Folder
 </button>
