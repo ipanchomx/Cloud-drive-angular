@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  fit('should jump to dir route when writing path', () => {
+  it('should jump back to dir route when clicking back', () => {
     login('t@t.com', '123456');
 
     browser.sleep(1000);
