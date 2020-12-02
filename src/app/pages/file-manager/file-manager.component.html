@@ -12,18 +12,18 @@
     <div class="input-path-section">
       <div class="input-info">
         <div class="back-button">
-          <button mat-mini-fab color="warn" *ngIf="!(pathMove == '/')" (click)="backFolder()">
+          <button mat-mini-fab color="warn" *ngIf="!(pathMove == '/')" (click)="backFolder()" id="backBtn"> 
             <mat-icon>arrow_back</mat-icon>
           </button>
         </div>
 
         <div class="path-control">
           <label id="path-label" for="path"> Path: </label>
-          <input type="text" name="path" id="path" [(ngModel)]="path" placeholder="Type path..." (keyup)="jumpTo($event)">
+          <input type="text" name="path" id="path" [(ngModel)]="path" placeholder="Type path..." (keyup)="jumpTo($event)" >
         </div>
       </div>
       <div class="input-button">
-        <button (click)="jumpTo($event)">Jump!</button>
+        <button (click)="jumpTo($event)" id="jumpButton">Jump!</button>
       </div>
       <div class="path-actions">
         <button id="createFolder" mat-raised-button color="primary" (click)="openCreateFolderDialog()">Create
