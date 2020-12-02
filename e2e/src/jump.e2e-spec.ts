@@ -28,7 +28,7 @@ describe('workspace-project App', () => {
     expect(pathInput.getText()).toEqual('');
   });
 
-  fit('should jump to dir route when writing path', () => {
+  it('should jump to dir route when writing path', () => {
     login('t@t.com', '123456');
 
     browser.sleep(1000);
