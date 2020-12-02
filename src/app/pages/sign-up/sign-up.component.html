@@ -35,7 +35,7 @@
 
       <mat-form-field class="emailInput">
         <mat-label>Email</mat-label>
-        <input type="email" matInput placeholder="Ex. pat@example.com" formControlName="email">
+        <input id="signupEmail" type="email" matInput placeholder="Ex. pat@example.com" formControlName="email">
 
         <mat-error *ngIf="signupForm.controls.email.errors">
           Please enter a valid email address
@@ -46,7 +46,7 @@
       <br>
 
       <mat-form-field>
-        <mat-label>Full Name</mat-label> <input matInput formControlName="name">
+        <mat-label>Full Name</mat-label> <input matInput formControlName="name" id="signupName">
         <mat-error *ngIf="signupForm.controls.name.errors">
           Cannot leave name empty
         </mat-error>
@@ -55,7 +55,7 @@
       <br>
 
       <mat-form-field>
-        <mat-label>Password</mat-label> <input type="password" matInput formControlName="password">
+        <mat-label>Password</mat-label> <input type="password" matInput formControlName="password" id="signupPassword">
         <mat-error *ngIf="signupForm.controls.password.errors">
           Password length must be more than 6 characters.
         </mat-error>
@@ -64,7 +64,7 @@
       <br>
 
       <mat-form-field>
-        <mat-label>Confirm password</mat-label> <input type="password" matInput formControlName="confirm">
+        <mat-label>Confirm password</mat-label> <input type="password" matInput formControlName="confirm" id="passwordConfirm">
       </mat-form-field>
 
       <mat-error *ngIf="signupForm.errors && signupForm.errors.mismatch">
@@ -73,7 +73,7 @@
 
       <br>
 
-      <button mat-raised-button color="accent">SIGN UP</button>
+      <button mat-raised-button color="accent" id="signUpButton">SIGN UP</button>
 
 
 
