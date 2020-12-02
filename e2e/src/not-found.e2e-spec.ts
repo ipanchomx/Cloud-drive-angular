@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should create a new folder after login', () => {
+  it('should redirect to 404 if route doesnt exist', () => {
     login('t@t.com', '123456');
 
     browser.sleep(1000);
